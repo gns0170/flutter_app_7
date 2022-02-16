@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../values/colors.dart' as CustomColor;
+import '../values/colors.dart' as custom_color;
 
 class DarkButton extends StatefulWidget {
   const DarkButton({Key? key, required this.text, this.icon}) : super(key: key);
@@ -30,7 +30,7 @@ class _DarkButton extends State<DarkButton> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
-          color: CustomColor.primaryColor,
+          color: custom_color.primaryColor,
         ),
         height: 60,
         width: MediaQuery.of(context).size.width - 40,
