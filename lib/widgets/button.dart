@@ -8,7 +8,7 @@ class DarkButton extends StatefulWidget {
       this.icon,
       this.height,
       this.width,
-      this.onPressed,
+      required this.onPressed,
       this.fontStyle})
       : super(key: key);
   final String text;
@@ -60,8 +60,8 @@ class _DarkButton extends State<DarkButton> {
   Widget build(BuildContext context) {
     size();
     return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(6), boxShadow: [
+      margin: const EdgeInsets.only(bottom: 7),
+      decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.2),
           spreadRadius: 0,
@@ -73,6 +73,7 @@ class _DarkButton extends State<DarkButton> {
       width: width,
       child: Material(
         color: custom_color.primaryColor2,
+        borderRadius: BorderRadius.circular(6),
         child: InkWell(
           onTap: widget.onPressed,
           child: Center(
@@ -86,8 +87,8 @@ class _DarkButton extends State<DarkButton> {
                   style: widget.fontStyle ??
                       const TextStyle(
                         color: Colors.white,
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
               ],
