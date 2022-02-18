@@ -13,26 +13,48 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-  List<DataQuestion> a = q;
-  String words = q[0].question;
+  List<DataQuestion> dataQuestions = q;
+  String semiKey = 'q1';
+  int semiNumberPage = 1;
   @override
   Widget build(BuildContext context) {
+    dynamic shownQuestion;
+    void shower() {
+      setState(() {
+        shownQuestion = q.singleWhere((element) => element.key == semiKey);
+      });
+    }
+
+    void outerChecker() {
+      if (semiNumberPage == 10) {
+        Navigator.pop(context, '/');
+      } else {
+        semiNumberPage++;
+      }
+    }
+
+    shower();
     return Scaffold(
         body: centerColumn([
       const Spacer(flex: 1),
-      TextQuestion(words: words),
+      TextQuestion(words: shownQuestion.question),
       const SizedBox(height: 10),
-      views(const Text('hi'), context),
+      views(shownQuestion.view, context),
       const SizedBox(height: 20),
       SizedBox(
         width: MediaQuery.of(context).size.width - 40,
-        height: 200,
+        height: 250,
         child: ListView.builder(
-            itemCount: q[0].options.length,
+            itemCount: shownQuestion.options.length,
             itemBuilder: (BuildContext context, int index) {
               return DarkButton(
-                text: q[0].options[index].text,
-                onPressed: () {},
+                text: shownQuestion.options[index].text,
+                onPressed: () {
+                  outerChecker();
+                  semiKey = shownQuestion.options[index].nextKey;
+                  shower();
+                  print(semiNumberPage);
+                },
                 height: 50,
               );
             }),
