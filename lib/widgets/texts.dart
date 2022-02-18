@@ -19,3 +19,22 @@ class _TextQuestionState extends State<TextQuestion> {
     );
   }
 }
+
+class TextExplain extends StatefulWidget {
+  const TextExplain({Key? key, required this.words}) : super(key: key);
+
+  final dynamic words;
+  @override
+  _TextExplainState createState() => _TextExplainState();
+}
+
+class _TextExplainState extends State<TextExplain> {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      widget.words,
+      style: const TextStyle(
+          color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+    );
+  }
+}

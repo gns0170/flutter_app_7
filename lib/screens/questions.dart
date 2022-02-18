@@ -4,6 +4,7 @@ import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/texts.dart';
 import 'package:flutter_application_7/widgets/view.dart';
 import '../data/questions.dart';
+import './home.dart';
 
 class Question extends StatefulWidget {
   const Question({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _QuestionState extends State<Question> {
   List<DataQuestion> dataQuestions = q;
   String semiKey = 'q1';
   int semiNumberPage = 1;
+
   @override
   Widget build(BuildContext context) {
     dynamic shownQuestion;
@@ -28,6 +30,7 @@ class _QuestionState extends State<Question> {
     void outerChecker() {
       if (semiNumberPage == 10) {
         Navigator.pop(context, '/');
+        Navigator.pushNamed(context, '/result');
       } else {
         semiNumberPage++;
       }
@@ -39,7 +42,7 @@ class _QuestionState extends State<Question> {
       const Spacer(flex: 1),
       TextQuestion(words: shownQuestion.question),
       const SizedBox(height: 10),
-      views(shownQuestion.view, context),
+      views(shownQuestion.view, context, 300),
       const SizedBox(height: 20),
       SizedBox(
         width: MediaQuery.of(context).size.width - 40,
@@ -51,9 +54,9 @@ class _QuestionState extends State<Question> {
                 text: shownQuestion.options[index].text,
                 onPressed: () {
                   outerChecker();
+                  addWeight(shownQuestion.options[index].weight);
                   semiKey = shownQuestion.options[index].nextKey;
                   shower();
-                  print(semiNumberPage);
                 },
                 height: 50,
               );

@@ -10,6 +10,15 @@ class Home extends StatefulWidget {
   HomeState createState() => HomeState();
 }
 
+List<int> shownWeight = [0, 0, 0, 0];
+void addWeight(List<int> a) {
+  if (a.length == 4) {
+    for (int index = 0; index < 4; index++) {
+      shownWeight[index] = shownWeight[index] + a[index];
+    }
+  }
+}
+
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -26,6 +35,7 @@ class HomeState extends State<Home> {
         DarkButton(
           onPressed: () {
             Navigator.pushNamed(context, '/question');
+            shownWeight = [0, 0, 0, 0];
           },
           text: "시작!",
           width: 115,

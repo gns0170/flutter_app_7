@@ -99,3 +99,99 @@ class _DarkButton extends State<DarkButton> {
     );
   }
 }
+
+class DarkerButton extends StatefulWidget {
+  const DarkerButton(
+      {Key? key,
+      required this.text,
+      this.icon,
+      this.iconDetail,
+      this.height,
+      this.width,
+      required this.onPressed,
+      this.fontStyle})
+      : super(key: key);
+  final String text;
+  final dynamic icon;
+  final dynamic iconDetail;
+
+  final dynamic onPressed;
+  final dynamic width;
+  final dynamic height;
+
+  final dynamic fontStyle;
+  @override
+  _DarkerButton createState() => _DarkerButton();
+}
+
+class _DarkerButton extends State<DarkerButton> {
+  dynamic width;
+  dynamic height;
+
+  void size() {
+    if (widget.width is int) {
+      width = widget.width.toDouble();
+    } else {
+      width = widget.width is double
+          ? widget.width
+          : (MediaQuery.of(context).size.width - 45);
+    }
+    if (widget.height is int) {
+      height = widget.height.toDouble();
+    } else {
+      height = widget.height is double ? widget.height : 50.00;
+    }
+  }
+
+  Widget iconSwitch() {
+    if (widget.icon == null && widget.iconDetail == null) {
+      return Container();
+    } else {
+      return Row(
+        children: [
+          widget.iconDetail ??
+              widget.icon ??
+              Icon(widget.icon, color: Colors.white, size: 35.0),
+          const SizedBox(
+            width: 10,
+          ),
+        ],
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    size();
+    return Container(
+      margin: const EdgeInsets.only(bottom: 7),
+      height: height,
+      width: width,
+      child: Material(
+        color: custom_color.primaryColor1,
+        borderRadius: BorderRadius.circular(6),
+        child: InkWell(
+          onTap: widget.onPressed,
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                widget.text,
+                style: widget.fontStyle ??
+                    const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const Spacer(flex: 1),
+              iconSwitch(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

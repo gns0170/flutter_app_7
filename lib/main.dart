@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/screens/questions.dart';
+import 'package:flutter_application_7/screens/result.dart';
 import 'package:flutter_application_7/widgets/appbar.dart';
 import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => const Home(),
             '/question': (context) => const Question(),
+            '/result': (context) => const Result(),
           },
         ),
       ),
