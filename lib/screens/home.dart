@@ -50,7 +50,9 @@ class HomeState extends State<Home> {
         DarkButton(
           text: "나는 롤을 모른다!",
           height: 50,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/achievement');
+          },
           icon: Icons.reply,
         ),
         const SizedBox(

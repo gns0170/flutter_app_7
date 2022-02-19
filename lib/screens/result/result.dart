@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './resultContext.dart';
-import './resultGraph.dart';
+import 'result_context.dart';
+import 'result_graph.dart';
 
 //List
 class Result extends StatefulWidget {
@@ -34,7 +34,7 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
       controller: _tabController,
       children: const [
         ResultContext(),
-        ResultGraph(),
+        ResultGraph1(),
       ],
     );
   }

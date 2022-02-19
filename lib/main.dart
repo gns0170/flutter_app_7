@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/widgets/appbar.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             '/': (context) => const Home(),
             '/question': (context) => const Question(),
             '/result': (context) => const Result(),
+            '/achievement': (context) => const Achievement(),
           },
         ),
       ),

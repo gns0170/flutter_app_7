@@ -42,3 +42,22 @@ class _TextExplainState extends State<TextExplain> {
     );
   }
 }
+
+class TextTitleResultGraph extends StatefulWidget {
+  const TextTitleResultGraph({Key? key, required this.words}) : super(key: key);
+
+  final dynamic words;
+  @override
+  _TextTitleResultGraph createState() => _TextTitleResultGraph();
+}
+
+class _TextTitleResultGraph extends State<TextTitleResultGraph> {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      widget.words,
+      style: const TextStyle(
+          color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600),
+    );
+  }
+}
