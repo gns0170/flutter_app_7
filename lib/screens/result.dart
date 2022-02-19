@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/data/results.dart';
 import 'package:flutter_application_7/widgets/button.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/texts.dart';
@@ -13,20 +14,36 @@ class Result extends StatefulWidget {
   _ResultState createState() => _ResultState();
 }
 
-class _ResultState extends State<Result> {
+dynamic _globalTabController;
+
+class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _globalTabController = _tabController;
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
-        length: 2,
-        child: TabBarView(
-          children: [
-            ResultContext(),
-            ResultGraph(),
-          ],
-        ));
+    return TabBarView(
+      controller: _tabController,
+      children: const [
+        ResultContext(),
+        ResultGraph(),
+      ],
+    );
   }
 }
 
+//first Screen
 class ResultContext extends StatefulWidget {
   const ResultContext({Key? key}) : super(key: key);
 
@@ -37,32 +54,16 @@ class ResultContext extends StatefulWidget {
 class _ResultContextState extends State<ResultContext> {
   Widget shownResultText = Container();
   Widget shownResultTitle = Container();
-  void highestWeight() {
+
+  void selectShownResult() {
     int maxWeight = shownWeight.reduce(max);
     int index;
+    dynamic proResult;
     for (index = 0; shownWeight[index] != maxWeight; index++) {}
     setState(() {
-      switch (index) {
-        case 0:
-          shownResultText = const TextExplain(words: "1234");
-          shownResultTitle = const TextQuestion(words: "설명 페이지1");
-          break;
-        case 1:
-          shownResultText = const TextExplain(words: "234");
-          shownResultTitle = const TextQuestion(words: "설명 페이지2");
-          break;
-        case 2:
-          shownResultText = const TextExplain(words: "345");
-          shownResultTitle = const TextQuestion(words: "설명 페이지3");
-          break;
-        case 3:
-          shownResultText = const TextExplain(words: "456");
-          shownResultTitle = const TextQuestion(words: "설명 페이지4");
-          break;
-        default:
-          break;
-      }
-      print(index);
+      proResult = r[index];
+      shownResultText = proResult.explain;
+      shownResultTitle = proResult.title;
     });
   }
 
@@ -74,7 +75,11 @@ class _ResultContextState extends State<ResultContext> {
         ),
         DarkerButton(
             text: '그래프로 보기',
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                _globalTabController?.index = 1;
+              });
+            },
             iconDetail: const Icon(
               Icons.arrow_right_alt,
               size: 50,
@@ -102,14 +107,18 @@ class _ResultContextState extends State<ResultContext> {
           ],
         ),
         const SizedBox(height: 5),
-        DarkButton(text: "처음으로", onPressed: () {})
+        DarkButton(
+            text: "처음으로",
+            onPressed: () {
+              Navigator.pop(context);
+            })
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    highestWeight();
+    selectShownResult();
     return Scaffold(
         body: centerColumn([
       shownResultTitle,
@@ -121,6 +130,7 @@ class _ResultContextState extends State<ResultContext> {
   }
 }
 
+//second Screen
 class ResultGraph extends StatefulWidget {
   const ResultGraph({Key? key}) : super(key: key);
 

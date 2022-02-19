@@ -54,7 +54,7 @@ class _QuestionState extends State<Question> {
                 text: shownQuestion.options[index].text,
                 onPressed: () {
                   outerChecker();
-                  addWeight(shownQuestion.options[index].weight);
+                  proAddWeight(shownQuestion.options[index].weightStyle);
                   semiKey = shownQuestion.options[index].nextKey;
                   shower();
                 },

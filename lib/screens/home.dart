@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 List<int> shownWeight = [0, 0, 0, 0];
-void addWeight(List<int> a) {
+void proAddWeight(List<int> a) {
   if (a.length == 4) {
     for (int index = 0; index < 4; index++) {
       shownWeight[index] = shownWeight[index] + a[index];
