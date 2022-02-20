@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/texts.dart';
-import 'package:flutter_application_7/widgets/view.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
 

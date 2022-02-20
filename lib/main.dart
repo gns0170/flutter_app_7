@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
@@ -10,11 +11,14 @@ void main() {
   runApp(const MyApp());
 }
 
+Record R = Record();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    R.loadRecord();
     return MaterialApp(
       title: 'A',
       theme: ThemeData(

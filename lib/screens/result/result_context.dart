@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/results.dart';
+
 import 'package:flutter_application_7/widgets/button.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/view.dart';
 import '../home.dart';
-import 'dart:math';
+
 import './result.dart';
 
 //first Screen
 class ResultContext extends StatefulWidget {
-  const ResultContext({Key? key}) : super(key: key);
+  const ResultContext({Key? key, required this.proResult}) : super(key: key);
 
+  final DataResult proResult;
   @override
   _ResultContextState createState() => _ResultContextState();
 }
@@ -18,18 +20,6 @@ class ResultContext extends StatefulWidget {
 class _ResultContextState extends State<ResultContext> {
   Widget shownResultText = Container();
   Widget shownResultTitle = Container();
-
-  void selectShownResult() {
-    int maxWeight = globalWeight.reduce(max);
-    int index;
-    dynamic proResult;
-    for (index = 0; globalWeight[index] != maxWeight; index++) {}
-    setState(() {
-      proResult = r[index];
-      shownResultText = proResult.explain;
-      shownResultTitle = proResult.title;
-    });
-  }
 
   Widget buttons() {
     return Column(
@@ -76,7 +66,8 @@ class _ResultContextState extends State<ResultContext> {
 
   @override
   Widget build(BuildContext context) {
-    selectShownResult();
+    shownResultText = widget.proResult.explain;
+    shownResultTitle = widget.proResult.title;
     return Scaffold(
         body: centerColumn([
       shownResultTitle,
