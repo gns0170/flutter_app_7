@@ -10,6 +10,7 @@ class Home extends StatefulWidget {
   HomeState createState() => HomeState();
 }
 
+//global dataProcess
 List<int> globalWeight = [0, 0, 0, 0];
 void proAddWeight(List<int> a) {
   if (a.length == 4) {
@@ -19,9 +20,19 @@ void proAddWeight(List<int> a) {
   }
 }
 
+List<int> globalWeightPosition = [0, 0, 0, 0, 0];
+void proAddWeightPosition(List<int> a) {
+  if (a.length == 5) {
+    for (int index = 0; index < 5; index++) {
+      globalWeightPosition[index] = globalWeightPosition[index] + a[index];
+    }
+  }
+}
+
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    //views
     return Scaffold(
       body: centerColumn([
         const Spacer(flex: 3),
@@ -36,6 +47,7 @@ class HomeState extends State<Home> {
           onPressed: () {
             Navigator.pushNamed(context, '/question');
             globalWeight = [0, 0, 0, 0];
+            globalWeightPosition = [0, 0, 0, 0, 0];
           },
           text: "시작!",
           width: 115,

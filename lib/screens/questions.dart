@@ -20,14 +20,18 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
+    //data Process
     dynamic shownQuestion;
-    void shower() {
+    void selectQuestion() {
       setState(() {
         shownQuestion = q.singleWhere((element) => element.key == semiKey);
       });
     }
 
-    void outerChecker() {
+    selectQuestion();
+
+    //related variables
+    void changePage() {
       if (semiNumberPage == 10) {
         Navigator.pop(context, '/');
         Navigator.pushNamed(context, '/result');
@@ -36,7 +40,7 @@ class _QuestionState extends State<Question> {
       }
     }
 
-    shower();
+    //views
     return Scaffold(
         body: centerColumn([
       const Spacer(flex: 1),
@@ -53,10 +57,12 @@ class _QuestionState extends State<Question> {
               return DarkButton(
                 text: shownQuestion.options[index].text,
                 onPressed: () {
-                  outerChecker();
+                  changePage();
                   proAddWeight(shownQuestion.options[index].weightStyle);
+                  proAddWeightPosition(
+                      shownQuestion.options[index].weightPosition);
                   semiKey = shownQuestion.options[index].nextKey;
-                  shower();
+                  selectQuestion();
                 },
                 height: 50,
               );

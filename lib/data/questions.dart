@@ -16,6 +16,7 @@ class Option {
   Option(this.text, this.weightStyle, this.weightPosition, this.nextKey);
 }
 
+//Data
 List<DataQuestion> q = [
   DataQuestion("q1", "Q. 첫번쨰 문제", const Text("123"), [
     Option("1번 답", [3, -1, -1, -1], [1, 1, 1, -1, -2], "q2"),

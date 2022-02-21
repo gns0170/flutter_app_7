@@ -6,6 +6,7 @@ late List<int> recordR = [];
 late List<int> recordA = [];
 
 class Record {
+  //Data Process
   late List<String> stringRecordR = [];
   late List<String> stringRecordA = [];
 

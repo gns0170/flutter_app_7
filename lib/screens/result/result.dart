@@ -4,9 +4,10 @@ import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/data/results.dart';
 import 'package:flutter_application_7/main.dart';
 import 'package:flutter_application_7/screens/home.dart';
+import 'package:flutter_application_7/screens/result/result_graph2.dart';
 import 'dart:math';
 import 'result_context.dart';
-import 'result_graph.dart';
+import 'result_graph1.dart';
 
 //List
 class Result extends StatefulWidget {
@@ -19,28 +20,12 @@ class Result extends StatefulWidget {
 dynamic globalTabController;
 
 class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
+  //related variables
   late TabController _tabController;
-  DataResult selectProResult() {
-    int maxWeight = globalWeight.reduce(max);
-    int index;
-    DataResult proResult = r[0];
-
-    for (index = 0; globalWeight[index] != maxWeight; index++) {}
-    setState(() {
-      proResult = r[index];
-      recordR[index]++;
-      CheckAcases checkCase = CheckAcases();
-      checkCase.setRecordAByAcases();
-
-      R.saveRecord();
-    });
-    return proResult;
-  }
-
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     globalTabController = _tabController;
   }
 
@@ -50,13 +35,38 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  //dataProcess
+  DataResult selectResult() {
+    int maxWeight = globalWeight.reduce(max);
+    int maxWeightPosition = globalWeightPosition.reduce(max);
+    int index;
+    int indexPosition;
+    DataResult proResult = r[0];
+
+    for (index = 0; globalWeight[index] != maxWeight; index++) {}
+    for (indexPosition = 0;
+        globalWeightPosition[index] != maxWeightPosition;
+        indexPosition++) {}
+
+    setState(() {
+      proResult = r[index];
+      recordR[index]++;
+      CheckAcases checkCase = CheckAcases();
+      checkCase.setRecordAByAcases();
+      R.saveRecord();
+    });
+    return proResult;
+  }
+
+//views
   @override
   Widget build(BuildContext context) {
     return TabBarView(
       controller: _tabController,
       children: [
-        ResultContext(proResult: selectProResult()),
+        ResultContext(proResult: selectResult()),
         const ResultGraph1(),
+        const ResultGraph2(),
       ],
     );
   }

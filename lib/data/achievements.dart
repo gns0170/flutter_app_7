@@ -10,9 +10,11 @@ class DataAchievement {
   DataAchievement(this.title, this.text, this.icon, {this.cases});
 }
 
+//Basic data
 Widget iconBasicA =
     const Text('?', style: TextStyle(fontSize: 40, color: Colors.black87));
 
+//data
 List<DataAchievement> a = [
   DataAchievement("1번 항목", "1번 설명", "Bar"),
   DataAchievement("1번 achieve", "1번 설명",
@@ -37,6 +39,7 @@ List<DataAchievement> a = [
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
 ];
 
+//cases
 class CheckAcases {
   List<bool> aCases = [
     false,
@@ -60,6 +63,7 @@ class CheckAcases {
   }
 }
 
+//about Record
 void setAchievementCasesByRecord() {
   for (int i = 0; i < a.length; i++) {
     a[i].cases = recordA[i] == 0 ? false : true;

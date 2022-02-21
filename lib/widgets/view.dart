@@ -6,7 +6,7 @@ Widget views(inform, context, width) {
     padding: const EdgeInsets.all(8.0),
     width: MediaQuery.of(context).size.width - 40,
     height: width.toDouble() ?? 300,
-    color: custom_color.primaryColor1,
+    color: custom_color.primaryColor1.withOpacity(0.8),
     child: inform ?? inform,
   );
 }

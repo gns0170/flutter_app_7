@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/achievements.dart';
 import 'package:flutter_application_7/data/record.dart';
-import 'package:flutter_application_7/main.dart';
-
+import '../../values/colors.dart' as custom_colors;
 import '../../widgets/layout.dart';
 
-//List
+//ListView
 class Achievement extends StatefulWidget {
   const Achievement({Key? key}) : super(key: key);
   @override
@@ -13,11 +12,14 @@ class Achievement extends StatefulWidget {
 }
 
 class _AchievementState extends State<Achievement> {
+  //dataProcess
   List<DataAchievement> listShownAchieve = a;
 
   @override
   Widget build(BuildContext context) {
+    //dataProcess
     setAchievementCasesByRecord();
+    //Views
     return centerColumn([
       SizedBox(
         width: MediaQuery.of(context).size.width - 40,
@@ -31,11 +33,15 @@ class _AchievementState extends State<Achievement> {
 
             if (recordA[index] == 0 && proIcon != "Bar") {
               proIcon = iconBasicA;
+              if (index > 8) {
+                proTitle = "???";
+                proText = "?????";
+              }
             }
-            print(a[index].icon);
             AchieveTile proAchieve = AchieveTile(
                 shownAchieve: DataAchievement(proTitle, proText, proIcon,
-                    cases: recordA[index]));
+                    cases: recordA[index]),
+                semiActive: recordA[index] != 0 ? true : false);
             return proAchieve;
           },
         ),
@@ -46,8 +52,11 @@ class _AchievementState extends State<Achievement> {
 
 //Tile
 class AchieveTile extends StatefulWidget {
-  AchieveTile({Key? key, required this.shownAchieve}) : super(key: key);
+  const AchieveTile(
+      {Key? key, required this.shownAchieve, required this.semiActive})
+      : super(key: key);
   final DataAchievement shownAchieve;
+  final bool semiActive;
   @override
   _AchieveTileState createState() => _AchieveTileState();
 }
@@ -55,11 +64,25 @@ class AchieveTile extends StatefulWidget {
 class _AchieveTileState extends State<AchieveTile> {
   @override
   Widget build(BuildContext context) {
+    //views
     if (widget.shownAchieve.icon == "Bar") {
-      return Text(widget.shownAchieve.title,
-          style: const TextStyle(fontSize: 30, color: Colors.white));
+      return Column(children: [
+        const SizedBox(height: 10),
+        Material(
+            type: MaterialType.transparency,
+            child: Text(widget.shownAchieve.title,
+                style: const TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold))),
+        const SizedBox(height: 10),
+      ]);
     } else {
       return Card(
+          borderOnForeground: true,
+          color: widget.semiActive == true
+              ? custom_colors.primaryColor4
+              : custom_colors.primaryColor1,
           child: SizedBox(
               width: MediaQuery.of(context).size.width - 30,
               height: 90,
@@ -67,6 +90,8 @@ class _AchieveTileState extends State<AchieveTile> {
                 const SizedBox(width: 8),
                 Card(
                   child: Container(
+                    // decoration: BoxDecoration(
+                    //     border: Border.all(width: 2, color: Colors.black54)),
                     alignment: Alignment.center,
                     width: 70,
                     height: 70,
@@ -76,17 +101,27 @@ class _AchieveTileState extends State<AchieveTile> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      color: Colors.amber,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                          color: widget.semiActive == true
+                              ? Colors.white24
+                              : Colors.black12,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5))),
+                      margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(widget.shownAchieve.title,
-                              style: const TextStyle(fontSize: 26)),
-                          const SizedBox(height: 5),
+                              style: const TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 6),
                           Text(widget.shownAchieve.text,
-                              style: const TextStyle(fontSize: 18))
+                              style: const TextStyle(
+                                  fontSize: 17, color: Colors.white))
                         ],
                       )),
                 )
