@@ -56,6 +56,7 @@ class _QuestionState extends State<Question> {
             itemBuilder: (BuildContext context, int index) {
               return DarkButton(
                 text: shownQuestion.options[index].text,
+                left: true,
                 onPressed: () {
                   changePage();
                   proAddWeight(shownQuestion.options[index].weightStyle);

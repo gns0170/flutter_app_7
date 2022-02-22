@@ -8,6 +8,7 @@ class DarkButton extends StatefulWidget {
       this.icon,
       this.height,
       this.width,
+      this.left,
       required this.onPressed,
       this.fontStyle})
       : super(key: key);
@@ -18,6 +19,7 @@ class DarkButton extends StatefulWidget {
   final dynamic width;
   final dynamic height;
 
+  final dynamic left;
   final dynamic fontStyle;
   @override
   _DarkButton createState() => _DarkButton();
@@ -76,23 +78,25 @@ class _DarkButton extends State<DarkButton> {
         borderRadius: BorderRadius.circular(6),
         child: InkWell(
           onTap: widget.onPressed,
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                iconSwitch(),
-                Text(
-                  widget.text,
-                  textAlign: TextAlign.center,
-                  style: widget.fontStyle ??
-                      const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: widget.left == null
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.start,
+            children: [
+              iconSwitch(),
+              widget.left == null
+                  ? const SizedBox()
+                  : const SizedBox(width: 10),
+              Text(
+                widget.text,
+                style: widget.fontStyle ??
+                    const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ],
           ),
         ),
       ),
