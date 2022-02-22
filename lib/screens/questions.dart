@@ -32,9 +32,6 @@ class _QuestionState extends State<Question> {
 
     //related variables
     void changePage() {
-      print(globalWeight);
-      print("hi");
-      print(globalWeightPosition);
       if (semiNumberPage == 10) {
         Navigator.pop(context);
         Navigator.pushNamed(context, '/result');

@@ -81,7 +81,7 @@ class _ResultGraph2State extends State<ResultGraph2> {
                 const Spacer(flex: 1),
                 IconButton(
                     onPressed: () {
-                      globalTabController?.index = 3;
+                      globalTabController?.index = 0.bitLength;
                     },
                     icon: const Icon(Icons.navigate_next,
                         color: Colors.white, size: 30)),
