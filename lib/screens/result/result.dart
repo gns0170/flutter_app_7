@@ -21,6 +21,7 @@ dynamic globalTabController;
 
 class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
   //related variables
+
   late TabController _tabController;
   @override
   void initState() {
@@ -41,20 +42,20 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
     int maxWeightPosition = globalWeightPosition.reduce(max);
     int index;
     int indexPosition;
-    DataResult proResult = r[0];
+    DataResult proResult;
 
     for (index = 0; globalWeight[index] != maxWeight; index++) {}
     for (indexPosition = 0;
-        globalWeightPosition[index] != maxWeightPosition;
+        globalWeightPosition[indexPosition] != maxWeightPosition;
         indexPosition++) {}
 
-    setState(() {
-      proResult = r[index];
-      recordR[index]++;
-      CheckAcases checkCase = CheckAcases();
-      checkCase.setRecordAByAcases();
-      R.saveRecord();
-    });
+    int indexComposed = indexPosition * 4 + index;
+    proResult = r[indexComposed];
+    recordR[indexComposed]++;
+    CheckAcases checkCase = CheckAcases();
+    checkCase.setRecordAByAcases();
+    R.saveRecord();
+
     return proResult;
   }
 

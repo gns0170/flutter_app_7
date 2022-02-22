@@ -72,7 +72,7 @@ Widget buttons(context) {
           text: "처음으로",
           onPressed: () {
             Navigator.pop(context);
-          })
+          }),
     ],
   );
 }
