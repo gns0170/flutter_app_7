@@ -19,7 +19,7 @@ List<DataResult> r = [
         TextQuestion(words: '탑')
       ]),
       const TextExplain(
-        words: '111111',
+        words: '',
       )),
   DataResult(
       'result2',
