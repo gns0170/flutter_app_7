@@ -18,9 +18,11 @@ List<DataResult> r = [
         SizedBox(width: 10),
         TextQuestion(words: '탑')
       ]),
-      const TextExplain(
-        words: '111111',
-      )),
+      const SingleChildScrollView(
+          child: TextExplain(
+        words:
+            '1231231\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123\n123123',
+      ))),
   DataResult(
       'result2',
       Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
