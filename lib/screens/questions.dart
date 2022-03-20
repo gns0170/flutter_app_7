@@ -43,11 +43,9 @@ class _QuestionState extends State<Question> {
     //views
     return Scaffold(
         body: centerColumn([
-      const Spacer(flex: 1),
+      const Spacer(flex: 3),
       TextQuestion(words: shownQuestion.question),
-      const SizedBox(height: 10),
-      views(shownQuestion.view, context, 300),
-      const SizedBox(height: 20),
+      const Spacer(flex: 1),
       SizedBox(
         width: MediaQuery.of(context).size.width - 40,
         height: 250,
@@ -69,7 +67,18 @@ class _QuestionState extends State<Question> {
               );
             }),
       ),
-      const Spacer(flex: 2),
+      const Spacer(flex: 5),
+      theNumberQuestions(semiNumberPage),
+      const SizedBox(height: 30)
     ]));
   }
+}
+
+Widget theNumberQuestions(dynamic number) {
+  return Container(
+    child: Center(
+        child: TextQuestion(
+      words: number.toString() + '/10',
+    )),
+  );
 }
