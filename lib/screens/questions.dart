@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/widgets/button.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/texts.dart';
-import 'package:flutter_application_7/widgets/view.dart';
 import '../data/questions.dart';
 import './home.dart';
 
@@ -75,7 +74,7 @@ class _QuestionState extends State<Question> {
 }
 
 Widget theNumberQuestions(dynamic number) {
-  return Container(
+  return SizedBox(
     child: Center(
         child: TextQuestion(
       words: number.toString() + '/10',
