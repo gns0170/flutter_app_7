@@ -66,16 +66,50 @@ class CheckAcases {
   List<bool> aCases = [
     false,
     //1
-    recordR[0] != 0 ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
+    recordR[0] == 1 &&
+            recordR[4] == 1 &&
+            recordR[8] == 1 &&
+            recordR[12] == 1 &&
+            recordR[16] == 1
+        ? true
+        : false,
+    recordR[1] == 1 &&
+            recordR[5] == 1 &&
+            recordR[9] == 1 &&
+            recordR[13] == 1 &&
+            recordR[17] == 1
+        ? true
+        : false,
+    recordR[2] == 1 &&
+            recordR[6] == 1 &&
+            recordR[10] == 1 &&
+            recordR[14] == 1 &&
+            recordR[18] == 1
+        ? true
+        : false,
+    recordR[3] == 1 &&
+            recordR[7] == 1 &&
+            recordR[11] == 1 &&
+            recordR[15] == 1 &&
+            recordR[19] == 1
+        ? true
+        : false,
     //2
-    1 is bool ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
+    recordR[0] == 1 && recordR[1] == 1 && recordR[2] == 1 && recordR[3] == 1
+        ? true
+        : false,
+    recordR[4] == 1 && recordR[5] == 1 && recordR[6] == 1 && recordR[7] == 1
+        ? true
+        : false,
+    recordR[8] == 1 && recordR[9] == 1 && recordR[10] == 1 && recordR[11] == 1
+        ? true
+        : false,
+    recordR[12] == 1 && recordR[13] == 1 && recordR[14] == 1 && recordR[15] == 1
+        ? true
+        : false,
+    recordR[16] == 1 && recordR[17] == 1 && recordR[18] == 1 && recordR[19] == 1
+        ? true
+        : false,
     //3
     1 is bool ? true : false,
     1 is bool ? true : false,

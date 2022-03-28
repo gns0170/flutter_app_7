@@ -46,10 +46,10 @@ class Record {
   }
 
   void convertIntToString() {
-    for (int i = 0; i < r.length; i++) {
+    for (int i = 0; i < recordR.length; i++) {
       stringRecordR[i] = recordR[i].toString();
     }
-    for (int i = 0; i < a.length; i++) {
+    for (int i = 0; i < recordA.length; i++) {
       stringRecordA[i] = recordA[i].toString();
     }
   }
