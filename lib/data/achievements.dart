@@ -17,25 +17,46 @@ Widget iconBasicA =
 //data
 List<DataAchievement> a = [
   DataAchievement("1번 항목", "1번 설명", "Bar"),
-  DataAchievement("1번 achieve", "1번 설명",
+  //1
+  DataAchievement("나비처럼 날아서", "화려한 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
-  DataAchievement("2번 achieve", "1번 설명",
+  //2
+  DataAchievement("차갑지만 아름다운", "정교한 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
-  DataAchievement("3번 achieve", "1번 설명",
+  //3
+  DataAchievement("우리는 모두 칭구", "협력적인 결과를 전부 얻은 사람",
+      const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
+  //4
+  DataAchievement("대를 위한 희생", "숭고한 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   DataAchievement("2번 항목", "1번 설명", "Bar"),
-  DataAchievement("1번 achieve", "2번 설명",
+  //5
+  DataAchievement("죽음이 두렵지 않은", "탑을 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
-  DataAchievement("2번 achieve", "2번 설명",
+  //6
+  DataAchievement("아 맞다 강타!", "정글을 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
-  DataAchievement("3번 achieve", "2번 설명",
+  //7
+  DataAchievement("뭐든 가능한 사람", "미드를 전부 얻은 사람",
+      const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
+  //8
+  DataAchievement("집중, 또 집중!", "원딜을 전부 얻은 사람",
+      const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
+  //9
+  DataAchievement("서포터야, 고마워!", "서포터를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   DataAchievement("3번 항목", "1번 설명", "Bar"),
-  DataAchievement("1번 achieve", "3번 설명",
+  //10
+  DataAchievement("포화 속으로", "화려한 점수가 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
-  DataAchievement("2번 achieve", "3번 설명",
+  //11
+  DataAchievement("생각하는 기계", "정밀한 점수가 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
-  DataAchievement("3번 achieve", "3번 설명",
+  //12
+  DataAchievement("사회적 동물", "협력적인 점수가 2등의 2배 이상 높다.",
+      const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
+  //13
+  DataAchievement("오, 어머니…", "숭고한 점수가 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
 ];
 
@@ -46,11 +67,15 @@ class CheckAcases {
     recordR[0] != 0 ? true : false,
     1 is bool ? true : false,
     1 is bool ? true : false,
-    false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
     1 is bool ? true : false,
     false,
+    1 is bool ? true : false,
+    1 is bool ? true : false,
+    1 is bool ? true : false,
+    1 is bool ? true : false,
+    1 is bool ? true : false,
+    false,
+    1 is bool ? true : false,
     1 is bool ? true : false,
     1 is bool ? true : false,
     1 is bool ? true : false,

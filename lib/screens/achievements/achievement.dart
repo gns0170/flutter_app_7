@@ -33,10 +33,10 @@ class _AchievementState extends State<Achievement> {
 
             if (recordA[index] == 0 && proIcon != "Bar") {
               proIcon = iconBasicA;
-              if (index > 8) {
-                proTitle = "???";
-                proText = "?????";
-              }
+              // if (index > 8) {
+              //   proTitle = "???";
+              //   proText = "?????";
+              // }
             }
             AchieveTile proAchieve = AchieveTile(
                 shownAchieve: DataAchievement(proTitle, proText, proIcon,
