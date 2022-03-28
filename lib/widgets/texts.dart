@@ -43,6 +43,29 @@ class _TextExplainState extends State<TextExplain> {
   }
 }
 
+class TextExplainResult extends StatefulWidget {
+  const TextExplainResult({Key? key, required this.words, this.color})
+      : super(key: key);
+
+  final dynamic color;
+  final dynamic words;
+  @override
+  _TextExplainResultState createState() => _TextExplainResultState();
+}
+
+class _TextExplainResultState extends State<TextExplainResult> {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      widget.words,
+      style: TextStyle(
+          color: widget.color ?? Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold),
+    );
+  }
+}
+
 class TextTitleResultGraph extends StatefulWidget {
   const TextTitleResultGraph({Key? key, required this.words}) : super(key: key);
 
