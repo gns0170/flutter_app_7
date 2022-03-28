@@ -18,7 +18,6 @@ class _AchievementState extends State<Achievement> {
   @override
   Widget build(BuildContext context) {
     //dataProcess
-    setAchievementCasesByRecord();
     //Views
     return centerColumn([
       SizedBox(
@@ -27,11 +26,12 @@ class _AchievementState extends State<Achievement> {
         child: ListView.builder(
           itemCount: listShownAchieve.length,
           itemBuilder: (BuildContext context, int index) {
+            int proPNumber = listShownAchieve[index].pNumber;
             String proTitle = listShownAchieve[index].title;
             String proText = listShownAchieve[index].text;
             dynamic proIcon = listShownAchieve[index].icon;
 
-            if (recordA[index] == 0 && proIcon != "Bar") {
+            if (recordA[a[index].pNumber] == 0 && proIcon != "Bar") {
               proIcon = iconBasicA;
               // if (index > 8) {
               //   proTitle = "???";
@@ -39,9 +39,10 @@ class _AchievementState extends State<Achievement> {
               // }
             }
             AchieveTile proAchieve = AchieveTile(
-                shownAchieve: DataAchievement(proTitle, proText, proIcon,
-                    cases: recordA[index]),
-                semiActive: recordA[index] != 0 ? true : false);
+                shownAchieve: DataAchievement(
+                    proPNumber, proTitle, proText, proIcon,
+                    cases: recordA[a[index].pNumber]),
+                semiActive: recordA[a[index].pNumber] != 0 ? true : false);
             return proAchieve;
           },
         ),
@@ -121,7 +122,8 @@ class _AchieveTileState extends State<AchieveTile> {
                           const SizedBox(height: 6),
                           Text(widget.shownAchieve.text,
                               style: const TextStyle(
-                                  fontSize: 17, color: Colors.white))
+                                  fontSize: 15, color: Colors.white)),
+                          const SizedBox(height: 6)
                         ],
                       )),
                 )

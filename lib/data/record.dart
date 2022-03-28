@@ -17,8 +17,8 @@ class Record {
         stringRecordR.add('0');
       }
     }
-    if (recordA.length != a.length) {
-      for (int i = 0; i < a.length; i++) {
+    if (recordA.length != a.length - 2) {
+      for (int i = 0; i < a.length - 2; i++) {
         recordA.add(0);
         stringRecordA.add('0');
       }
@@ -26,10 +26,21 @@ class Record {
   }
 
   void convertStringToInt() {
-    for (int i = 0; i < r.length; i++) {
+    if (a.length != stringRecordA.length) {
+      if (a.length > stringRecordA.length) {
+        for (int i = 0; i < a.length - stringRecordA.length + 1; i++) {
+          stringRecordA.add('0');
+        }
+      } else {
+        for (int i = 0; i < stringRecordA.length - a.length + 1; i++) {
+          stringRecordA.removeLast();
+        }
+      }
+    }
+    for (int i = 0; i < recordR.length; i++) {
       recordR[i] = int.parse(stringRecordR[i]);
     }
-    for (int i = 0; i < a.length; i++) {
+    for (int i = 0; i < recordA.length; i++) {
       recordA[i] = int.parse(stringRecordA[i]);
     }
   }
