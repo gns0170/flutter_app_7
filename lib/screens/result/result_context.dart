@@ -5,6 +5,7 @@ import 'package:flutter_application_7/widgets/button.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/view.dart';
 import './result.dart';
+import 'package:share_plus/share_plus.dart';
 
 //first Screen
 class ResultContext extends StatefulWidget {
@@ -60,7 +61,8 @@ Widget buttons(context) {
           const Spacer(flex: 1),
           DarkButton(
               text: "공유하기",
-              onPressed: () {},
+              onPressed: () =>
+                  Share.share('check out my website https://example.com'),
               width: 180,
               height: 70,
               icon: Icons.share),
