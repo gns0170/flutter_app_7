@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/layout.dart';
 import '../widgets/button.dart';
 import '../widgets/texts.dart' as custom_text;
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -32,6 +33,24 @@ void proAddWeightPosition(List<int> a) {
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    //Banner
+    const admobBannerID = "ca-app-pub-4363316862676869~8730480021";
+    const admobBannerTestID = "ca-app-pub-3940256099942544/6300978111";
+    final BannerAd myBanner = BannerAd(
+      adUnitId: admobBannerTestID,
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: const BannerAdListener(),
+    );
+    myBanner.load();
+    final AdWidget adWidget = AdWidget(ad: myBanner);
+    final Container adContainer = Container(
+      alignment: Alignment.center,
+      child: adWidget,
+      width: myBanner.size.width.toDouble(),
+      height: myBanner.size.height.toDouble(),
+    );
+
     //views
     return Scaffold(
       body: centerColumn([
@@ -69,7 +88,8 @@ class HomeState extends State<Home> {
         ),
         const SizedBox(
           height: 10,
-        )
+        ),
+        adContainer,
       ]),
     );
   }

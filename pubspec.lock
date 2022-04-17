@@ -107,6 +107,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_mobile_ads:
+    dependency: "direct main"
+    description:
+      name: google_mobile_ads
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   intl:
     dependency: transitive
     description:
@@ -218,7 +225,7 @@ packages:
       name: share_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.3"
+    version: "4.0.4"
   share_plus_linux:
     dependency: transitive
     description:
@@ -433,7 +440,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.1"
+    version: "2.5.1"
   xdg_directories:
     dependency: transitive
     description:
