@@ -11,7 +11,9 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-
+  MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+      tagForChildDirectedTreatment: TagForChildDirectedTreatment.unspecified,
+      testDeviceIds: <String>["d3b14dfe-7806-41c1-a8e4-f064ca23dbe9"]));
   runApp(const MyApp());
 }
 
@@ -20,6 +22,7 @@ Record R = Record();
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
   MyAppState createState() => MyAppState();
 }
 
