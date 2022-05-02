@@ -43,6 +43,10 @@ class _ResultContextState extends State<ResultContext> {
   }
 }
 
+dynamic shareResult() {
+  return Share.share("example\nhttps://example.com");
+}
+
 Widget buttons(context) {
   return Column(
     children: [
@@ -61,8 +65,7 @@ Widget buttons(context) {
           const Spacer(flex: 1),
           DarkButton(
               text: "공유하기",
-              onPressed: () =>
-                  Share.share('check out my website https://example.com'),
+              onPressed: () => shareResult(),
               width: 180,
               height: 70,
               icon: Icons.share),

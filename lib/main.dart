@@ -13,7 +13,10 @@ void main() {
   MobileAds.instance.initialize();
   MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
       tagForChildDirectedTreatment: TagForChildDirectedTreatment.unspecified,
-      testDeviceIds: <String>["d3b14dfe-7806-41c1-a8e4-f064ca23dbe9"]));
+      testDeviceIds: <String>[
+        "d3b14dfe-7806-41c1-a8e4-f064ca23dbe9",
+        "73f4774d-5c27-4af9-98e8-76480ba7df79"
+      ]));
   runApp(const MyApp());
 }
 

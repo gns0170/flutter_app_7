@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //Banner
-const admobBannerID = "ca-app-pub-4363316862676869~8730480021";
+const admobBannerID = "ca-app-pub-4363316862676869/8538908330";
 const admobBannerTestID = "ca-app-pub-3940256099942544~3347511713";
 final BannerAd myBanner = BannerAd(
-  adUnitId: admobBannerTestID,
+  adUnitId: admobBannerID,
   size: AdSize.banner,
   request: const AdRequest(),
   listener: const BannerAdListener(),
