@@ -37,6 +37,12 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     myBanner.load();
+    //AdMob
+    Widget ad = switchAd == true
+        ? adContainer
+        : const SizedBox(
+            height: 10,
+          );
     //views
     return Scaffold(
       body: centerColumn([
@@ -80,11 +86,7 @@ class HomeState extends State<Home> {
         const SizedBox(
           height: 10,
         ),
-        switchAd == true
-            ? adContainer
-            : const SizedBox(
-                height: 10,
-              ),
+        ad
       ]),
     );
   }
