@@ -30,6 +30,8 @@ void proAddWeightPosition(List<int> a) {
   }
 }
 
+int switchAd = 0;
+
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -61,18 +63,25 @@ class HomeState extends State<Home> {
           ),
         ),
         const Spacer(flex: 3),
+        Text("$switchAd"),
         DarkButton(
           text: "나는 롤을 모른다!",
           height: 50,
           onPressed: () {
-            Navigator.pushNamed(context, '/achievement');
+            switchAd = (switchAd + 1) % 2;
+
+            // Navigator.pushNamed(context, '/achievement');
           },
           icon: Icons.reply,
         ),
         const SizedBox(
           height: 10,
         ),
-        adContainer,
+        switchAd == 0
+            ? adContainer
+            : const SizedBox(
+                height: 10,
+              ),
       ]),
     );
   }

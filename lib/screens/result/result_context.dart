@@ -29,7 +29,7 @@ class _ResultContextState extends State<ResultContext> {
         body: centerColumn([
       shownResultTitle,
       const SizedBox(height: 6),
-      views(shownResultText, context, 400),
+      views(shownResultText, context, 350),
       const SizedBox(height: 8),
       DarkerButton(
           text: '그래프로 보기',
@@ -47,6 +47,7 @@ dynamic shareResult() {
   return Share.share("example\nhttps://example.com");
 }
 
+//버튼 모음
 Widget buttons(context) {
   return Column(
     children: [
@@ -60,13 +61,13 @@ Widget buttons(context) {
               onPressed: () {
                 Navigator.pushNamed(context, '/achievement');
               },
-              width: 180,
+              width: (MediaQuery.of(context).size.width - 50) / 2,
               height: 70),
-          const Spacer(flex: 1),
+          const SizedBox(width: 10),
           DarkButton(
               text: "공유하기",
               onPressed: () => shareResult(),
-              width: 180,
+              width: (MediaQuery.of(context).size.width - 50) / 2,
               height: 70,
               icon: Icons.share),
           const SizedBox(width: 20),
@@ -74,7 +75,7 @@ Widget buttons(context) {
       ),
       const SizedBox(height: 5),
       DarkButton(
-          text: "처음으로",
+          text: "맨 처음으로",
           onPressed: () {
             Navigator.pop(context);
           }),

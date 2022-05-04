@@ -138,7 +138,7 @@ class _DarkerButton extends State<DarkerButton> {
     } else {
       width = widget.width is double
           ? widget.width
-          : (MediaQuery.of(context).size.width - 45);
+          : (MediaQuery.of(context).size.width - 40);
     }
     if (widget.height is int) {
       height = widget.height.toDouble();
@@ -176,24 +176,36 @@ class _DarkerButton extends State<DarkerButton> {
         borderRadius: BorderRadius.circular(6),
         child: InkWell(
           onTap: widget.onPressed,
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 15,
-              ),
-              Text(
-                widget.text,
-                style: widget.fontStyle ??
-                    const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+          child: widget.icon != null || widget.iconDetail != null
+              ? Row(
+                  children: [
+                    const SizedBox(
+                      width: 15,
                     ),
-              ),
-              const Spacer(flex: 1),
-              iconSwitch(),
-            ],
-          ),
+                    Text(
+                      widget.text,
+                      style: widget.fontStyle ??
+                          const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const Spacer(flex: 1),
+                    iconSwitch(),
+                  ],
+                )
+              : Center(
+                  child: Text(
+                    widget.text,
+                    style: widget.fontStyle ??
+                        const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
         ),
       ),
     );

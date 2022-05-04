@@ -4,6 +4,7 @@ import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/result/result_context.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/texts.dart';
+import '../../widgets/button.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
 import '../../values/colors.dart' as custom_color;
@@ -117,7 +118,13 @@ class _ResultGraph1State extends State<ResultGraph1> {
           ),
         ),
       ),
-      const SizedBox(height: 20),
+      const SizedBox(height: 15),
+      DarkerButton(
+        text: '결과 첫 화면',
+        onPressed: () {
+          globalTabController?.index = 0;
+        },
+      ),
       buttons(context)
     ]));
   }
