@@ -30,7 +30,8 @@ void proAddWeightPosition(List<int> a) {
   }
 }
 
-int switchAd = 0;
+//Ad
+bool switchAd = true;
 
 class HomeState extends State<Home> {
   @override
@@ -68,7 +69,9 @@ class HomeState extends State<Home> {
           text: "나는 롤을 모른다!",
           height: 50,
           onPressed: () {
-            switchAd = (switchAd + 1) % 2;
+            setState(() {
+              switchAd = !switchAd;
+            });
 
             // Navigator.pushNamed(context, '/achievement');
           },
@@ -77,7 +80,7 @@ class HomeState extends State<Home> {
         const SizedBox(
           height: 10,
         ),
-        switchAd == 0
+        switchAd == true
             ? adContainer
             : const SizedBox(
                 height: 10,
