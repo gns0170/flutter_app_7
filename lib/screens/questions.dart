@@ -46,8 +46,8 @@ class _QuestionState extends State<Question> {
       TextQuestion(words: shownQuestion.question),
       const Spacer(flex: 1),
       SizedBox(
-        width: MediaQuery.of(context).size.width - 40,
-        height: 250,
+        width: MediaQuery.of(context).size.width - 20,
+        height: 370,
         child: ListView.builder(
             itemCount: shownQuestion.options.length,
             itemBuilder: (BuildContext context, int index) {
@@ -68,7 +68,7 @@ class _QuestionState extends State<Question> {
       ),
       const Spacer(flex: 5),
       theNumberQuestions(semiNumberPage),
-      const SizedBox(height: 30)
+      const SizedBox(height: 30),
     ]));
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/widgets/appbar.dart';
+import 'package:flutter_application_7/widgets/drawer.dart';
 import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -52,7 +53,8 @@ class MyAppState extends State<MyApp> {
               )),
         ),
         home: Scaffold(
-          appBar: baseAppBar,
+          appBar: baseAppBar(context),
+          drawer: Drawer(child: baseDrawer),
           body: MaterialApp(
             initialRoute: '/',
             routes: {
@@ -60,8 +62,28 @@ class MyAppState extends State<MyApp> {
               '/question': (context) => const Question(),
               '/result': (context) => const Result(),
               '/achievement': (context) => const Achievement(),
+              '/test': (context) => const TestScreen(),
             },
           ),
         ));
+  }
+}
+
+class TestScreen extends StatefulWidget {
+  const TestScreen({Key? key}) : super(key: key);
+
+  @override
+  TestScreenState createState() => TestScreenState();
+}
+
+class TestScreenState extends State<TestScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        color: Colors.black,
+        child: Text("123"),
+      ),
+    );
   }
 }
