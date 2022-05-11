@@ -3,6 +3,7 @@ import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
+import 'package:flutter_application_7/screens/statistics.dart';
 import 'package:flutter_application_7/widgets/appbar.dart';
 import 'package:flutter_application_7/widgets/drawer.dart';
 import './screens/home.dart';
@@ -54,15 +55,16 @@ class MyAppState extends State<MyApp> {
         ),
         home: Scaffold(
           appBar: baseAppBar(context),
-          drawer: Drawer(child: baseDrawer),
+          drawer: Drawer(child: baseDrawer(context)),
           body: MaterialApp(
-            initialRoute: '/',
+            initialRoute: "/home",
             routes: {
-              '/': (context) => const Home(),
+              '/home': (context) => const Home(),
               '/question': (context) => const Question(),
               '/result': (context) => const Result(),
               '/achievement': (context) => const Achievement(),
               '/test': (context) => const TestScreen(),
+              '/statistics': (context) => const Statistics(),
             },
           ),
         ));
