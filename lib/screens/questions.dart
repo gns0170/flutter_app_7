@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/widgets/button.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/texts.dart';
+import 'package:flutter_application_7/widgets/drawer.dart';
 import '../data/questions.dart';
 import './home.dart';
+import 'dart:developer';
 
 class Question extends StatefulWidget {
   const Question({Key? key}) : super(key: key);

@@ -9,6 +9,7 @@ import 'package:flutter_application_7/widgets/drawer.dart';
 import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:flutter_provider/flutter_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ void main() {
         "d3b14dfe-7806-41c1-a8e4-f064ca23dbe9",
         "b707453f-ec54-4d0e-8f08-c3d236ce513f"
       ]));
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 Record R = Record();
@@ -43,31 +44,38 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     R.loadRecord();
 
-    return MaterialApp(
-        title: 'A',
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-              color: custom_colors.primaryColor1,
-              actionsIconTheme: IconThemeData(
-                color: Colors.white,
-                size: 32,
-              )),
-        ),
-        home: Scaffold(
-          appBar: baseAppBar(context),
-          drawer: Drawer(child: baseDrawer(context)),
-          body: MaterialApp(
-            initialRoute: "/home",
-            routes: {
-              '/home': (context) => const Home(),
-              '/question': (context) => const Question(),
-              '/result': (context) => const Result(),
-              '/achievement': (context) => const Achievement(),
-              '/test': (context) => const TestScreen(),
-              '/statistics': (context) => const Statistics(),
-            },
-          ),
-        ));
+    return Providers(
+        providers: [
+          Provider<DrawerSwitch>.value(
+            drawerSwitch1,
+            disposer: (v) => v.dispose(),
+          )
+        ],
+        child: MaterialApp(
+            title: 'A',
+            theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                  color: custom_colors.primaryColor1,
+                  actionsIconTheme: IconThemeData(
+                    color: Colors.white,
+                    size: 32,
+                  )),
+            ),
+            home: Scaffold(
+              appBar: baseAppBar(context),
+              drawer: Drawer(child: BaseDrawer()),
+              body: MaterialApp(
+                initialRoute: "/home",
+                routes: {
+                  '/home': (context) => const Home(),
+                  '/question': (context) => const Question(),
+                  '/result': (context) => const Result(),
+                  '/achievement': (context) => const Achievement(),
+                  '/test': (context) => const TestScreen(),
+                  '/statistics': (context) => const Statistics(),
+                },
+              ),
+            )));
   }
 }
 

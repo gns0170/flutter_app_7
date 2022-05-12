@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/flutter_provider.dart';
 import '../widgets/layout.dart';
 import '../widgets/button.dart';
 import '../widgets/adver.dart';
 import '../widgets/texts.dart' as custom_text;
+import 'package:flutter_application_7/widgets/drawer.dart';
+import 'dart:developer';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -36,8 +39,18 @@ bool switchAd = true;
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    myBanner.load();
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        if (Provider.of<DrawerSwitch>(context).value == true) {
+          drawerSwitch1.change();
+          log("Test");
+          Navigator.pushNamed(context, '/statistics');
+        }
+      });
+    });
+
     //AdMob
+    myBanner.load();
     Widget ad = switchAd == true
         ? adContainer
         : const SizedBox(
