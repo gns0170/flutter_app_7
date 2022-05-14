@@ -20,35 +20,37 @@ class _AchievementState extends State<Achievement> {
   Widget build(BuildContext context) {
     //dataProcess
     //Views
-    return centerColumn([
-      SizedBox(
-        width: MediaQuery.of(context).size.width - 40,
-        height: MediaQuery.of(context).size.height - 80,
-        child: ListView.builder(
-          itemCount: listShownAchieve.length,
-          itemBuilder: (BuildContext context, int index) {
-            int proPNumber = listShownAchieve[index].pNumber;
-            String proTitle = listShownAchieve[index].title;
-            String proText = listShownAchieve[index].text;
-            dynamic proIcon = listShownAchieve[index].icon;
+    return Scaffold(
+        appBar: AppBar(),
+        body: centerColumn([
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 40,
+            height: MediaQuery.of(context).size.height - 80,
+            child: ListView.builder(
+              itemCount: listShownAchieve.length,
+              itemBuilder: (BuildContext context, int index) {
+                int proPNumber = listShownAchieve[index].pNumber;
+                String proTitle = listShownAchieve[index].title;
+                String proText = listShownAchieve[index].text;
+                dynamic proIcon = listShownAchieve[index].icon;
 
-            if (recordA[a[index].pNumber] == 0 && proIcon != "Bar") {
-              proIcon = iconBasicA;
-              // if (index > 8) {
-              //   proTitle = "???";
-              //   proText = "?????";
-              // }
-            }
-            AchieveTile proAchieve = AchieveTile(
-                shownAchieve: DataAchievement(
-                    proPNumber, proTitle, proText, proIcon,
-                    cases: recordA[a[index].pNumber]),
-                semiActive: recordA[a[index].pNumber] != 0 ? true : false);
-            return proAchieve;
-          },
-        ),
-      ),
-    ]);
+                if (recordA[a[index].pNumber] == 0 && proIcon != "Bar") {
+                  proIcon = iconBasicA;
+                  // if (index > 8) {
+                  //   proTitle = "???";
+                  //   proText = "?????";
+                  // }
+                }
+                AchieveTile proAchieve = AchieveTile(
+                    shownAchieve: DataAchievement(
+                        proPNumber, proTitle, proText, proIcon,
+                        cases: recordA[a[index].pNumber]),
+                    semiActive: recordA[a[index].pNumber] != 0 ? true : false);
+                return proAchieve;
+              },
+            ),
+          ),
+        ]));
   }
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/screens/achievements/achievement.dart';
+import 'package:flutter_application_7/screens/statistics.dart';
 
 class BaseDrawer extends StatefulWidget {
   const BaseDrawer({Key? key}) : super(key: key);
@@ -15,15 +17,19 @@ class BaseDrawerState extends State<BaseDrawer> {
         ListTile(
           title: const Text('업적'),
           onTap: () {
-            drawerSwitch.changeAchievement();
+            //drawerSwitch.changeAchievement();
             Navigator.pop(context);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Achievement()));
           },
         ),
         ListTile(
           title: const Text('통계'),
           onTap: () {
-            drawerSwitch.changeStatistics();
+            //drawerSwitch.changeStatistics();
             Navigator.pop(context);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Statistics()));
           },
         )
       ],
@@ -45,6 +51,10 @@ class DrawerSwitch extends ChangeNotifier {
 
   void changeAchievement() {
     _valueAchievement = !_valueAchievement;
+    notifyListeners();
+  }
+
+  void notify() {
     notifyListeners();
   }
 }

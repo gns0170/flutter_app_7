@@ -16,6 +16,7 @@ class StatisticsState extends State<Statistics> {
   Widget build(BuildContext context) {
     log("Tes12t");
     return Scaffold(
+        appBar: AppBar(),
         backgroundColor: custom_colors.primaryColor5.withOpacity(0.7),
         body: Center(
             child: Column(
