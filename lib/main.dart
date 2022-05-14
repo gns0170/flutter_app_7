@@ -11,6 +11,23 @@ import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_provider/flutter_provider.dart';
 
+//Route Aware Test
+abstract class RouteAware {
+  /// Called when the top route has been popped off, and the current route
+  /// shows up.
+  void didPopNext() {}
+
+  /// Called when the current route has been pushed.
+  void didPush() {}
+
+  /// Called when the current route has been popped off.
+  void didPop() {}
+
+  /// Called when a new route has been pushed, and the current route is no
+  /// longer visible.
+  void didPushNext() {}
+}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
@@ -24,6 +41,9 @@ void main() {
 }
 
 Record R = Record();
+
+//루트 관리
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -47,7 +67,7 @@ class MyAppState extends State<MyApp> {
     return Providers(
         providers: [
           Provider<DrawerSwitch>.value(
-            drawerSwitch1,
+            drawerSwitch,
             disposer: (v) => v.dispose(),
           )
         ],
@@ -65,6 +85,7 @@ class MyAppState extends State<MyApp> {
               appBar: baseAppBar(context),
               drawer: const Drawer(child: BaseDrawer()),
               body: MaterialApp(
+                navigatorObservers: [routeObserver],
                 initialRoute: "/home",
                 routes: {
                   '/home': (context) => const Home(),

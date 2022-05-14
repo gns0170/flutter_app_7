@@ -42,10 +42,15 @@ class HomeState extends State<Home> {
     //Drawer Screeen Navigator
     Future.delayed(Duration.zero, () {
       setState(() {
-        if (Provider.of<DrawerSwitch>(context).value == true) {
-          drawerSwitch1.change();
+        if (Provider.of<DrawerSwitch>(context).valueStatistic == true) {
+          drawerSwitch.changeStatistics();
           log("Test");
           Navigator.pushNamed(context, '/statistics');
+        }
+        if (Provider.of<DrawerSwitch>(context).valueAchievement == true) {
+          drawerSwitch.changeAchievement();
+          log("Test");
+          Navigator.pushNamed(context, '/achievement');
         }
       });
     });

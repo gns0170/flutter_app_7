@@ -13,13 +13,16 @@ class BaseDrawerState extends State<BaseDrawer> {
       padding: const EdgeInsets.only(top: 80),
       children: [
         ListTile(
-          title: const Text('12'),
-          onTap: () {},
+          title: const Text('업적'),
+          onTap: () {
+            drawerSwitch.changeAchievement();
+            Navigator.pop(context);
+          },
         ),
         ListTile(
-          title: const Text('Statistics'),
+          title: const Text('통계'),
           onTap: () {
-            drawerSwitch1.change();
+            drawerSwitch.changeStatistics();
             Navigator.pop(context);
           },
         )
@@ -28,14 +31,20 @@ class BaseDrawerState extends State<BaseDrawer> {
   }
 }
 
-bool drawerSwitch = false;
-final drawerSwitch1 = DrawerSwitch();
+final drawerSwitch = DrawerSwitch();
 
 class DrawerSwitch extends ChangeNotifier {
-  bool _value = false;
-  bool get value => _value;
-  void change() {
-    _value = !_value;
+  bool _valueStatistic = false;
+  bool _valueAchievement = false;
+  bool get valueStatistic => _valueStatistic;
+  bool get valueAchievement => _valueAchievement;
+  void changeStatistics() {
+    _valueStatistic = !_valueStatistic;
+    notifyListeners();
+  }
+
+  void changeAchievement() {
+    _valueAchievement = !_valueAchievement;
     notifyListeners();
   }
 }
