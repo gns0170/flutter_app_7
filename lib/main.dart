@@ -20,7 +20,7 @@ void main() {
         "d3b14dfe-7806-41c1-a8e4-f064ca23dbe9",
         "b707453f-ec54-4d0e-8f08-c3d236ce513f"
       ]));
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 Record R = Record();
@@ -63,7 +63,7 @@ class MyAppState extends State<MyApp> {
             ),
             home: Scaffold(
               appBar: baseAppBar(context),
-              drawer: Drawer(child: BaseDrawer()),
+              drawer: const Drawer(child: BaseDrawer()),
               body: MaterialApp(
                 initialRoute: "/home",
                 routes: {
@@ -92,7 +92,7 @@ class TestScreenState extends State<TestScreen> {
     return Scaffold(
       body: Container(
         color: Colors.black,
-        child: Text("123"),
+        child: const Text("123"),
       ),
     );
   }

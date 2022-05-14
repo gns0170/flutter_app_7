@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../screens/home.dart';
 
 class BaseDrawer extends StatefulWidget {
-  BaseDrawer({Key? key}) : super(key: key);
+  const BaseDrawer({Key? key}) : super(key: key);
   @override
   BaseDrawerState createState() => BaseDrawerState();
 }
@@ -18,7 +17,7 @@ class BaseDrawerState extends State<BaseDrawer> {
           onTap: () {},
         ),
         ListTile(
-          title: Text('Statistics'),
+          title: const Text('Statistics'),
           onTap: () {
             drawerSwitch1.change();
             Navigator.pop(context);
