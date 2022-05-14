@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/statistics.dart';
+import 'package:flutter_provider/flutter_provider.dart';
 
 class BaseDrawer extends StatefulWidget {
   const BaseDrawer({Key? key}) : super(key: key);
@@ -52,6 +55,11 @@ class DrawerSwitch extends ChangeNotifier {
   void changeAchievement() {
     _valueAchievement = !_valueAchievement;
     notifyListeners();
+  }
+
+  void test(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Achievement()));
   }
 
   void notify() {
