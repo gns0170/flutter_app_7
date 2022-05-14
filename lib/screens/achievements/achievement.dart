@@ -125,7 +125,7 @@ class _AchieveTileState extends State<AchieveTile> {
                           const SizedBox(height: 6),
                           Text(widget.shownAchieve.text,
                               style: const TextStyle(
-                                  fontSize: 15, color: Colors.white)),
+                                  fontSize: 14, color: Colors.white)),
                           const SizedBox(height: 6)
                         ],
                       )),

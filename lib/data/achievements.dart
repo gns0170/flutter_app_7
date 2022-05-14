@@ -48,16 +48,16 @@ List<DataAchievement> a = [
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   DataAchievement(0, "3번 항목", "1번 설명", "Bar"),
   //10
-  DataAchievement(10, "포화 속으로", "화려한 점수가 2등의 2배 이상 높다.",
+  DataAchievement(10, "포화 속으로", "화려함이 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //11
-  DataAchievement(11, "생각하는 기계", "정밀한 점수가 2등의 2배 이상 높다.",
+  DataAchievement(11, "생각하는 기계", "정밀함이 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //12
-  DataAchievement(12, "사회적 동물", "협력적인 점수가 2등의 2배 이상 높다.",
+  DataAchievement(12, "사회적 동물", "협력적임이 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //13
-  DataAchievement(13, "오, 어머니…", "숭고한 점수가 2등의 2배 이상 높다.",
+  DataAchievement(13, "오, 어머니…", "숭고함이 2등의 2배 이상 높다.",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
 ];
 

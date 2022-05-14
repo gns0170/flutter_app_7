@@ -82,7 +82,7 @@ class MyAppState extends State<MyApp> {
                   )),
             ),
             home: Scaffold(
-              appBar: BaseAppBar(),
+              appBar: const BaseAppBar(),
               drawer: const Drawer(child: BaseDrawer()),
               body: MaterialApp(
                 navigatorObservers: [routeObserver],

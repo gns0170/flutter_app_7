@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/statistics.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 
 class BaseDrawer extends StatefulWidget {
   const BaseDrawer({Key? key}) : super(key: key);

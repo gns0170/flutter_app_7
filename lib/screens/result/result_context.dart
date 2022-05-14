@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/results.dart';
-import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/button.dart';
 import 'package:flutter_application_7/widgets/drawer.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/view.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 import './result.dart';
 import 'package:share_plus/share_plus.dart';
 
