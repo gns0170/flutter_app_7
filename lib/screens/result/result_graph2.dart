@@ -101,14 +101,12 @@ class _ResultGraph2State extends State<ResultGraph2> {
         width: MediaQuery.of(context).size.width - 40,
         height: 300,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Expanded(
-          child: charts.PieChart<String>(shownWeight(),
-              defaultRenderer: charts.ArcRendererConfig(arcRendererDecorators: [
-                charts.ArcLabelDecorator(
-                    labelPosition: charts.ArcLabelPosition.auto)
-              ]),
-              animate: false),
-        ),
+        child: charts.PieChart<String>(shownWeight(),
+            defaultRenderer: charts.ArcRendererConfig(arcRendererDecorators: [
+              charts.ArcLabelDecorator(
+                  labelPosition: charts.ArcLabelPosition.auto)
+            ]),
+            animate: false),
       ),
       const SizedBox(height: 20),
       DarkerButton(

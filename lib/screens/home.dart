@@ -37,22 +37,6 @@ bool switchAd = true;
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    //Drawer Screeen Navigator
-    // Future.delayed(Duration.zero, () {
-    //   setState(() {
-    //     if (Provider.of<DrawerSwitch>(context).valueStatistic == true) {
-    //       drawerSwitch.changeStatistics();
-    //       log("Test");
-    //       Navigator.pushNamed(context, '/statistics');
-    //     }
-    //     if (Provider.of<DrawerSwitch>(context).valueAchievement == true) {
-    //       drawerSwitch.changeAchievement();
-    //       log("Test");
-    //       Navigator.pushNamed(context, '/achievement');
-    //     }
-    //   });
-    // });
-
     //AdMob
     myBanner.load();
     Widget ad = switchAd == true

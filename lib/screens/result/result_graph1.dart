@@ -97,25 +97,23 @@ class _ResultGraph1State extends State<ResultGraph1> {
         width: MediaQuery.of(context).size.width - 40,
         height: 300,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Expanded(
-          child: charts.PieChart<String>(
-            shownWeight(),
-            defaultRenderer: charts.ArcRendererConfig(arcRendererDecorators: [
-              charts.ArcLabelDecorator(
-                  labelPosition: charts.ArcLabelPosition.auto)
-            ]),
-            animate: false,
-            behaviors: [
-              charts.DatumLegend(
-                  position: charts.BehaviorPosition.end,
-                  cellPadding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
-                  showMeasures: false,
-                  legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
-                  measureFormatter: (value) {
-                    return '';
-                  })
-            ],
-          ),
+        child: charts.PieChart<String>(
+          shownWeight(),
+          defaultRenderer: charts.ArcRendererConfig(arcRendererDecorators: [
+            charts.ArcLabelDecorator(
+                labelPosition: charts.ArcLabelPosition.auto)
+          ]),
+          animate: false,
+          behaviors: [
+            charts.DatumLegend(
+                position: charts.BehaviorPosition.end,
+                cellPadding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
+                showMeasures: false,
+                legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
+                measureFormatter: (value) {
+                  return '';
+                })
+          ],
         ),
       ),
       const SizedBox(height: 15),
