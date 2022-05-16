@@ -1,4 +1,4 @@
-package com.example.flutter_application_7
+package com.testpotato.right_position
 
 import io.flutter.embedding.android.FlutterActivity
 
