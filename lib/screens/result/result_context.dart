@@ -7,6 +7,7 @@ import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/view.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../values/colors.dart' as custom_colors;
+import 'package:achievement_view/achievement_view.dart';
 
 //first Screen
 class ResultContext extends StatefulWidget {
@@ -36,59 +37,7 @@ class _ResultContextState extends State<ResultContext> {
           text: '그래프로 보기',
           onPressed: () {
             //globalTabController?.index = 1;
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return Dialog(
-                      backgroundColor: custom_colors.primaryColor5,
-                      child: SizedBox(
-                          height: 90,
-                          child: Row(children: [
-                            const SizedBox(width: 8),
-                            Card(
-                              child: Container(
-                                // decoration: BoxDecoration(
-                                //     border: Border.all(width: 2, color: Colors.black54)),
-                                alignment: Alignment.center,
-                                width: 70,
-                                height: 70,
-                                child: const Text('!',
-                                    style: TextStyle(
-                                        fontSize: 40, color: Colors.black87)),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Container(
-                                  decoration: const BoxDecoration(
-                                      color: Colors.white24,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5))),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("테스트 제목",
-                                          style: const TextStyle(
-                                              fontSize: 22,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold)),
-                                      const SizedBox(height: 6),
-                                      Text("텍스트 글",
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white)),
-                                      const SizedBox(height: 6)
-                                    ],
-                                  )),
-                            )
-                          ])));
-                });
+            showAchievementView(context);
           },
           iconDetail:
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),
@@ -135,4 +84,22 @@ Widget buttons(context) {
           }),
     ],
   );
+}
+
+void showAchievementView(BuildContext context) {
+  dynamic a1 = AchievementView(context,
+      title: "텍스트 제목               ",
+      subTitle: "텍스트 바디",
+      color: custom_colors.primaryColor4.withOpacity(0.9),
+      isCircle: true, listener: (status) {
+    print(status);
+  });
+
+  dynamic a2 = AchievementView(context,
+      title: "텍스트 제목               ",
+      subTitle: "텍스트 바디",
+      color: custom_colors.primaryColor4.withOpacity(0.9),
+      isCircle: true, listener: (status) {
+    print(status);
+  });
 }

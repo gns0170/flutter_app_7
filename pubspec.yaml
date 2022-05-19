@@ -39,6 +39,7 @@ dependencies:
   share_plus: ^4.0.3
   google_mobile_ads: ^1.2.0
   flutter_provider: ^2.1.0
+  achievement_view: ^1.0.0
 
 dev_dependencies:
   flutter_test:
