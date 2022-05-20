@@ -21,3 +21,23 @@ void showAchievementView(BuildContext context) {
 
   a1..show();
 }
+
+void showAchievementView2(BuildContext context) {
+  dynamic a1 = AchievementView(context,
+      title: "텍스트 제목 232323              ",
+      subTitle: "텍스트 바디2323",
+      color: custom_colors.primaryColor4.withOpacity(0.9),
+      isCircle: true, listener: (status) {
+    print(status);
+  });
+
+  dynamic a2 = AchievementView(context,
+      title: "텍스트 제목               ",
+      subTitle: "텍스트 바디",
+      color: custom_colors.primaryColor4.withOpacity(0.9),
+      isCircle: true, listener: (status) {
+    print(status);
+  });
+
+  a1..show();
+}

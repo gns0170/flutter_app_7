@@ -34,14 +34,6 @@ class BaseDrawerState extends State<BaseDrawer> {
                 MaterialPageRoute(builder: (context) => const Statistics()));
           },
         ),
-        ListTile(
-          title: const Text('테스트'),
-          onTap: () {
-            //drawerSwitch.changeStatistics();
-            Navigator.pop(context);
-            showAchievementView(context);
-          },
-        ),
       ],
     );
   }

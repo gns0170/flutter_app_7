@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
+import 'package:flutter_application_7/widgets/achievement_popup/achievemen.dart';
 import 'package:flutter_application_7/widgets/drawer.dart';
 import 'package:flutter_provider/flutter_provider.dart';
 
@@ -29,7 +30,9 @@ class _BaseAppBarState extends State<BaseAppBar> {
       automaticallyImplyLeading: false,
       actions: <Widget>[
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            shownAchieve(context);
+          },
           splashRadius: 30,
           icon: const Icon(Icons.share),
         ),
@@ -51,5 +54,15 @@ class _BaseAppBarState extends State<BaseAppBar> {
         ),
       ],
     );
+  }
+}
+
+void shownAchieve(context) async {
+  for (int index = 0; index < 3; index++) {
+    if (index == 0)
+      showAchievementView2(context);
+    else
+      await Future.delayed(Duration(seconds: 4))
+          .then((value) => showAchievementView(context));
   }
 }
