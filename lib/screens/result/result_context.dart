@@ -6,8 +6,6 @@ import 'package:flutter_application_7/widgets/drawer.dart';
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/view.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../values/colors.dart' as custom_colors;
-import 'package:achievement_view/achievement_view.dart';
 
 //first Screen
 class ResultContext extends StatefulWidget {
@@ -37,7 +35,6 @@ class _ResultContextState extends State<ResultContext> {
           text: '그래프로 보기',
           onPressed: () {
             //globalTabController?.index = 1;
-            showAchievementView(context);
           },
           iconDetail:
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),
@@ -84,22 +81,4 @@ Widget buttons(context) {
           }),
     ],
   );
-}
-
-void showAchievementView(BuildContext context) {
-  dynamic a1 = AchievementView(context,
-      title: "텍스트 제목               ",
-      subTitle: "텍스트 바디",
-      color: custom_colors.primaryColor4.withOpacity(0.9),
-      isCircle: true, listener: (status) {
-    print(status);
-  });
-
-  dynamic a2 = AchievementView(context,
-      title: "텍스트 제목               ",
-      subTitle: "텍스트 바디",
-      color: custom_colors.primaryColor4.withOpacity(0.9),
-      isCircle: true, listener: (status) {
-    print(status);
-  });
 }

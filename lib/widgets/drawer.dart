@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
+
 import 'package:flutter_application_7/screens/statistics.dart';
+import 'package:flutter_application_7/widgets/achievement_popup/achievemen.dart';
 
 class BaseDrawer extends StatefulWidget {
   const BaseDrawer({Key? key}) : super(key: key);
@@ -31,7 +33,15 @@ class BaseDrawerState extends State<BaseDrawer> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Statistics()));
           },
-        )
+        ),
+        ListTile(
+          title: const Text('테스트'),
+          onTap: () {
+            //drawerSwitch.changeStatistics();
+            Navigator.pop(context);
+            showAchievementView(context);
+          },
+        ),
       ],
     );
   }
