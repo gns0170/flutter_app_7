@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/results.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 
 import 'package:flutter_application_7/widgets/button.dart';
-import 'package:flutter_application_7/widgets/drawer.dart';
+
 import 'package:flutter_application_7/widgets/layout.dart';
 import 'package:flutter_application_7/widgets/view.dart';
 import 'package:share_plus/share_plus.dart';
@@ -35,6 +36,7 @@ class _ResultContextState extends State<ResultContext> {
           text: '그래프로 보기',
           onPressed: () {
             //globalTabController?.index = 1;
+            appBarSwitch.changeShownAchieve();
           },
           iconDetail:
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),

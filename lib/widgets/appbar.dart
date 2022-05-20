@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/widgets/achievement_popup/achievemen.dart';
-import 'package:flutter_application_7/widgets/drawer.dart';
+
 import 'package:flutter_provider/flutter_provider.dart';
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
@@ -24,6 +25,11 @@ class _BaseAppBarState extends State<BaseAppBar> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Achievement()));
         }
+        if (Provider.of<AppBarSwitch>(context).value == true) {
+          appBarSwitch.changeShownAchieve();
+          shownAchieve(context);
+        }
+        ;
       });
     });
     return AppBar(
@@ -59,10 +65,11 @@ class _BaseAppBarState extends State<BaseAppBar> {
 
 void shownAchieve(context) async {
   for (int index = 0; index < 3; index++) {
-    if (index == 0)
-      showAchievementView2(context);
-    else
+    if (index == 0) {
+      showAchievementView(context, null, null, null);
+    } else {
       await Future.delayed(Duration(seconds: 4))
-          .then((value) => showAchievementView(context));
+          .then((value) => showAchievementView(context, null, null, null));
+    }
   }
 }

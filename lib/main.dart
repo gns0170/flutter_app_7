@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/record.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
@@ -69,7 +70,11 @@ class MyAppState extends State<MyApp> {
           Provider<DrawerSwitch>.value(
             drawerSwitch,
             disposer: (v) => v.dispose(),
-          )
+          ),
+          Provider<AppBarSwitch>.value(
+            appBarSwitch,
+            disposer: (v) => v.dispose(),
+          ),
         ],
         child: MaterialApp(
             title: 'A',

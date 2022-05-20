@@ -79,8 +79,6 @@ class HomeState extends State<Home> {
             setState(() {
               switchAd = !switchAd;
             });
-
-            // Navigator.pushNamed(context, '/achievement');
           },
           icon: Icons.reply,
         ),
