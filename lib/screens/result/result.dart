@@ -3,6 +3,8 @@ import 'package:flutter_application_7/data/achievements.dart';
 import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/data/results.dart';
 import 'package:flutter_application_7/main.dart';
+import 'package:flutter_application_7/provider/refer_value.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/screens/result/result_graph2.dart';
 import 'dart:math';
@@ -43,6 +45,8 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
     int index;
     int indexPosition;
     DataResult proResult;
+    //RecordA check for achievement View
+    List<int> tempRecordA = recordA;
 
     for (index = 0; globalWeight[index] != maxWeight; index++) {}
     for (indexPosition = 0;
@@ -52,8 +56,21 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
     int indexComposed = indexPosition * 4 + index;
     proResult = r[indexComposed];
     recordR[indexComposed]++;
+
     CheckAcases checkCase = CheckAcases();
     checkCase.setRecordAByAcases();
+
+    //RecordA check for achievement view
+    for (index = 0; index < recordA.length; index++) {
+      if (tempRecordA[index] != recordA[index]) {
+        referDas.add(
+            DataAchievementShown(a[index].title, a[index].text, a[index].icon));
+      }
+    }
+    appBarSwitch.changeShownAchieve();
+    initReferDas();
+
+    //end the record
     R.saveRecord();
 
     return proResult;
