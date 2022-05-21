@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/provider/switch.dart';
+import 'package:flutter_provider/flutter_provider.dart';
 
-import '../widgets/layout.dart';
-import '../widgets/button.dart';
+import '../widgets/parts/layout.dart';
+import '../widgets/parts/button.dart';
 import '../widgets/adver.dart';
-import '../widgets/texts.dart' as custom_text;
+import '../widgets/parts/texts.dart' as custom_text;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -31,19 +33,17 @@ void proAddWeightPosition(List<int> a) {
   }
 }
 
-//Ad
-bool switchAd = true;
-
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     //AdMob
     myBanner.load();
-    Widget ad = switchAd == true
-        ? adContainer
-        : const SizedBox(
-            height: 10,
-          );
+    Future.delayed(
+        Duration.zero,
+        () => setState(() {
+              Provider.of<AppBarSwitch>(context).switchAd;
+            }));
+
     //views
     return Scaffold(
       body: centerColumn([
@@ -71,21 +71,20 @@ class HomeState extends State<Home> {
           ),
         ),
         const Spacer(flex: 3),
-        Text("$switchAd"),
-        DarkButton(
-          text: "나는 롤을 모른다!",
-          height: 50,
-          onPressed: () {
-            setState(() {
-              switchAd = !switchAd;
-            });
-          },
-          icon: Icons.reply,
-        ),
+        // DarkButton(
+        //   text: "나는 롤을 모른다!",
+        //   height: 50,
+        //   onPressed: () {
+        //     setState(() {
+        //       switchAd = !switchAd;
+        //     });
+        //   },
+        //   icon: Icons.reply,
+        // ),
         const SizedBox(
           height: 10,
         ),
-        ad
+        adContainer(myBanner, context)
       ]),
     );
   }

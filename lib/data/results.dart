@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/widgets/texts.dart';
+import 'package:flutter_application_7/widgets/parts/texts.dart';
 import '../values/colors.dart' as custom_color;
 
 class DataResult {

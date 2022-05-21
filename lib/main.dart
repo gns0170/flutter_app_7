@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/statistics.dart';
-import 'package:flutter_application_7/widgets/appbar.dart';
-import 'package:flutter_application_7/widgets/drawer.dart';
+import 'package:flutter_application_7/widgets/parts/appbar.dart';
+import 'package:flutter_application_7/widgets/parts/drawer.dart';
 import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -57,7 +58,10 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
     // Load ads.
   }
 

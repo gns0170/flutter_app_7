@@ -7,6 +7,7 @@ import 'package:flutter_application_7/provider/refer_value.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/screens/result/result_graph2.dart';
+
 import 'dart:math';
 import 'result_context.dart';
 import 'result_graph1.dart';

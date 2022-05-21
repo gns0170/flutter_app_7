@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/results.dart';
 
 import 'package:flutter_application_7/provider/switch.dart';
+import 'package:flutter_application_7/screens/result/result.dart';
+import 'package:flutter_application_7/widgets/adver.dart';
 
-import 'package:flutter_application_7/widgets/button.dart';
+import 'package:flutter_application_7/widgets/parts/button.dart';
 
-import 'package:flutter_application_7/widgets/layout.dart';
-import 'package:flutter_application_7/widgets/view.dart';
+import 'package:flutter_application_7/widgets/parts/layout.dart';
+import 'package:flutter_application_7/widgets/parts/view.dart';
+import 'package:flutter_provider/flutter_provider.dart';
+
 import 'package:share_plus/share_plus.dart';
 
 //first Screen
@@ -25,10 +29,21 @@ class _ResultContextState extends State<ResultContext> {
 
   @override
   Widget build(BuildContext context) {
+    //ad
+    myBanner3.load();
+    Future.delayed(
+        Duration.zero,
+        () => setState(() {
+              Provider.of<AppBarSwitch>(context).switchAd;
+            }));
+
     shownResultText = widget.proResult.explain;
     shownResultTitle = widget.proResult.title;
     return Scaffold(
         body: centerColumn([
+      appBarSwitch.switchAd == true
+          ? const Spacer(flex: 2)
+          : const Spacer(flex: 1),
       shownResultTitle,
       const SizedBox(height: 6),
       views(shownResultText, context, 350),
@@ -36,12 +51,14 @@ class _ResultContextState extends State<ResultContext> {
       DarkerButton(
           text: '그래프로 보기',
           onPressed: () {
-            //globalTabController?.index = 1;
-            appBarSwitch.changeShownAchieve();
+            globalTabController?.index = 1;
+            // appBarSwitch.changeShownAchieve();
           },
           iconDetail:
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),
       buttons(context),
+      const Spacer(flex: 1),
+      adContainer(myBanner3, context),
     ]));
   }
 }

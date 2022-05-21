@@ -33,8 +33,24 @@ class AppBarSwitch extends ChangeNotifier {
   bool _value = false;
   bool get value => _value;
 
+  bool _valueAdPopup = false;
+  bool get valueAdPopup => _valueAdPopup;
+
+  bool _switchAd = false;
+  bool get switchAd => _switchAd;
+
   void changeShownAchieve() {
     _value = !_value;
+    notifyListeners();
+  }
+
+  void changeSwitchAd() {
+    _switchAd = !_switchAd;
+    notifyListeners();
+  }
+
+  void changeValueAdPopup() {
+    _valueAdPopup = !_valueAdPopup;
     notifyListeners();
   }
 

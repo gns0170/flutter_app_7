@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/achievements.dart';
 import 'package:flutter_application_7/data/record.dart';
 import '../../values/colors.dart' as custom_colors;
-import '../../widgets/layout.dart';
+import '../../widgets/parts/layout.dart';
 
 //ListView
 class Achievement extends StatefulWidget {

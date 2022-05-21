@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../values/colors.dart' as custom_colors;
+import '../../values/colors.dart' as custom_colors;
 
 Widget centerColumn(childrens) {
   return Container(

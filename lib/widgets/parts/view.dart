@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../values/colors.dart' as custom_color;
+import '../../values/colors.dart' as custom_color;
 
 Widget views(inform, context, width) {
   return Container(

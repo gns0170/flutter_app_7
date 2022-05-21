@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:developer';
 import '../values/colors.dart' as custom_colors;
 
-import 'package:flutter_application_7/widgets/texts.dart';
+import 'package:flutter_application_7/widgets/parts/texts.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);

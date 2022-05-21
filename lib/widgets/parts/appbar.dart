@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
-import 'package:flutter_application_7/widgets/achievement_popup/achievemen_show.dart';
+
+import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
 
 import 'package:flutter_provider/flutter_provider.dart';
 
@@ -29,6 +30,29 @@ class _BaseAppBarState extends State<BaseAppBar> {
           appBarSwitch.changeShownAchieve();
           shownAchieve(context, null, null, null);
         }
+        if (Provider.of<AppBarSwitch>(context).valueAdPopup == true) {
+          appBarSwitch.changeValueAdPopup();
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                    content: SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("123"),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              appBarSwitch.changeSwitchAd();
+                            },
+                            child: const Text('test'))
+                      ]),
+                ));
+              });
+        }
       });
     });
     return AppBar(
@@ -36,7 +60,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
       actions: <Widget>[
         IconButton(
           onPressed: () {
-            shownAchieve(context, null, null, null);
+            appBarSwitch.changeValueAdPopup();
           },
           splashRadius: 30,
           icon: const Icon(Icons.share),

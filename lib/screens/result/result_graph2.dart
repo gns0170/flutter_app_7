@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/result/result_context.dart';
-import 'package:flutter_application_7/widgets/layout.dart';
-import 'package:flutter_application_7/widgets/texts.dart';
-import '../../widgets/button.dart';
+import 'package:flutter_application_7/widgets/adver.dart';
+import 'package:flutter_application_7/widgets/parts/layout.dart';
+import 'package:flutter_application_7/widgets/parts/texts.dart';
+import 'package:flutter_provider/flutter_provider.dart';
+import '../../widgets/parts/button.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
 import '../../values/colors.dart' as custom_color;
@@ -28,6 +31,13 @@ class TestData {
 class _ResultGraph2State extends State<ResultGraph2> {
   @override
   Widget build(BuildContext context) {
+    //ad
+    myBanner5.load();
+    Future.delayed(
+        Duration.zero,
+        () => setState(() {
+              Provider.of<AppBarSwitch>(context).switchAd;
+            }));
     //data Process
     List<charts.Series<TestData, String>> shownWeight() {
       List<TestData> proWeight = [
@@ -95,6 +105,9 @@ class _ResultGraph2State extends State<ResultGraph2> {
     //Views
     return Scaffold(
         body: centerColumn([
+      appBarSwitch.switchAd == true
+          ? const Spacer(flex: 2)
+          : const Spacer(flex: 1),
       title(),
       Container(
         color: Colors.white,
@@ -115,7 +128,9 @@ class _ResultGraph2State extends State<ResultGraph2> {
           globalTabController?.index = 0;
         },
       ),
-      buttons(context)
+      buttons(context),
+      const Spacer(flex: 1),
+      adContainer(myBanner5, context),
     ]));
   }
 }

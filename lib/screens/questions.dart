@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/widgets/button.dart';
-import 'package:flutter_application_7/widgets/layout.dart';
-import 'package:flutter_application_7/widgets/texts.dart';
+import 'package:flutter_application_7/provider/switch.dart';
+import 'package:flutter_application_7/widgets/adver.dart';
+import 'package:flutter_application_7/widgets/parts/button.dart';
+import 'package:flutter_application_7/widgets/parts/layout.dart';
+import 'package:flutter_application_7/widgets/parts/texts.dart';
+import 'package:flutter_provider/flutter_provider.dart';
 
 import '../data/questions.dart';
 import './home.dart';
@@ -20,6 +23,13 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
+    //ad
+    myBanner2.load();
+    Future.delayed(
+        Duration.zero,
+        () => setState(() {
+              Provider.of<AppBarSwitch>(context).switchAd;
+            }));
     //data Process
     dynamic shownQuestion;
     void selectQuestion() {
@@ -45,7 +55,9 @@ class _QuestionState extends State<Question> {
         body: centerColumn([
       const Spacer(flex: 3),
       TextQuestion(words: shownQuestion.question),
-      const Spacer(flex: 1),
+      appBarSwitch.switchAd == true
+          ? const Spacer(flex: 1)
+          : const Spacer(flex: 2),
       SizedBox(
         width: MediaQuery.of(context).size.width - 20,
         height: 370,
@@ -67,9 +79,12 @@ class _QuestionState extends State<Question> {
               );
             }),
       ),
-      const Spacer(flex: 5),
+      const Spacer(flex: 2),
       theNumberQuestions(semiNumberPage),
-      const SizedBox(height: 30),
+      appBarSwitch.switchAd == true
+          ? const Spacer(flex: 1)
+          : const SizedBox(height: 30),
+      adContainer(myBanner2, context),
     ]));
   }
 }
