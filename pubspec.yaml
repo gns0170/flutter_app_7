@@ -40,6 +40,7 @@ dependencies:
   google_mobile_ads: ^1.2.0
   flutter_provider: ^2.1.0
   achievement_view: ^1.0.0
+  in_app_purchase: ^3.0.4
 
 dev_dependencies:
   flutter_test:

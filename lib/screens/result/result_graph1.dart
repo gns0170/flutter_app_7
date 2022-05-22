@@ -36,7 +36,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<AppBarSwitch>(context).switchAd;
+              Provider.of<HomeSwitch>(context).switchAd;
             }));
     //data Process
     List<charts.Series<TestData, String>> shownWeight() {
@@ -101,7 +101,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
 
     return Scaffold(
         body: centerColumn([
-      appBarSwitch.switchAd == true
+      homeSwitch.switchAd == true
           ? const Spacer(flex: 2)
           : const Spacer(flex: 1),
       title(),

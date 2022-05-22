@@ -41,7 +41,7 @@ class HomeState extends State<Home> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<AppBarSwitch>(context).switchAd;
+              Provider.of<HomeSwitch>(context).switchAd;
             }));
 
     //views

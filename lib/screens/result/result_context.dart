@@ -34,14 +34,14 @@ class _ResultContextState extends State<ResultContext> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<AppBarSwitch>(context).switchAd;
+              Provider.of<HomeSwitch>(context).switchAd;
             }));
 
     shownResultText = widget.proResult.explain;
     shownResultTitle = widget.proResult.title;
     return Scaffold(
         body: centerColumn([
-      appBarSwitch.switchAd == true
+      homeSwitch.switchAd == true
           ? const Spacer(flex: 2)
           : const Spacer(flex: 1),
       shownResultTitle,

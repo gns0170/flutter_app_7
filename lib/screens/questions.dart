@@ -28,7 +28,7 @@ class _QuestionState extends State<Question> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<AppBarSwitch>(context).switchAd;
+              Provider.of<HomeSwitch>(context).switchAd;
             }));
     //data Process
     dynamic shownQuestion;
@@ -55,7 +55,7 @@ class _QuestionState extends State<Question> {
         body: centerColumn([
       const Spacer(flex: 3),
       TextQuestion(words: shownQuestion.question),
-      appBarSwitch.switchAd == true
+      homeSwitch.switchAd == true
           ? const Spacer(flex: 1)
           : const Spacer(flex: 2),
       SizedBox(
@@ -81,7 +81,7 @@ class _QuestionState extends State<Question> {
       ),
       const Spacer(flex: 2),
       theNumberQuestions(semiNumberPage),
-      appBarSwitch.switchAd == true
+      homeSwitch.switchAd == true
           ? const Spacer(flex: 1)
           : const SizedBox(height: 30),
       adContainer(myBanner2, context),

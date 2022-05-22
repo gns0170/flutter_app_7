@@ -39,7 +39,7 @@ final BannerAd myBanner5 = BannerAd(
 
 Widget adContainer(banner, context) {
   Provider.of<AppBarSwitch>(context);
-  return appBarSwitch.switchAd == true
+  return homeSwitch.switchAd == true
       ? StatefulBuilder(
           builder: (context, setState) => Container(
                 alignment: Alignment.center,

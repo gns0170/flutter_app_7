@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
-
 import 'package:flutter_provider/flutter_provider.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+
+//import for InAppPurchaseAndroidPlatformAddition
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+//import for BillingResponse
+import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
   const BaseAppBar({Key? key}) : super(key: key);
@@ -16,8 +23,12 @@ class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
 }
 
 class _BaseAppBarState extends State<BaseAppBar> {
+  //inapp purchase
+
   @override
   Widget build(BuildContext context) {
+    //inapp Purchase
+
     //Drawer Page Change
     Future.delayed(Duration.zero, () {
       setState(() {
@@ -42,13 +53,14 @@ class _BaseAppBarState extends State<BaseAppBar> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("123"),
+                        const Text("광고 없애기", style: TextStyle(fontSize: 18)),
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              appBarSwitch.changeSwitchAd();
+                              homeSwitch.changeSwitchAd();
                             },
-                            child: const Text('test'))
+                            child: const Text('￦500',
+                                style: TextStyle(fontSize: 15)))
                       ]),
                 ));
               });
