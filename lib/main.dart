@@ -1,7 +1,3 @@
-
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_7/data/record.dart';
@@ -17,105 +13,10 @@ import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_provider/flutter_provider.dart';
 
-import 'package:in_app_purchase/in_app_purchase.dart';
-
-//import for InAppPurchaseAndroidPlatformAddition
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-//import for BillingResponse
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-
-
+import './test.dart';
 
 //inapp Test
-void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-  purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-    if (purchaseDetails.status == PurchaseStatus.pending) {
-      _showPendingUI();
-    } else {
-      if (purchaseDetails.status == PurchaseStatus.error) {
-        _handleError(purchaseDetails.error!);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-                 purchaseDetails.status == PurchaseStatus.restored) {
-        bool valid = await _verifyPurchase(purchaseDetails);
-        if (valid) {
-          _deliverProduct(purchaseDetails);
-        } else {
-          _handleInvalidPurchase(purchaseDetails);
-        }
-      }
-      if (purchaseDetails.pendingCompletePurchase) {
-        await InAppPurchase.instance
-            .completePurchase(purchaseDetails);
-      }
-    }
-  });
-}
-final bool available = await InAppPurchase.instance.isAvailable();
-if (!available) {
-  // The store cannot be reached or accessed. Update the UI accordingly.
-}
-
-// Set literals require Dart 2.2. Alternatively, use
-// `Set<String> _kIds = <String>['product1', 'product2'].toSet()`.
-const Set<String> _kIds = <String>{'product1', 'product2'};
-final ProductDetailsResponse response =
-    await InAppPurchase.instance.queryProductDetails(_kIds);
-if (response.notFoundIDs.isNotEmpty) {
-  // Handle the error.
-}
-List<ProductDetails> products = response.productDetails;
-
-await InAppPurchase.instance.restorePurchases();
-
-
-
-final ProductDetails productDetails = ... // Saved earlier from queryProductDetails().
-final PurchaseParam purchaseParam = PurchaseParam(productDetails: productDetails);
-if (_isConsumable(productDetails)) {
-  InAppPurchase.instance.buyConsumable(purchaseParam: purchaseParam);
-} else {
-  InAppPurchase.instance.buyNonConsumable(purchaseParam: purchaseParam);
-}
-// From here the purchase flow will be handled by the underlying store.
-// Updates will be delivered to the `InAppPurchase.instance.purchaseStream`.
-
-
-final PurchaseDetails oldPurchaseDetails = ...;
-PurchaseParam purchaseParam = GooglePlayPurchaseParam(
-    productDetails: productDetails,
-    changeSubscriptionParam: ChangeSubscriptionParam(
-        oldPurchaseDetails: oldPurchaseDetails,
-        prorationMode: ProrationMode.immediateWithTimeProration));
-InAppPurchase.instance
-    .buyNonConsumable(purchaseParam: purchaseParam);
-
-
-
-
-
-
-if (Platform.isAndroid) {
-  final InAppPurchaseAndroidPlatformAddition androidAddition =
-    _inAppPurchase
-      .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
-  var priceChangeConfirmationResult =
-      await androidAddition.launchPriceChangeConfirmationFlow(
-    sku: 'purchaseId',
-  );
-  if (priceChangeConfirmationResult.responseCode == BillingResponse.ok){
-    // TODO acknowledge price change
-  }else{
-    // TODO show error
-  }
-}
-
 //inappTest
-
-
-
-
-
-
 
 //Route Aware Test
 abstract class RouteAware {
@@ -160,47 +61,14 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   //test inapp
-    StreamSubscription<List<PurchaseDetails>> _subscription;
-
-  @override
-  void dispose() {
-    _subscription.cancel();
-    super.dispose();
-  }
-
-
 
 //inapp end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   @override
   void initState() {
     //inapp
-    final Stream purchaseUpdated =
-        InAppPurchase.instance.purchaseStream;
-    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onDone: () {
-      _subscription.cancel();
-    }, onError: (error) {
-      // handle error here.
-    });
-    super.initState();
-    //inapp
 
+    //inapp
 
     super.initState();
     SystemChrome.setPreferredOrientations([
@@ -213,6 +81,10 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     R.loadRecord();
+
+    //in app
+
+    //in app end
 
     return Providers(
         providers: [
@@ -244,13 +116,13 @@ class MyAppState extends State<MyApp> {
               drawer: const Drawer(child: BaseDrawer()),
               body: MaterialApp(
                 navigatorObservers: [routeObserver],
-                initialRoute: "/home",
+                initialRoute: "/test",
                 routes: {
                   '/home': (context) => const Home(),
                   '/question': (context) => const Question(),
                   '/result': (context) => const Result(),
                   '/achievement': (context) => const Achievement(),
-                  '/test': (context) => const TestScreen(),
+                  '/test': (context) => const InApp(),
                   '/statistics': (context) => const Statistics(),
                 },
               ),
@@ -276,3 +148,5 @@ class TestScreenState extends State<TestScreen> {
     );
   }
 }
+
+//in app class

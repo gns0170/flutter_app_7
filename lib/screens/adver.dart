@@ -14,7 +14,7 @@ class _AdPurchaseState extends State<AdPurchase> {
     return Scaffold(
         appBar: AppBar(),
         body: centerColumn([
-          Text("1234"),
+          const Text("1234"),
         ]));
   }
 }

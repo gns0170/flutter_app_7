@@ -6,12 +6,6 @@ import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
 import 'package:flutter_provider/flutter_provider.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
-
-//import for InAppPurchaseAndroidPlatformAddition
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-//import for BillingResponse
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
   const BaseAppBar({Key? key}) : super(key: key);
