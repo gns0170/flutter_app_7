@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/logic/dash_purchases.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
 import 'package:flutter_provider/flutter_provider.dart';
+import 'package:provider/provider.dart' as p;
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
   const BaseAppBar({Key? key}) : super(key: key);
@@ -88,6 +90,23 @@ class _BaseAppBarState extends State<BaseAppBar> {
           width: 17,
         ),
       ],
+    );
+  }
+}
+
+class _PurchaseList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var purchases = context.watch<DashPurchases>();
+    var products = purchases.products;
+    return Column(
+      children: products
+          .map((product) => _PurchaseWidget(
+              product: product,
+              onPressed: () {
+                purchases.buy(product);
+              }))
+          .toList(),
     );
   }
 }

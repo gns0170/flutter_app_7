@@ -8,14 +8,17 @@ import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/statistics.dart';
 import 'package:flutter_application_7/widgets/parts/appbar.dart';
 import 'package:flutter_application_7/widgets/parts/drawer.dart';
+import 'package:flutter_provider/flutter_provider.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:provider/provider.dart' as p;
 import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 
 import './test.dart';
 
 //inapp Test
+import './logic/dash_purchases.dart';
 //inappTest
 
 //Route Aware Test
@@ -38,16 +41,40 @@ abstract class RouteAware {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
+  InAppPurchase;
   MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
       tagForChildDirectedTreatment: TagForChildDirectedTreatment.unspecified,
       testDeviceIds: <String>[
         "d3b14dfe-7806-41c1-a8e4-f064ca23dbe9",
         "b707453f-ec54-4d0e-8f08-c3d236ce513f"
       ]));
-  runApp(const MyApp());
+
+  runApp(p.MultiProvider(providers: [
+    p.ChangeNotifierProvider<DashPurchases>(
+      create: (context) => DashPurchases(
+        context.read<DashCounter>(),
+      ),
+      lazy: false,
+    ),
+  ], child: const MyApp()));
 }
 
 Record R = Record();
+
+//test inapp
+// Gives the option to override in tests.
+class IAPConnection {
+  static InAppPurchase? _instance;
+  static set instance(InAppPurchase value) {
+    _instance = value;
+  }
+
+  static InAppPurchase get instance {
+    _instance ??= InAppPurchase.instance;
+    return _instance!;
+  }
+}
+//inapp end
 
 //루트 관리
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
@@ -60,10 +87,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  //test inapp
-
-//inapp end
-
   @override
   void initState() {
     //inapp
@@ -99,7 +122,7 @@ class MyAppState extends State<MyApp> {
           Provider<HomeSwitch>.value(
             homeSwitch,
             disposer: (v) => v.dispose(),
-          )
+          ),
         ],
         child: MaterialApp(
             title: 'A',

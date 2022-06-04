@@ -56,6 +56,7 @@ class InAppState extends State<InApp> {
       // handle error here.
     });
     initStoreInfo();
+
     super.initState();
   }
 
@@ -71,6 +72,7 @@ class InAppState extends State<InApp> {
         _purchasePending = false;
         _loading = false;
       });
+      _inAppPurchase.restorePurchases();
       return;
     }
 
