@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/logic/dash_purchases.dart';
+import 'package:flutter_application_7/logic/firebase_notifier.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
 import 'package:flutter_provider/flutter_provider.dart';
-import 'package:provider/provider.dart' as p;
+import 'package:provider/provider.dart' as fp;
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
   const BaseAppBar({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
   @override
   Widget build(BuildContext context) {
     //inapp Purchase
-
+    var firebaseNotifier = context.watch<FirebaseNotifier>();
     //Drawer Page Change
     Future.delayed(Duration.zero, () {
       setState(() {
@@ -54,9 +54,12 @@ class _BaseAppBarState extends State<BaseAppBar> {
                             onPressed: () {
                               Navigator.pop(context);
                               homeSwitch.changeSwitchAd();
+                              firebaseNotifier.login();
                             },
-                            child: const Text('￦500',
-                                style: TextStyle(fontSize: 15)))
+                            child: firebaseNotifier.isLoggingIn
+                                ? const Center(child: Text('Logging in...'))
+                                : const Text('￦500',
+                                    style: TextStyle(fontSize: 15)))
                       ]),
                 ));
               });
@@ -90,23 +93,6 @@ class _BaseAppBarState extends State<BaseAppBar> {
           width: 17,
         ),
       ],
-    );
-  }
-}
-
-class _PurchaseList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var purchases = context.watch<DashPurchases>();
-    var products = purchases.products;
-    return Column(
-      children: products
-          .map((product) => _PurchaseWidget(
-              product: product,
-              onPressed: () {
-                purchases.buy(product);
-              }))
-          .toList(),
     );
   }
 }
