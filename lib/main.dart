@@ -57,28 +57,7 @@ void main() {
       ]));
 
   ///in app purchase
-  runApp(p.MultiProvider(providers: [
-    p.ChangeNotifierProvider<FirebaseNotifier>(
-        create: (_) => FirebaseNotifier()),
-    p.ChangeNotifierProvider<DashCounter>(create: (_) => DashCounter()),
-    p.ChangeNotifierProvider<DashUpgrades>(
-      create: (context) => DashUpgrades(
-        context.read<DashCounter>(),
-        context.read<FirebaseNotifier>(),
-      ),
-    ),
-    p.ChangeNotifierProvider<IAPRepo>(
-      create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
-    ),
-    p.ChangeNotifierProvider<DashPurchases>(
-      create: (context) => DashPurchases(
-        context.read<DashCounter>(),
-        context.read<FirebaseNotifier>(),
-        context.read<IAPRepo>(),
-      ),
-      lazy: false,
-    ),
-  ], child: const MyApp()));
+  runApp(const MyApp());
 }
 
 Record R = Record();
@@ -131,47 +110,70 @@ class MyAppState extends State<MyApp> {
 
     //in app end
 
-    return Providers(
+    return p.MultiProvider(
         providers: [
-          Provider<DrawerSwitch>.value(
-            drawerSwitch,
-            disposer: (v) => v.dispose(),
+          p.ChangeNotifierProvider<FirebaseNotifier>(
+              create: (_) => FirebaseNotifier()),
+          p.ChangeNotifierProvider<DashCounter>(create: (_) => DashCounter()),
+          p.ChangeNotifierProvider<DashUpgrades>(
+            create: (context) => DashUpgrades(
+              context.read<DashCounter>(),
+              context.read<FirebaseNotifier>(),
+            ),
           ),
-          Provider<AppBarSwitch>.value(
-            appBarSwitch,
-            disposer: (v) => v.dispose(),
+          p.ChangeNotifierProvider<IAPRepo>(
+            create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
           ),
-          Provider<HomeSwitch>.value(
-            homeSwitch,
-            disposer: (v) => v.dispose(),
+          p.ChangeNotifierProvider<DashPurchases>(
+            create: (context) => DashPurchases(
+              context.read<DashCounter>(),
+              context.read<FirebaseNotifier>(),
+              context.read<IAPRepo>(),
+            ),
+            lazy: false,
           ),
         ],
-        child: MaterialApp(
-            title: 'A',
-            theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                  color: custom_colors.primaryColor1,
-                  actionsIconTheme: IconThemeData(
-                    color: Colors.white,
-                    size: 32,
-                  )),
-            ),
-            home: Scaffold(
-              appBar: const BaseAppBar(),
-              drawer: const Drawer(child: BaseDrawer()),
-              body: MaterialApp(
-                navigatorObservers: [routeObserver],
-                initialRoute: "/home",
-                routes: {
-                  '/home': (context) => const HomePage(),
-                  '/question': (context) => const Question(),
-                  '/result': (context) => const Result(),
-                  '/achievement': (context) => const Achievement(),
-                  '/test': (context) => const TestScreen(),
-                  '/statistics': (context) => const Statistics(),
-                },
+        child: Providers(
+            providers: [
+              Provider<DrawerSwitch>.value(
+                drawerSwitch,
+                disposer: (v) => v.dispose(),
               ),
-            )));
+              Provider<AppBarSwitch>.value(
+                appBarSwitch,
+                disposer: (v) => v.dispose(),
+              ),
+              Provider<HomeSwitch>.value(
+                homeSwitch,
+                disposer: (v) => v.dispose(),
+              ),
+            ],
+            child: MaterialApp(
+                title: 'A',
+                theme: ThemeData(
+                  appBarTheme: const AppBarTheme(
+                      color: custom_colors.primaryColor1,
+                      actionsIconTheme: IconThemeData(
+                        color: Colors.white,
+                        size: 32,
+                      )),
+                ),
+                home: Scaffold(
+                  appBar: const BaseAppBar(),
+                  drawer: const Drawer(child: BaseDrawer()),
+                  body: MaterialApp(
+                    navigatorObservers: [routeObserver],
+                    initialRoute: "/test",
+                    routes: {
+                      '/home': (context) => const HomePage(),
+                      '/question': (context) => const Question(),
+                      '/result': (context) => const Result(),
+                      '/achievement': (context) => const Achievement(),
+                      '/test': (context) => const TestScreen(),
+                      '/statistics': (context) => const Statistics(),
+                    },
+                  ),
+                ))));
   }
 }
 
