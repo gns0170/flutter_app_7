@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 enum PurchaseType {
   subscriptionPurchase,
@@ -34,7 +34,7 @@ class PastPurchase {
       case storeKeyConsumable:
         return 'Consumable';
       case storeKeySubscription:
-        return 'Subscription';
+        return 'SubscriptionSilver';
       default:
         return productId;
     }

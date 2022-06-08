@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_7/data/record.dart';
-import 'package:flutter_application_7/logic/dash_upgrades.dart';
-import 'package:flutter_application_7/logic/firebase_notifier.dart';
-import 'package:flutter_application_7/model/firebase_state.dart';
-import 'package:flutter_application_7/model/purchasable_product.dart';
-import 'package:flutter_application_7/model/store_state.dart';
+import 'package:flutter_application_7/iap/logic/dash_upgrades.dart';
+import 'package:flutter_application_7/iap/logic/firebase_notifier.dart';
+import 'package:flutter_application_7/iap/model/firebase_state.dart';
+import 'package:flutter_application_7/iap/model/purchasable_product.dart';
+import 'package:flutter_application_7/iap/model/store_state.dart';
 import 'package:flutter_application_7/provider/switch.dart';
-import 'package:flutter_application_7/repo/iap_repo.dart';
+import 'package:flutter_application_7/iap/repo/iap_repo.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
@@ -21,11 +21,10 @@ import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
-import './test.dart';
 
 //inapp Test
-import './logic/dash_counter.dart';
-import './logic/dash_purchases.dart';
+import './iap/logic/dash_counter.dart';
+import './iap/logic/dash_purchases.dart';
 //inappTest
 
 //Route Aware Test

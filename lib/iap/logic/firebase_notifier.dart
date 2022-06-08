@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 import '../model/firebase_state.dart';
 
 class FirebaseNotifier extends ChangeNotifier {

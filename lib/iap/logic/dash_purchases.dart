@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
-import '../constants.dart';
-import '../main.dart';
+import '../../constants.dart';
+import '../../main.dart';
 import '../model/purchasable_product.dart';
 import '../model/store_state.dart';
 import '../repo/iap_repo.dart';

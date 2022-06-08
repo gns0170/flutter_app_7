@@ -53,7 +53,7 @@ class AppBarSwitch extends ChangeNotifier {
 }
 
 class HomeSwitch extends ChangeNotifier {
-  bool _switchAd = false;
+  bool _switchAd = true;
   bool get switchAd => _switchAd;
 
   void changeSwitchAd() {
