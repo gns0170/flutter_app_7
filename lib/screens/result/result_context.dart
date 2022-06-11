@@ -9,7 +9,6 @@ import 'package:flutter_application_7/widgets/parts/button.dart';
 
 import 'package:flutter_application_7/widgets/parts/layout.dart';
 import 'package:flutter_application_7/widgets/parts/view.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 
 import 'package:share_plus/share_plus.dart';
 
@@ -34,7 +33,7 @@ class _ResultContextState extends State<ResultContext> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<HomeSwitch>(context).switchAd;
+              homeSwitch.switchAd;
             }));
 
     shownResultText = widget.proResult.explain;

@@ -4,7 +4,6 @@ import 'package:flutter_application_7/widgets/adver.dart';
 import 'package:flutter_application_7/widgets/parts/button.dart';
 import 'package:flutter_application_7/widgets/parts/layout.dart';
 import 'package:flutter_application_7/widgets/parts/texts.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 
 import '../data/questions.dart';
 import './home.dart';
@@ -28,7 +27,7 @@ class _QuestionState extends State<Question> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<HomeSwitch>(context).switchAd;
+              homeSwitch.switchAd;
             }));
     //data Process
     dynamic shownQuestion;

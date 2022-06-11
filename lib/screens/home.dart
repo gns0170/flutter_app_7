@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_7/provider/switch.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 
 import '../widgets/parts/layout.dart';
 import '../widgets/parts/button.dart';
@@ -41,7 +41,7 @@ class HomeState extends State<Home> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<HomeSwitch>(context).switchAd;
+              homeSwitch.switchAd;
             }));
 
     //views

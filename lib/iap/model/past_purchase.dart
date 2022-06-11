@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-import '../../constants.dart';
-
 enum PurchaseType {
   subscriptionPurchase,
   nonSubscriptionPurchase,
@@ -31,10 +29,6 @@ class PastPurchase {
 
   String get title {
     switch (productId) {
-      case storeKeyConsumable:
-        return 'Consumable';
-      case storeKeySubscription:
-        return 'SubscriptionSilver';
       default:
         return productId;
     }

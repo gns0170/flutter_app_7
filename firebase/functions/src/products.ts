@@ -4,12 +4,12 @@ export interface ProductData {
 }
 
 export const productDataMap: { [productId: string]: ProductData } = {
-  "dash_consumable_2k": {
-    productId: "dash_consumable_2k",
+  "upgrade": {
+    productId: "upgrade",
     type: "NON_SUBSCRIPTION",
   },
-  "dash_upgrade_3d": {
-    productId: "dash_upgrade_3d",
+  "upgrade2": {
+    productId: "upgrade2",
     type: "NON_SUBSCRIPTION",
   },
   "dash_subscription_doubler": {

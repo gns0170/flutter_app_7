@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
 import 'package:flutter_application_7/iap/logic/firebase_notifier.dart';
-import 'package:flutter_application_7/main.dart';
-import 'package:flutter_application_7/iap/model/firebase_state.dart';
 import 'package:flutter_application_7/iap/model/purchasable_product.dart';
+import 'package:flutter_application_7/iap/model/firebase_state.dart';
+
 import 'package:flutter_application_7/iap/model/store_state.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
-import 'package:flutter_provider/flutter_provider.dart';
+
 import 'package:provider/provider.dart' as fp;
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
@@ -36,9 +36,9 @@ class _BaseAppBarState extends State<BaseAppBar> {
       return _PurchasesNotAvailable();
     }
 
-    if (!firebaseNotifier.loggedIn) {
-      return const LoginPage();
-    }
+    // if (!firebaseNotifier.loggedIn) {
+    //   return const LoginPage();
+    // }
 
     var upgrades = context.watch<DashPurchases>();
 
@@ -58,23 +58,23 @@ class _BaseAppBarState extends State<BaseAppBar> {
     //Drawer Page Change
     Future.delayed(Duration.zero, () {
       setState(() {
-        if (Provider.of<DrawerSwitch>(context).valueAchievement == true) {
+        if (drawerSwitch.valueAchievement == true) {
           drawerSwitch.changeAchievement();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Achievement()));
         }
-        if (Provider.of<AppBarSwitch>(context).value == true) {
+        if (appBarSwitch.value == true) {
           appBarSwitch.changeShownAchieve();
           shownAchieve(context, null, null, null);
         }
-        if (Provider.of<AppBarSwitch>(context).valueAdPopup == true) {
+        if (appBarSwitch.valueAdPopup == true) {
           appBarSwitch.changeValueAdPopup();
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                     content: SizedBox(
-                  height: 100,
+                  height: 120,
                   width: 100,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -127,6 +127,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
   }
 }
 
+///purchase pages
 class _PurchasesLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -146,6 +147,7 @@ class _PurchaseList extends StatelessWidget {
   Widget build(BuildContext context) {
     var purchases = context.watch<DashPurchases>();
     var products = purchases.products;
+
     return Column(
       children: products
           .map((product) => _PurchaseWidget(
@@ -175,13 +177,18 @@ class _PurchaseWidget extends StatelessWidget {
     if (product.status == ProductStatus.purchased) {
       title += ' (purchased)';
     }
-    return InkWell(
-        onTap: onPressed,
-        child: ListTile(
-          title: Text(title),
-          subtitle: Text(product.description),
-          trailing: Text(_trailing()),
-        ));
+
+    print(product.id);
+    print(product.status);
+    return product.id == 'upgrade'
+        ? InkWell(
+            onTap: onPressed,
+            child: ListTile(
+              title: Text(title),
+              subtitle: Text(product.description),
+              trailing: Text(_trailing()),
+            ))
+        : const SizedBox.shrink();
   }
 
   String _trailing() {

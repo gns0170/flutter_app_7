@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/provider/switch.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //Banner
@@ -38,7 +37,6 @@ final BannerAd myBanner5 = BannerAd(
 );
 
 Widget adContainer(banner, context) {
-  Provider.of<AppBarSwitch>(context);
   return homeSwitch.switchAd == true
       ? StatefulBuilder(
           builder: (context, setState) => Container(

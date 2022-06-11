@@ -6,7 +6,6 @@ import 'package:flutter_application_7/screens/result/result_context.dart';
 import 'package:flutter_application_7/widgets/adver.dart';
 import 'package:flutter_application_7/widgets/parts/layout.dart';
 import 'package:flutter_application_7/widgets/parts/texts.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 import '../../widgets/parts/button.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
@@ -36,7 +35,7 @@ class _ResultGraph2State extends State<ResultGraph2> {
     Future.delayed(
         Duration.zero,
         () => setState(() {
-              Provider.of<HomeSwitch>(context).switchAd;
+              homeSwitch.switchAd;
             }));
     //data Process
     List<charts.Series<TestData, String>> shownWeight() {
