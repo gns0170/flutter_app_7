@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_7/provider/switch.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../widgets/parts/layout.dart';
 import '../widgets/parts/button.dart';
@@ -71,16 +72,14 @@ class HomeState extends State<Home> {
           ),
         ),
         const Spacer(flex: 3),
-        // DarkButton(
-        //   text: "나는 롤을 모른다!",
-        //   height: 50,
-        //   onPressed: () {
-        //     setState(() {
-        //       switchAd = !switchAd;
-        //     });
-        //   },
-        //   icon: Icons.reply,
-        // ),
+        DarkButton(
+          text: "나는 롤을 모른다!",
+          height: 50,
+          onPressed: () {
+            setState(() {});
+          },
+          icon: Icons.reply,
+        ),
         const SizedBox(
           height: 10,
         ),

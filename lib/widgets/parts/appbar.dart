@@ -7,12 +7,13 @@ import 'package:flutter_application_7/iap/model/purchasable_product.dart';
 import 'package:flutter_application_7/iap/model/firebase_state.dart';
 
 import 'package:flutter_application_7/iap/model/store_state.dart';
+import 'package:flutter_application_7/iap/repo/iap_repo.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 import 'package:flutter_application_7/widgets/parts/achievement_popup/achievement_show.dart';
 
-import 'package:provider/provider.dart' as fp;
+import 'package:provider/provider.dart';
 
 class BaseAppBar extends StatefulWidget with PreferredSizeWidget {
   const BaseAppBar({Key? key}) : super(key: key);
@@ -74,7 +75,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
               builder: (BuildContext context) {
                 return AlertDialog(
                     content: SizedBox(
-                  height: 120,
+                  height: 300,
                   width: 100,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -90,6 +91,8 @@ class _BaseAppBarState extends State<BaseAppBar> {
                                 : storeWidget)
                         // const Text('￦500',
                         //     style: TextStyle(fontSize: 15)))
+                        ,
+                        const PastPurchasesWidget()
                       ]),
                 ));
               });
@@ -200,5 +203,23 @@ class _PurchaseWidget extends StatelessWidget {
       case ProductStatus.pending:
         return 'buying...';
     }
+  }
+}
+
+class PastPurchasesWidget extends StatelessWidget {
+  const PastPurchasesWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var purchases = context.watch<IAPRepo>().purchases;
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: purchases.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(purchases[index].title),
+        subtitle: Text(purchases[index].status.toString()),
+      ),
+      separatorBuilder: (context, index) => const Divider(),
+    );
   }
 }
