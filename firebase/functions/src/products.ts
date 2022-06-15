@@ -8,12 +8,12 @@ export const productDataMap: { [productId: string]: ProductData } = {
     productId: "upgrade",
     type: "NON_SUBSCRIPTION",
   },
-  "upgrade2": {
-    productId: "upgrade2",
+  "1": {
+    productId: "consumable2",
     type: "NON_SUBSCRIPTION",
   },
-  "dash_subscription_doubler": {
-    productId: "dash_subscription_doubler",
+  "subscription": {
+    productId: "subscription",
     type: "SUBSCRIPTION",
   },
 };

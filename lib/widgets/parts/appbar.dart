@@ -75,12 +75,17 @@ class _BaseAppBarState extends State<BaseAppBar> {
               builder: (BuildContext context) {
                 return AlertDialog(
                     content: SizedBox(
-                  height: 300,
+                  height: 400,
                   width: 100,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text("광고 없애기", style: TextStyle(fontSize: 18)),
+                        ElevatedButton(
+                            onPressed: () {
+                              firebaseNotifier.login();
+                            },
+                            child: const Text('Login')),
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -183,7 +188,7 @@ class _PurchaseWidget extends StatelessWidget {
 
     print(product.id);
     print(product.status);
-    return product.id == 'upgrade'
+    return true
         ? InkWell(
             onTap: onPressed,
             child: ListTile(

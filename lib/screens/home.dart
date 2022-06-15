@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_7/provider/switch.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../widgets/parts/layout.dart';
 import '../widgets/parts/button.dart';

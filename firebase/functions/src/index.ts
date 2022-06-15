@@ -4,7 +4,8 @@ import * as admin from "firebase-admin";
 import {productDataMap} from "./products";
 import {PurchaseHandler} from "./purchase-handler";
 import {GooglePlayPurchaseHandler} from "./google-play.purchase-handler";
-import {AppStorePurchaseHandler} from "./app-store.purchase-handler";
+
+// import {AppStorePurchaseHandler} from "./app-store.purchase-handler";
 import {CLOUD_REGION} from "./constants";
 import {IapRepository, IAPSource} from "./iap.repository";
 import {HttpsError} from "firebase-functions/lib/providers/https";
@@ -19,7 +20,7 @@ admin.initializeApp();
 const iapRepository = new IapRepository(admin.firestore());
 const purchaseHandlers: { [source in IAPSource]: PurchaseHandler } = {
   "google_play": new GooglePlayPurchaseHandler(iapRepository),
-  "app_store": new AppStorePurchaseHandler(iapRepository),
+// "app_store": new AppStorePurchaseHandler(iapRepository),
 };
 
 //
@@ -68,9 +69,9 @@ export const verifyPurchase = functions.https.onCall(
     });
 
 // Handling of AppStore server-to-server events
-export const handleAppStoreServerEvent =
-    (purchaseHandlers.app_store as AppStorePurchaseHandler)
-        .handleServerEvent;
+// export const handleAppStoreServerEvent =
+//     (purchaseHandlers.app_store as AppStorePurchaseHandler)
+//         .handleServerEvent;
 
 // Handling of PlayStore server-to-server events
 export const handlePlayStoreServerEvent =
