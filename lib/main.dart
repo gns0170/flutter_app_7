@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/iap/logic/firebase_notifier.dart';
+import 'package:flutter_application_7/iap/model/purchasable_product.dart';
 import 'package:flutter_application_7/iap/repo/iap_repo.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 
@@ -51,7 +52,28 @@ void main() {
       ]));
 
   ///in app purchase
-  runApp(const MyApp());
+  runApp(providerApp(const MyApp()));
+}
+
+Widget providerApp(Widget mainWidget) {
+  return MultiProvider(providers: [
+    ChangeNotifierProvider<FirebaseNotifier>(create: (_) => FirebaseNotifier()),
+    ChangeNotifierProvider<DashCounter>(create: (_) => DashCounter()),
+    ChangeNotifierProvider<IAPRepo>(
+      create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
+    ),
+    ChangeNotifierProvider<DashPurchases>(
+      create: (context) => DashPurchases(
+        context.read<DashCounter>(),
+        context.read<FirebaseNotifier>(),
+        context.read<IAPRepo>(),
+      ),
+      lazy: false,
+    ),
+    Provider<DrawerSwitch>(create: (_) => drawerSwitch),
+    Provider<AppBarSwitch>(create: (_) => appBarSwitch),
+    Provider<HomeSwitch>(create: (_) => homeSwitch),
+  ], child: mainWidget);
 }
 
 Record R = Record();
@@ -84,11 +106,10 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   @override
   void initState() {
-    //inapp
-
-    //inapp
-
     super.initState();
+    //inapp
+    //inapp
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
@@ -101,55 +122,45 @@ class MyAppState extends State<MyApp> {
     R.loadRecord();
 
     //in app
+    var purchases = context.watch<DashPurchases>();
+    var products = purchases.products;
+    var noAdproduct =
+        products[products.indexWhere((element) => element.id == "no_ad")];
 
+    print(products.map((e) => e.id));
+    print(products.map((e) => e.status));
+    //AD 확인
+    if (noAdproduct.status == ProductStatus.purchased) {
+      homeSwitch.noAd();
+    }
     //in app end
 
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<FirebaseNotifier>(
-              create: (_) => FirebaseNotifier()),
-          ChangeNotifierProvider<DashCounter>(create: (_) => DashCounter()),
-          ChangeNotifierProvider<IAPRepo>(
-            create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
+    return MaterialApp(
+        title: 'A',
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+              color: custom_colors.primaryColor1,
+              actionsIconTheme: IconThemeData(
+                color: Colors.white,
+                size: 32,
+              )),
+        ),
+        home: Scaffold(
+          appBar: const BaseAppBar(),
+          drawer: const Drawer(child: BaseDrawer()),
+          body: MaterialApp(
+            navigatorObservers: [routeObserver],
+            initialRoute: "/home",
+            routes: {
+              '/home': (context) => const Home(),
+              '/question': (context) => const Question(),
+              '/result': (context) => const Result(),
+              '/achievement': (context) => const Achievement(),
+              '/test': (context) => const TestScreen(),
+              '/statistics': (context) => const Statistics(),
+            },
           ),
-          ChangeNotifierProvider<DashPurchases>(
-            create: (context) => DashPurchases(
-              context.read<DashCounter>(),
-              context.read<FirebaseNotifier>(),
-              context.read<IAPRepo>(),
-            ),
-            lazy: false,
-          ),
-          Provider<DrawerSwitch>(create: (_) => drawerSwitch),
-          Provider<AppBarSwitch>(create: (_) => appBarSwitch),
-          Provider<HomeSwitch>(create: (_) => homeSwitch),
-        ],
-        child: MaterialApp(
-            title: 'A',
-            theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                  color: custom_colors.primaryColor1,
-                  actionsIconTheme: IconThemeData(
-                    color: Colors.white,
-                    size: 32,
-                  )),
-            ),
-            home: Scaffold(
-              appBar: const BaseAppBar(),
-              drawer: const Drawer(child: BaseDrawer()),
-              body: MaterialApp(
-                navigatorObservers: [routeObserver],
-                initialRoute: "/home",
-                routes: {
-                  '/home': (context) => const Home(),
-                  '/question': (context) => const Question(),
-                  '/result': (context) => const Result(),
-                  '/achievement': (context) => const Achievement(),
-                  '/test': (context) => const TestScreen(),
-                  '/statistics': (context) => const Statistics(),
-                },
-              ),
-            )));
+        ));
   }
 }
 
@@ -158,28 +169,6 @@ class TestScreen extends StatefulWidget {
 
   @override
   TestScreenState createState() => TestScreenState();
-}
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var firebaseNotifier = context.watch<FirebaseNotifier>();
-
-    if (firebaseNotifier.isLoggingIn) {
-      return const Center(
-        child: Text('Logging in...'),
-      );
-    }
-    return Center(
-        child: ElevatedButton(
-      onPressed: () {
-        firebaseNotifier.login();
-      },
-      child: const Text('Login'),
-    ));
-  }
 }
 
 class TestScreenState extends State<TestScreen> {

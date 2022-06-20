@@ -61,6 +61,11 @@ class HomeSwitch extends ChangeNotifier {
     notifyListeners();
   }
 
+  void noAd() {
+    _switchAd = false;
+    notifyListeners();
+  }
+
   void notify() {
     notifyListeners();
   }

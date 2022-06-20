@@ -37,33 +37,38 @@ class _BaseAppBarState extends State<BaseAppBar> {
       return _PurchasesNotAvailable();
     }
 
-    // if (!firebaseNotifier.loggedIn) {
-    //   return const LoginPage();
-    // }
-
-    var upgrades = context.watch<DashPurchases>();
+    //load list items
+    var purchases = context.watch<DashPurchases>();
+    var products = purchases.products;
+    // var noAdproduct =
+    //     products[products.indexWhere((element) => element.id == "no_ad")];
 
     Widget storeWidget;
-    switch (upgrades.storeState) {
+    switch (purchases.storeState) {
       case StoreState.loading:
         storeWidget = _PurchasesLoading();
         break;
       case StoreState.available:
-        storeWidget = _PurchaseList();
+        storeWidget = _PurchaseList(products: products);
         break;
       case StoreState.notAvailable:
         storeWidget = _PurchasesNotAvailable();
         break;
     }
 
-    //Drawer Page Change
     Future.delayed(Duration.zero, () {
       setState(() {
+        // //AD 확인
+        // if (noAdproduct.status == ProductStatus.purchased) {
+        //   homeSwitch.noAd();
+        // }
+        //Drawer Page Change
         if (drawerSwitch.valueAchievement == true) {
           drawerSwitch.changeAchievement();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Achievement()));
         }
+
         if (appBarSwitch.value == true) {
           appBarSwitch.changeShownAchieve();
           shownAchieve(context, null, null, null);
@@ -75,35 +80,31 @@ class _BaseAppBarState extends State<BaseAppBar> {
               builder: (BuildContext context) {
                 return AlertDialog(
                     content: SizedBox(
-                  height: 400,
+                  height: 550,
                   width: 100,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text("광고 없애기", style: TextStyle(fontSize: 18)),
-                        ElevatedButton(
-                            onPressed: () {
-                              firebaseNotifier.login();
-                            },
-                            child: const Text('Login')),
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                               homeSwitch.changeSwitchAd();
                             },
                             child: firebaseNotifier.isLoggingIn
-                                ? const Center(child: Text('Logging in...'))
+                                ? const LoginPage()
                                 : storeWidget)
                         // const Text('￦500',
                         //     style: TextStyle(fontSize: 15)))
                         ,
-                        const PastPurchasesWidget()
+                        //const PastPurchasesWidget()
                       ]),
                 ));
               });
         }
       });
     });
+
     return AppBar(
       automaticallyImplyLeading: false,
       actions: <Widget>[
@@ -151,6 +152,9 @@ class _PurchasesNotAvailable extends StatelessWidget {
 }
 
 class _PurchaseList extends StatelessWidget {
+  final List<PurchasableProduct> products;
+  const _PurchaseList({Key? key, required this.products}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var purchases = context.watch<DashPurchases>();
@@ -188,7 +192,7 @@ class _PurchaseWidget extends StatelessWidget {
 
     print(product.id);
     print(product.status);
-    return true
+    return product.id == "no_ad"
         ? InkWell(
             onTap: onPressed,
             child: ListTile(
@@ -226,5 +230,27 @@ class PastPurchasesWidget extends StatelessWidget {
       ),
       separatorBuilder: (context, index) => const Divider(),
     );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var firebaseNotifier = context.watch<FirebaseNotifier>();
+
+    if (firebaseNotifier.isLoggingIn) {
+      return const Center(
+        child: Text('Logging in...'),
+      );
+    }
+    return Center(
+        child: ElevatedButton(
+      onPressed: () {
+        firebaseNotifier.login();
+      },
+      child: const Text('Login'),
+    ));
   }
 }
