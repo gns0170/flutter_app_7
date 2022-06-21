@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/iap/repo/iap_repo.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../constants.dart';
@@ -10,22 +11,21 @@ import '../../main.dart';
 import '../model/purchasable_product.dart';
 import '../model/store_state.dart';
 
-import 'dash_counter.dart';
 import 'firebase_notifier.dart';
 
 class DashPurchases extends ChangeNotifier {
-  DashCounter counter;
+  ProviderSwitches ad;
   FirebaseNotifier firebaseNotifier;
   IAPRepo iapRepo;
   StoreState storeState = StoreState.loading;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   List<PurchasableProduct> products = [];
 
-  bool get beautifiedDash => _beautifiedDashUpgrade;
-  bool _beautifiedDashUpgrade = false;
+  bool get adUpgrade => _adUpgrade;
+  bool _adUpgrade = false;
   final iapConnection = IAPConnection.instance;
 
-  DashPurchases(this.counter, this.firebaseNotifier, this.iapRepo) {
+  DashPurchases(this.ad, this.firebaseNotifier, this.iapRepo) {
     final purchaseUpdated = iapConnection.purchaseStream;
     _subscription = purchaseUpdated.listen(
       _onPurchaseUpdate,
@@ -106,13 +106,11 @@ class DashPurchases extends ChangeNotifier {
         // Apply changes locally
         switch (purchaseDetails.productID) {
           case storeKeySubscription:
-            counter.applyPaidMultiplier();
             break;
           case storeKeyConsumable:
-            counter.addBoughtDashes(2000);
             break;
           case storeKeyUpgrade:
-            _beautifiedDashUpgrade = true;
+            _adUpgrade = true;
             break;
         }
       }
@@ -161,12 +159,10 @@ class DashPurchases extends ChangeNotifier {
     // Set the subscription in the counter logic and show/hide purchased on the
     // purchases page.
     if (iapRepo.hasActiveSubscription) {
-      counter.applyPaidMultiplier();
       for (final element in subscriptions) {
         _updateStatus(element, ProductStatus.purchased);
       }
     } else {
-      counter.removePaidMultiplier();
       for (final element in subscriptions) {
         _updateStatus(element, ProductStatus.purchasable);
       }
@@ -174,14 +170,11 @@ class DashPurchases extends ChangeNotifier {
 
     // Set the dash beautifier and show/hide purchased on
     // the purchases page.
-    if (iapRepo.hasUpgrade != _beautifiedDashUpgrade) {
-      _beautifiedDashUpgrade = iapRepo.hasUpgrade;
+    if (iapRepo.hasUpgrade != _adUpgrade) {
+      _adUpgrade = iapRepo.hasUpgrade;
       for (final element in upgrades) {
-        _updateStatus(
-            element,
-            _beautifiedDashUpgrade
-                ? ProductStatus.purchased
-                : ProductStatus.purchasable);
+        _updateStatus(element,
+            _adUpgrade ? ProductStatus.purchased : ProductStatus.purchasable);
       }
       notifyListeners();
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/data/results.dart';
+import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
 
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_application_7/widgets/parts/button.dart';
 
 import 'package:flutter_application_7/widgets/parts/layout.dart';
 import 'package:flutter_application_7/widgets/parts/view.dart';
+import 'package:provider/provider.dart';
 
 import 'package:share_plus/share_plus.dart';
 
@@ -30,17 +32,13 @@ class _ResultContextState extends State<ResultContext> {
   Widget build(BuildContext context) {
     //ad
     myBanner3.load();
-    Future.delayed(
-        Duration.zero,
-        () => setState(() {
-              homeSwitch.switchAd;
-            }));
+    var purchase = context.read<DashPurchases>();
 
     shownResultText = widget.proResult.explain;
     shownResultTitle = widget.proResult.title;
     return Scaffold(
         body: centerColumn([
-      homeSwitch.switchAd == true
+      purchase.adUpgrade == false
           ? const Spacer(flex: 2)
           : const Spacer(flex: 1),
       shownResultTitle,
@@ -57,7 +55,7 @@ class _ResultContextState extends State<ResultContext> {
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),
       buttons(context),
       const Spacer(flex: 1),
-      adContainer(myBanner3, context),
+      adContainer(myBanner3, context, purchase.adUpgrade),
     ]));
   }
 }

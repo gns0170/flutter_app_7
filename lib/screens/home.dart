@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
-
 import 'package:flutter_application_7/provider/switch.dart';
+
 import 'package:provider/provider.dart';
 
 import '../iap/logic/firebase_notifier.dart';
@@ -47,13 +45,7 @@ class HomeState extends State<Home> {
     }
     //AdMob
     myBanner.load();
-    Future.delayed(
-        Duration.zero,
-        () => setState(() {
-              homeSwitch.switchAd;
-            }));
-    //Test
-
+    var purchase = context.watch<DashPurchases>();
     //views
     return Scaffold(
       body: centerColumn([
@@ -92,7 +84,7 @@ class HomeState extends State<Home> {
         const SizedBox(
           height: 10,
         ),
-        adContainer(myBanner, context)
+        adContainer(myBanner, context, purchase.adUpgrade)
       ]),
     );
   }

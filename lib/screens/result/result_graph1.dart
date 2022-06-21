@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/result/result_context.dart';
 import 'package:flutter_application_7/widgets/adver.dart';
 import 'package:flutter_application_7/widgets/parts/layout.dart';
 import 'package:flutter_application_7/widgets/parts/texts.dart';
+import 'package:provider/provider.dart';
 
+import '../../iap/logic/dash_purchases.dart';
 import '../../widgets/parts/button.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
@@ -33,11 +34,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
   Widget build(BuildContext context) {
     //ad
     myBanner4.load();
-    Future.delayed(
-        Duration.zero,
-        () => setState(() {
-              homeSwitch.switchAd;
-            }));
+    var purchase = context.read<DashPurchases>();
     //data Process
     List<charts.Series<TestData, String>> shownWeight() {
       List<TestData> proWeight = [
@@ -101,7 +98,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
 
     return Scaffold(
         body: centerColumn([
-      homeSwitch.switchAd == true
+      purchase.adUpgrade == false
           ? const Spacer(flex: 2)
           : const Spacer(flex: 1),
       title(),
@@ -138,7 +135,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
       ),
       buttons(context),
       const Spacer(flex: 1),
-      adContainer(myBanner4, context),
+      adContainer(myBanner4, context, purchase.adUpgrade),
     ]));
   }
 }

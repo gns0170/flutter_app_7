@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_7/data/record.dart';
 import 'package:flutter_application_7/iap/logic/firebase_notifier.dart';
-import 'package:flutter_application_7/iap/model/purchasable_product.dart';
 import 'package:flutter_application_7/iap/repo/iap_repo.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 
@@ -19,7 +18,6 @@ import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //inapp Test
-import './iap/logic/dash_counter.dart';
 import './iap/logic/dash_purchases.dart';
 //inappTest
 
@@ -58,13 +56,15 @@ void main() {
 Widget providerApp(Widget mainWidget) {
   return MultiProvider(providers: [
     ChangeNotifierProvider<FirebaseNotifier>(create: (_) => FirebaseNotifier()),
-    ChangeNotifierProvider<DashCounter>(create: (_) => DashCounter()),
     ChangeNotifierProvider<IAPRepo>(
       create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
     ),
+    ChangeNotifierProvider<ProviderSwitches>(
+        create: ((context) =>
+            ProviderSwitches(context.read<FirebaseNotifier>()))),
     ChangeNotifierProvider<DashPurchases>(
       create: (context) => DashPurchases(
-        context.read<DashCounter>(),
+        context.read<ProviderSwitches>(),
         context.read<FirebaseNotifier>(),
         context.read<IAPRepo>(),
       ),
@@ -72,7 +72,6 @@ Widget providerApp(Widget mainWidget) {
     ),
     Provider<DrawerSwitch>(create: (_) => drawerSwitch),
     Provider<AppBarSwitch>(create: (_) => appBarSwitch),
-    Provider<HomeSwitch>(create: (_) => homeSwitch),
   ], child: mainWidget);
 }
 
@@ -122,45 +121,35 @@ class MyAppState extends State<MyApp> {
     R.loadRecord();
 
     //in app
-    var purchases = context.watch<DashPurchases>();
-    var products = purchases.products;
-    var noAdproduct =
-        products[products.indexWhere((element) => element.id == "no_ad")];
-
-    print(products.map((e) => e.id));
-    print(products.map((e) => e.status));
-    //AD 확인
-    if (noAdproduct.status == ProductStatus.purchased) {
-      homeSwitch.noAd();
-    }
     //in app end
 
     return MaterialApp(
-        title: 'A',
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-              color: custom_colors.primaryColor1,
-              actionsIconTheme: IconThemeData(
-                color: Colors.white,
-                size: 32,
-              )),
+      title: 'A',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            color: custom_colors.primaryColor1,
+            actionsIconTheme: IconThemeData(
+              color: Colors.white,
+              size: 32,
+            )),
+      ),
+      home: Scaffold(
+        appBar: const BaseAppBar(),
+        drawer: const Drawer(child: BaseDrawer()),
+        body: MaterialApp(
+          navigatorObservers: [routeObserver],
+          initialRoute: "/home",
+          routes: {
+            '/home': (context) => const Home(),
+            '/question': (context) => const Question(),
+            '/result': (context) => const Result(),
+            '/achievement': (context) => const Achievement(),
+            '/test': (context) => const TestScreen(),
+            '/statistics': (context) => const Statistics(),
+          },
         ),
-        home: Scaffold(
-          appBar: const BaseAppBar(),
-          drawer: const Drawer(child: BaseDrawer()),
-          body: MaterialApp(
-            navigatorObservers: [routeObserver],
-            initialRoute: "/home",
-            routes: {
-              '/home': (context) => const Home(),
-              '/question': (context) => const Question(),
-              '/result': (context) => const Result(),
-              '/achievement': (context) => const Achievement(),
-              '/test': (context) => const TestScreen(),
-              '/statistics': (context) => const Statistics(),
-            },
-          ),
-        ));
+      ),
+    );
   }
 }
 
@@ -188,3 +177,19 @@ class TestScreenState extends State<TestScreen> {
 }
 
 //in app class
+// class InitBackend extends StatefulWidget {
+//   const InitBackend({Key? key}) : super(key: key);
+//   @override
+//   _InitBackendState createState() => _InitBackendState();
+// }
+
+// class _InitBackendState extends State<InitBackend> {
+//   @override
+//   Widget build(BuildContext context) {
+//     //IAP
+//     var purchase = context.read<DashPurchases>();
+//     //AD 확인
+//     Future.delayed(Duration.zero, () => setState(() {}));
+//     return const SizedBox(width: 0, height: 0);
+//   }
+// }

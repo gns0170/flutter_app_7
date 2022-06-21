@@ -89,7 +89,6 @@ class _BaseAppBarState extends State<BaseAppBar> {
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              homeSwitch.changeSwitchAd();
                             },
                             child: firebaseNotifier.isLoggingIn
                                 ? const LoginPage()
@@ -108,6 +107,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
     return AppBar(
       automaticallyImplyLeading: false,
       actions: <Widget>[
+        //const InitBackend(),
         IconButton(
           onPressed: () {
             appBarSwitch.changeValueAdPopup();
