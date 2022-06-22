@@ -80,7 +80,11 @@ class _QuestionState extends State<Question> {
       purchase.adUpgrade == false
           ? const Spacer(flex: 1)
           : const SizedBox(height: 30),
-      adContainer(myBanner2, context, purchase.adUpgrade),
+      !purchase.adUpgrade
+          ? adContainer(myBanner2, context)
+          : const SizedBox(
+              height: 10,
+            )
     ]));
   }
 }

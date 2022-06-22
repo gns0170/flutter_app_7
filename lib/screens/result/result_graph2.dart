@@ -126,7 +126,11 @@ class _ResultGraph2State extends State<ResultGraph2> {
       ),
       buttons(context),
       const Spacer(flex: 1),
-      adContainer(myBanner5, context, purchase.adUpgrade),
+      !purchase.adUpgrade
+          ? adContainer(myBanner5, context)
+          : const SizedBox(
+              height: 10,
+            )
     ]));
   }
 }

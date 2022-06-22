@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
-import 'package:flutter_application_7/provider/switch.dart';
 
 import 'package:provider/provider.dart';
 
@@ -84,7 +83,11 @@ class HomeState extends State<Home> {
         const SizedBox(
           height: 10,
         ),
-        adContainer(myBanner, context, purchase.adUpgrade)
+        !purchase.adUpgrade
+            ? adContainer(myBanner, context)
+            : const SizedBox(
+                height: 10,
+              )
       ]),
     );
   }

@@ -55,7 +55,11 @@ class _ResultContextState extends State<ResultContext> {
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),
       buttons(context),
       const Spacer(flex: 1),
-      adContainer(myBanner3, context, purchase.adUpgrade),
+      !purchase.adUpgrade
+          ? adContainer(myBanner3, context)
+          : const SizedBox(
+              height: 10,
+            )
     ]));
   }
 }

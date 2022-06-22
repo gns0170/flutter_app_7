@@ -58,10 +58,6 @@ class _BaseAppBarState extends State<BaseAppBar> {
 
     Future.delayed(Duration.zero, () {
       setState(() {
-        // //AD 확인
-        // if (noAdproduct.status == ProductStatus.purchased) {
-        //   homeSwitch.noAd();
-        // }
         //Drawer Page Change
         if (drawerSwitch.valueAchievement == true) {
           drawerSwitch.changeAchievement();
@@ -93,10 +89,6 @@ class _BaseAppBarState extends State<BaseAppBar> {
                             child: firebaseNotifier.isLoggingIn
                                 ? const LoginPage()
                                 : storeWidget)
-                        // const Text('￦500',
-                        //     style: TextStyle(fontSize: 15)))
-                        ,
-                        //const PastPurchasesWidget()
                       ]),
                 ));
               });
@@ -183,6 +175,7 @@ class _PurchaseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<DashPurchases>();
     var title = product.title
         .replaceAll('(com.testpotato.right_position (unreviewed))', '');
 
@@ -190,9 +183,7 @@ class _PurchaseWidget extends StatelessWidget {
       title += ' (purchased)';
     }
 
-    print(product.id);
-    print(product.status);
-    return product.id == "no_ad"
+    return product.id == "no_ad2"
         ? InkWell(
             onTap: onPressed,
             child: ListTile(

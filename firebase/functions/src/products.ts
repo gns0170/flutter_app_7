@@ -4,8 +4,8 @@ export interface ProductData {
 }
 
 export const productDataMap: { [productId: string]: ProductData } = {
-  "no_ad": {
-    productId: "no_ad",
+  "no_ad2": {
+    productId: "no_ad2",
     type: "NON_SUBSCRIPTION",
   },
   "1": {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //Banner
@@ -36,18 +35,14 @@ final BannerAd myBanner5 = BannerAd(
   listener: const BannerAdListener(),
 );
 
-Widget adContainer(banner, context, upgrade) {
-  return upgrade == false
-      ? StatefulBuilder(
-          builder: (context, setState) => Container(
-                alignment: Alignment.center,
-                child: AdWidget(ad: banner),
-                width: myBanner.size.width.toDouble(),
-                height: myBanner.size.height.toDouble(),
-              ))
-      : const SizedBox(
-          height: 10,
-        );
+Widget adContainer(banner, context) {
+  return StatefulBuilder(
+      builder: (context, setState) => Container(
+            alignment: Alignment.center,
+            child: AdWidget(ad: banner),
+            width: myBanner.size.width.toDouble(),
+            height: myBanner.size.height.toDouble(),
+          ));
 }
 
 //Switch
