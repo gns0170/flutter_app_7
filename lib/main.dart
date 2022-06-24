@@ -59,18 +59,19 @@ Widget providerApp(Widget mainWidget) {
     ChangeNotifierProvider<IAPRepo>(
       create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
     ),
-    ChangeNotifierProvider<ProviderSwitches>(
+    ChangeNotifierProvider<ProviderUpgrade>(
         create: ((context) =>
-            ProviderSwitches(context.read<FirebaseNotifier>()))),
+            ProviderUpgrade(context.read<FirebaseNotifier>()))),
     ChangeNotifierProvider<DashPurchases>(
       create: (context) => DashPurchases(
-        context.read<ProviderSwitches>(),
+        context.read<ProviderUpgrade>(),
         context.read<FirebaseNotifier>(),
         context.read<IAPRepo>(),
       ),
       lazy: false,
     ),
-    Provider<DrawerSwitch>(create: (_) => drawerSwitch),
+    ChangeNotifierProvider<ProviderNavigation>(
+        create: (_) => ProviderNavigation()),
     Provider<AppBarSwitch>(create: (_) => appBarSwitch),
   ], child: mainWidget);
 }

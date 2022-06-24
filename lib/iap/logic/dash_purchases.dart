@@ -14,7 +14,7 @@ import '../model/store_state.dart';
 import 'firebase_notifier.dart';
 
 class DashPurchases extends ChangeNotifier {
-  ProviderSwitches ad;
+  ProviderUpgrade ad;
   FirebaseNotifier firebaseNotifier;
   IAPRepo iapRepo;
   StoreState storeState = StoreState.loading;

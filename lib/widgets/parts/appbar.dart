@@ -59,8 +59,9 @@ class _BaseAppBarState extends State<BaseAppBar> {
     Future.delayed(Duration.zero, () {
       setState(() {
         //Drawer Page Change
-        if (drawerSwitch.valueAchievement == true) {
-          drawerSwitch.changeAchievement();
+        var providerNavigation = context.watch<ProviderNavigation>();
+        if (providerNavigation.achievement == PageStatus.on) {
+          providerNavigation.achievementOnOff();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Achievement()));
         }

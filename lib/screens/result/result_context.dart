@@ -70,6 +70,7 @@ dynamic shareResult() {
 
 //버튼 모음
 Widget buttons(context) {
+  var providerNavigation = context.watch<ProviderNavigation>();
   return Column(
     children: [
       const SizedBox(),
@@ -80,7 +81,7 @@ Widget buttons(context) {
           DarkButton(
               text: "업적",
               onPressed: () {
-                drawerSwitch.changeAchievement();
+                providerNavigation.achievementOnOff();
               },
               width: (MediaQuery.of(context).size.width - 50) / 2,
               height: 70),
