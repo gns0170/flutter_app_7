@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/provider/switch.dart';
+import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
 import 'package:flutter_application_7/widgets/adver.dart';
 import 'package:flutter_application_7/widgets/parts/button.dart';
 import 'package:flutter_application_7/widgets/parts/layout.dart';
 import 'package:flutter_application_7/widgets/parts/texts.dart';
-import 'package:flutter_provider/flutter_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../data/questions.dart';
 import './home.dart';
@@ -25,11 +25,7 @@ class _QuestionState extends State<Question> {
   Widget build(BuildContext context) {
     //ad
     myBanner2.load();
-    Future.delayed(
-        Duration.zero,
-        () => setState(() {
-              Provider.of<HomeSwitch>(context).switchAd;
-            }));
+    var purchase = context.read<DashPurchases>();
     //data Process
     dynamic shownQuestion;
     void selectQuestion() {
@@ -55,7 +51,7 @@ class _QuestionState extends State<Question> {
         body: centerColumn([
       const Spacer(flex: 3),
       TextQuestion(words: shownQuestion.question),
-      homeSwitch.switchAd == true
+      purchase.adUpgrade == false
           ? const Spacer(flex: 1)
           : const Spacer(flex: 2),
       SizedBox(
@@ -81,10 +77,14 @@ class _QuestionState extends State<Question> {
       ),
       const Spacer(flex: 2),
       theNumberQuestions(semiNumberPage),
-      homeSwitch.switchAd == true
+      purchase.adUpgrade == false
           ? const Spacer(flex: 1)
           : const SizedBox(height: 30),
-      adContainer(myBanner2, context),
+      !purchase.adUpgrade
+          ? adContainer(myBanner2, context)
+          : const SizedBox(
+              height: 10,
+            )
     ]));
   }
 }

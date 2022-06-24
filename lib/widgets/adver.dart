@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/provider/switch.dart';
-import 'package:flutter_provider/flutter_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //Banner
@@ -38,18 +36,13 @@ final BannerAd myBanner5 = BannerAd(
 );
 
 Widget adContainer(banner, context) {
-  Provider.of<AppBarSwitch>(context);
-  return homeSwitch.switchAd == true
-      ? StatefulBuilder(
-          builder: (context, setState) => Container(
-                alignment: Alignment.center,
-                child: AdWidget(ad: banner),
-                width: myBanner.size.width.toDouble(),
-                height: myBanner.size.height.toDouble(),
-              ))
-      : const SizedBox(
-          height: 10,
-        );
+  return StatefulBuilder(
+      builder: (context, setState) => Container(
+            alignment: Alignment.center,
+            child: AdWidget(ad: banner),
+            width: myBanner.size.width.toDouble(),
+            height: myBanner.size.height.toDouble(),
+          ));
 }
 
 //Switch

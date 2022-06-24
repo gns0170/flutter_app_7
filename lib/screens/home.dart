@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/provider/switch.dart';
-import 'package:flutter_provider/flutter_provider.dart';
+import 'package:flutter_application_7/iap/logic/dash_purchases.dart';
 
+import 'package:provider/provider.dart';
+
+import '../iap/logic/firebase_notifier.dart';
 import '../widgets/parts/layout.dart';
 import '../widgets/parts/button.dart';
 import '../widgets/adver.dart';
@@ -36,14 +38,13 @@ void proAddWeightPosition(List<int> a) {
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    var firebaseNotifier = context.watch<FirebaseNotifier>();
+    if (firebaseNotifier.isLoggingIn) {
+      firebaseNotifier.login();
+    }
     //AdMob
     myBanner.load();
-    Future.delayed(
-        Duration.zero,
-        () => setState(() {
-              Provider.of<HomeSwitch>(context).switchAd;
-            }));
-
+    var purchase = context.watch<DashPurchases>();
     //views
     return Scaffold(
       body: centerColumn([
@@ -71,20 +72,22 @@ class HomeState extends State<Home> {
           ),
         ),
         const Spacer(flex: 3),
-        // DarkButton(
-        //   text: "나는 롤을 모른다!",
-        //   height: 50,
-        //   onPressed: () {
-        //     setState(() {
-        //       switchAd = !switchAd;
-        //     });
-        //   },
-        //   icon: Icons.reply,
-        // ),
+        DarkButton(
+          text: "나는 롤을 모른다!",
+          height: 50,
+          onPressed: () {
+            setState(() {});
+          },
+          icon: Icons.reply,
+        ),
         const SizedBox(
           height: 10,
         ),
-        adContainer(myBanner, context)
+        !purchase.adUpgrade
+            ? adContainer(myBanner, context)
+            : const SizedBox(
+                height: 10,
+              )
       ]),
     );
   }

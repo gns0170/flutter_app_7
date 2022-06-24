@@ -1,121 +1,25 @@
-
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_7/data/record.dart';
+import 'package:flutter_application_7/iap/logic/firebase_notifier.dart';
+import 'package:flutter_application_7/iap/repo/iap_repo.dart';
 import 'package:flutter_application_7/provider/switch.dart';
+
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 import 'package:flutter_application_7/screens/questions.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/statistics.dart';
 import 'package:flutter_application_7/widgets/parts/appbar.dart';
 import 'package:flutter_application_7/widgets/parts/drawer.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:provider/provider.dart';
 import './screens/home.dart';
 import './values/colors.dart' as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:flutter_provider/flutter_provider.dart';
-
-import 'package:in_app_purchase/in_app_purchase.dart';
-
-//import for InAppPurchaseAndroidPlatformAddition
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-//import for BillingResponse
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-
-
 
 //inapp Test
-void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-  purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-    if (purchaseDetails.status == PurchaseStatus.pending) {
-      _showPendingUI();
-    } else {
-      if (purchaseDetails.status == PurchaseStatus.error) {
-        _handleError(purchaseDetails.error!);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-                 purchaseDetails.status == PurchaseStatus.restored) {
-        bool valid = await _verifyPurchase(purchaseDetails);
-        if (valid) {
-          _deliverProduct(purchaseDetails);
-        } else {
-          _handleInvalidPurchase(purchaseDetails);
-        }
-      }
-      if (purchaseDetails.pendingCompletePurchase) {
-        await InAppPurchase.instance
-            .completePurchase(purchaseDetails);
-      }
-    }
-  });
-}
-final bool available = await InAppPurchase.instance.isAvailable();
-if (!available) {
-  // The store cannot be reached or accessed. Update the UI accordingly.
-}
-
-// Set literals require Dart 2.2. Alternatively, use
-// `Set<String> _kIds = <String>['product1', 'product2'].toSet()`.
-const Set<String> _kIds = <String>{'product1', 'product2'};
-final ProductDetailsResponse response =
-    await InAppPurchase.instance.queryProductDetails(_kIds);
-if (response.notFoundIDs.isNotEmpty) {
-  // Handle the error.
-}
-List<ProductDetails> products = response.productDetails;
-
-await InAppPurchase.instance.restorePurchases();
-
-
-
-final ProductDetails productDetails = ... // Saved earlier from queryProductDetails().
-final PurchaseParam purchaseParam = PurchaseParam(productDetails: productDetails);
-if (_isConsumable(productDetails)) {
-  InAppPurchase.instance.buyConsumable(purchaseParam: purchaseParam);
-} else {
-  InAppPurchase.instance.buyNonConsumable(purchaseParam: purchaseParam);
-}
-// From here the purchase flow will be handled by the underlying store.
-// Updates will be delivered to the `InAppPurchase.instance.purchaseStream`.
-
-
-final PurchaseDetails oldPurchaseDetails = ...;
-PurchaseParam purchaseParam = GooglePlayPurchaseParam(
-    productDetails: productDetails,
-    changeSubscriptionParam: ChangeSubscriptionParam(
-        oldPurchaseDetails: oldPurchaseDetails,
-        prorationMode: ProrationMode.immediateWithTimeProration));
-InAppPurchase.instance
-    .buyNonConsumable(purchaseParam: purchaseParam);
-
-
-
-
-
-
-if (Platform.isAndroid) {
-  final InAppPurchaseAndroidPlatformAddition androidAddition =
-    _inAppPurchase
-      .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
-  var priceChangeConfirmationResult =
-      await androidAddition.launchPriceChangeConfirmationFlow(
-    sku: 'purchaseId',
-  );
-  if (priceChangeConfirmationResult.responseCode == BillingResponse.ok){
-    // TODO acknowledge price change
-  }else{
-    // TODO show error
-  }
-}
-
+import './iap/logic/dash_purchases.dart';
 //inappTest
-
-
-
-
-
-
 
 //Route Aware Test
 abstract class RouteAware {
@@ -137,16 +41,56 @@ abstract class RouteAware {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
+  InAppPurchase;
   MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
       tagForChildDirectedTreatment: TagForChildDirectedTreatment.unspecified,
       testDeviceIds: <String>[
         "d3b14dfe-7806-41c1-a8e4-f064ca23dbe9",
         "b707453f-ec54-4d0e-8f08-c3d236ce513f"
       ]));
-  runApp(const MyApp());
+
+  ///in app purchase
+  runApp(providerApp(const MyApp()));
+}
+
+Widget providerApp(Widget mainWidget) {
+  return MultiProvider(providers: [
+    ChangeNotifierProvider<FirebaseNotifier>(create: (_) => FirebaseNotifier()),
+    ChangeNotifierProvider<IAPRepo>(
+      create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
+    ),
+    ChangeNotifierProvider<ProviderSwitches>(
+        create: ((context) =>
+            ProviderSwitches(context.read<FirebaseNotifier>()))),
+    ChangeNotifierProvider<DashPurchases>(
+      create: (context) => DashPurchases(
+        context.read<ProviderSwitches>(),
+        context.read<FirebaseNotifier>(),
+        context.read<IAPRepo>(),
+      ),
+      lazy: false,
+    ),
+    Provider<DrawerSwitch>(create: (_) => drawerSwitch),
+    Provider<AppBarSwitch>(create: (_) => appBarSwitch),
+  ], child: mainWidget);
 }
 
 Record R = Record();
+
+//test inapp
+// Gives the option to override in tests.
+class IAPConnection {
+  static InAppPurchase? _instance;
+  static set instance(InAppPurchase value) {
+    _instance = value;
+  }
+
+  static InAppPurchase get instance {
+    _instance ??= InAppPurchase.instance;
+    return _instance!;
+  }
+}
+//inapp end
 
 //루트 관리
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
@@ -159,50 +103,12 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  //test inapp
-    StreamSubscription<List<PurchaseDetails>> _subscription;
-
-  @override
-  void dispose() {
-    _subscription.cancel();
-    super.dispose();
-  }
-
-
-
-//inapp end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   @override
   void initState() {
-    //inapp
-    final Stream purchaseUpdated =
-        InAppPurchase.instance.purchaseStream;
-    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onDone: () {
-      _subscription.cancel();
-    }, onError: (error) {
-      // handle error here.
-    });
     super.initState();
     //inapp
+    //inapp
 
-
-    super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
@@ -214,47 +120,36 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     R.loadRecord();
 
-    return Providers(
-        providers: [
-          Provider<DrawerSwitch>.value(
-            drawerSwitch,
-            disposer: (v) => v.dispose(),
-          ),
-          Provider<AppBarSwitch>.value(
-            appBarSwitch,
-            disposer: (v) => v.dispose(),
-          ),
-          Provider<HomeSwitch>.value(
-            homeSwitch,
-            disposer: (v) => v.dispose(),
-          )
-        ],
-        child: MaterialApp(
-            title: 'A',
-            theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                  color: custom_colors.primaryColor1,
-                  actionsIconTheme: IconThemeData(
-                    color: Colors.white,
-                    size: 32,
-                  )),
-            ),
-            home: Scaffold(
-              appBar: const BaseAppBar(),
-              drawer: const Drawer(child: BaseDrawer()),
-              body: MaterialApp(
-                navigatorObservers: [routeObserver],
-                initialRoute: "/home",
-                routes: {
-                  '/home': (context) => const Home(),
-                  '/question': (context) => const Question(),
-                  '/result': (context) => const Result(),
-                  '/achievement': (context) => const Achievement(),
-                  '/test': (context) => const TestScreen(),
-                  '/statistics': (context) => const Statistics(),
-                },
-              ),
-            )));
+    //in app
+    //in app end
+
+    return MaterialApp(
+      title: 'A',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            color: custom_colors.primaryColor1,
+            actionsIconTheme: IconThemeData(
+              color: Colors.white,
+              size: 32,
+            )),
+      ),
+      home: Scaffold(
+        appBar: const BaseAppBar(),
+        drawer: const Drawer(child: BaseDrawer()),
+        body: MaterialApp(
+          navigatorObservers: [routeObserver],
+          initialRoute: "/home",
+          routes: {
+            '/home': (context) => const Home(),
+            '/question': (context) => const Question(),
+            '/result': (context) => const Result(),
+            '/achievement': (context) => const Achievement(),
+            '/test': (context) => const TestScreen(),
+            '/statistics': (context) => const Statistics(),
+          },
+        ),
+      ),
+    );
   }
 }
 
@@ -268,11 +163,33 @@ class TestScreen extends StatefulWidget {
 class TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
+    var firebaseNotifier = context.watch<FirebaseNotifier>();
+
+    if (!firebaseNotifier.loggedIn) {
+      return const LoginPage();
+    }
+
     return Scaffold(
-      body: Container(
-        color: Colors.black,
-        child: const Text("123"),
-      ),
-    );
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [Text('132')]));
   }
 }
+
+//in app class
+// class InitBackend extends StatefulWidget {
+//   const InitBackend({Key? key}) : super(key: key);
+//   @override
+//   _InitBackendState createState() => _InitBackendState();
+// }
+
+// class _InitBackendState extends State<InitBackend> {
+//   @override
+//   Widget build(BuildContext context) {
+//     //IAP
+//     var purchase = context.read<DashPurchases>();
+//     //AD 확인
+//     Future.delayed(Duration.zero, () => setState(() {}));
+//     return const SizedBox(width: 0, height: 0);
+//   }
+// }

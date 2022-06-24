@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/iap/logic/firebase_notifier.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
 
 final drawerSwitch = DrawerSwitch();
 final appBarSwitch = AppBarSwitch();
-final homeSwitch = HomeSwitch();
 
 class DrawerSwitch extends ChangeNotifier {
   bool _valueStatistic = false;
@@ -52,16 +52,38 @@ class AppBarSwitch extends ChangeNotifier {
   }
 }
 
-class HomeSwitch extends ChangeNotifier {
-  bool _switchAd = false;
-  bool get switchAd => _switchAd;
+// class HomeSwitch extends ChangeNotifier {
+//   bool _switchAd = true;
+//   bool get switchAd => _switchAd;
 
-  void changeSwitchAd() {
-    _switchAd = !_switchAd;
+//   void changeSwitchAd() {
+//     _switchAd = !_switchAd;
+//     notifyListeners();
+//   }
+
+//   void noAd() {
+//     _switchAd = false;
+//     notifyListeners();
+//   }
+
+//   void notify() {
+//     notifyListeners();
+//   }
+// }
+
+class ProviderSwitches extends ChangeNotifier {
+  bool _ad = true;
+  bool get ad => _ad;
+  FirebaseNotifier firebaseNotifier;
+
+  ProviderSwitches(this.firebaseNotifier);
+  void changeAd() {
+    _ad = !_ad;
     notifyListeners();
   }
 
-  void notify() {
+  void noAd() {
+    _ad = false;
     notifyListeners();
   }
 }
