@@ -59,6 +59,7 @@ class HomeState extends State<Home> {
         DarkButton(
           onPressed: () {
             Navigator.pushNamed(context, '/question');
+            //성향, 포지션 점수 초기화
             globalWeight = [0, 0, 0, 0];
             globalWeightPosition = [0, 0, 0, 0, 0];
           },

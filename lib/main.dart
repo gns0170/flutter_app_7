@@ -176,21 +176,3 @@ class TestScreenState extends State<TestScreen> {
             children: const [Text('132')]));
   }
 }
-
-//in app class
-// class InitBackend extends StatefulWidget {
-//   const InitBackend({Key? key}) : super(key: key);
-//   @override
-//   _InitBackendState createState() => _InitBackendState();
-// }
-
-// class _InitBackendState extends State<InitBackend> {
-//   @override
-//   Widget build(BuildContext context) {
-//     //IAP
-//     var purchase = context.read<DashPurchases>();
-//     //AD 확인
-//     Future.delayed(Duration.zero, () => setState(() {}));
-//     return const SizedBox(width: 0, height: 0);
-//   }
-// }

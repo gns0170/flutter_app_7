@@ -33,7 +33,6 @@ class _ResultContextState extends State<ResultContext> {
     //ad
     myBanner3.load();
     var purchase = context.read<DashPurchases>();
-    var providerNavigation = context.watch<ProviderNavigation>();
 
     shownResultText = widget.proResult.explain;
     shownResultTitle = widget.proResult.title;
@@ -73,6 +72,7 @@ dynamic shareResult() {
 class Buttons extends StatelessWidget {
   const Buttons({Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     var providerNavigation = context.watch<ProviderNavigation>();
     return Column(

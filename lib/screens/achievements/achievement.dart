@@ -14,7 +14,7 @@ class Achievement extends StatefulWidget {
 
 class _AchievementState extends State<Achievement> {
   //dataProcess
-  List<DataAchievement> listShownAchieve = a;
+  List<DataAchievement> popUpAchievement = a;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,12 @@ class _AchievementState extends State<Achievement> {
               width: MediaQuery.of(context).size.width - 40,
               //height: MediaQuery.of(context).size.height - 80,
               child: ListView.builder(
-                itemCount: listShownAchieve.length,
+                itemCount: popUpAchievement.length,
                 itemBuilder: (BuildContext context, int index) {
-                  int proPNumber = listShownAchieve[index].pNumber;
-                  String proTitle = listShownAchieve[index].title;
-                  String proText = listShownAchieve[index].text;
-                  dynamic proIcon = listShownAchieve[index].icon;
+                  int proPNumber = popUpAchievement[index].pNumber;
+                  String proTitle = popUpAchievement[index].title;
+                  String proText = popUpAchievement[index].text;
+                  dynamic proIcon = popUpAchievement[index].icon;
 
                   if (recordA[a[index].pNumber] == 0 && proIcon != "Bar") {
                     proIcon = iconBasicA;
@@ -43,7 +43,7 @@ class _AchievementState extends State<Achievement> {
                     // }
                   }
                   AchieveTile proAchieve = AchieveTile(
-                      shownAchieve: DataAchievement(
+                      popUpAchieve: DataAchievement(
                           proPNumber, proTitle, proText, proIcon,
                           cases: recordA[a[index].pNumber]),
                       semiActive:
@@ -60,9 +60,9 @@ class _AchievementState extends State<Achievement> {
 //Tile
 class AchieveTile extends StatefulWidget {
   const AchieveTile(
-      {Key? key, required this.shownAchieve, required this.semiActive})
+      {Key? key, required this.popUpAchieve, required this.semiActive})
       : super(key: key);
-  final DataAchievement shownAchieve;
+  final DataAchievement popUpAchieve;
   final bool semiActive;
   @override
   _AchieveTileState createState() => _AchieveTileState();
@@ -72,12 +72,12 @@ class _AchieveTileState extends State<AchieveTile> {
   @override
   Widget build(BuildContext context) {
     //views
-    if (widget.shownAchieve.icon == "Bar") {
+    if (widget.popUpAchieve.icon == "Bar") {
       return Column(children: [
         const SizedBox(height: 10),
         Material(
             type: MaterialType.transparency,
-            child: Text(widget.shownAchieve.title,
+            child: Text(widget.popUpAchieve.title,
                 style: const TextStyle(
                     fontSize: 30,
                     color: Colors.white,
@@ -102,7 +102,7 @@ class _AchieveTileState extends State<AchieveTile> {
                     alignment: Alignment.center,
                     width: 70,
                     height: 70,
-                    child: widget.shownAchieve.icon,
+                    child: widget.popUpAchieve.icon,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -120,13 +120,13 @@ class _AchieveTileState extends State<AchieveTile> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.shownAchieve.title,
+                          Text(widget.popUpAchieve.title,
                               style: const TextStyle(
                                   fontSize: 22,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold)),
                           const SizedBox(height: 6),
-                          Text(widget.shownAchieve.text,
+                          Text(widget.popUpAchieve.text,
                               style: const TextStyle(
                                   fontSize: 14, color: Colors.white)),
                           const SizedBox(height: 6)
