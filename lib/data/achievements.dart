@@ -19,16 +19,16 @@ Widget iconBasicA =
 List<DataAchievement> a = [
   DataAchievement(0, "1번 항목", "1번 설명", "Bar"),
   //1
-  DataAchievement(1, "나비처럼 날아서", "화려한 결과를 전부 얻은 사람",
+  DataAchievement(1, "포화 속으로", "화려한 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //2
-  DataAchievement(2, "차갑지만 아름다운", "정교한 결과를 전부 얻은 사람",
+  DataAchievement(2, "생각하는 기계", "정교한 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //3
-  DataAchievement(3, "우리는 모두 칭구", "협력적인 결과를 전부 얻은 사람",
+  DataAchievement(3, "사회적 동물", "협력적인 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //4
-  DataAchievement(4, "대를 위한 희생", "숭고한 결과를 전부 얻은 사람",
+  DataAchievement(4, "오, 어머니…", "숭고한 결과를 전부 얻은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   DataAchievement(0, "2번 항목", "1번 설명", "Bar"),
   //5
@@ -48,16 +48,23 @@ List<DataAchievement> a = [
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   DataAchievement(0, "3번 항목", "1번 설명", "Bar"),
   //10
-  DataAchievement(10, "포화 속으로", "화려함이 2등의 2배 이상 높다.",
+  DataAchievement(10, "그런거 일부러 찾는 사람", "숭고한 원딜 결과 창을 본 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //11
-  DataAchievement(11, "생각하는 기계", "정밀함이 2등의 2배 이상 높다.",
+  DataAchievement(11, "소문난 망나니", "3연속 탑만 결과로 나온 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //12
-  DataAchievement(12, "사회적 동물", "협력적임이 2등의 2배 이상 높다.",
+  DataAchievement(12, "의문의 중국 오리 장인", "정교한 미드에서 표식을 찾은 사람",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
   //13
-  DataAchievement(13, "오, 어머니…", "숭고함이 2등의 2배 이상 높다.",
+  DataAchievement(13, "영원히 기억될 그 이름", "화려한 미드에서 표식을 찾은 사람",
+      const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
+  DataAchievement(0, "4번 항목", "1번 설명", "Bar"),
+  //14
+  DataAchievement(15, "전인", "모든 결과를 찾은 사람",
+      const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
+  //15
+  DataAchievement(16, "자강두천", "자존심 강한 두 천재의 대결",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
 ];
 
@@ -111,10 +118,14 @@ class CheckAcases {
         ? true
         : false,
     //3
-    1 is bool ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
-    1 is bool ? true : false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    //4
+    ach4_1(),
+    false,
   ];
   CheckAcases();
   void setRecordAByAcases() {
@@ -122,4 +133,13 @@ class CheckAcases {
       recordA[i] = aCases[a[i].pNumber] == true ? 1 : recordA[i];
     }
   }
+}
+
+//전인
+bool ach4_1() {
+  bool b = true;
+  for (int i = 0; i < 17; i++) {
+    b = recordA[i] == 1 ? b : false;
+  }
+  return b;
 }

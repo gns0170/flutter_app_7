@@ -7,6 +7,7 @@ import 'package:flutter_application_7/provider/refer_value.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/screens/result/result_graph2.dart';
+import 'package:provider/provider.dart';
 
 import 'dart:math';
 import 'result_context.dart';
@@ -46,6 +47,7 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
     int index;
     int indexPosition;
     DataResult proResult;
+    var providerPopUp = context.watch<ProviderPopup>();
     //RecordA check for achievement View
     List<int> tempRecordA = recordA;
 
@@ -68,7 +70,7 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
             DataAchievementShown(a[index].title, a[index].text, a[index].icon));
       }
     }
-    appBarSwitch.changeShownAchieve();
+    providerPopUp.achievementAlarmOnOff();
     initReferDas();
 
     //end the record

@@ -29,6 +29,8 @@ class _BaseAppBarState extends State<BaseAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    var providerNavigation = context.watch<ProviderNavigation>();
+    var providerPopUp = context.watch<ProviderPopup>();
     //inapp Purchase
     var firebaseNotifier = context.watch<FirebaseNotifier>();
     if (firebaseNotifier.state == FirebaseState.loading) {
@@ -59,18 +61,19 @@ class _BaseAppBarState extends State<BaseAppBar> {
     Future.delayed(Duration.zero, () {
       setState(() {
         //Drawer Page Change
-        if (drawerSwitch.valueAchievement == true) {
-          drawerSwitch.changeAchievement();
+
+        if (providerNavigation.achievement == PageStatus.on) {
+          providerNavigation.achievementOnOff();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Achievement()));
         }
 
-        if (appBarSwitch.value == true) {
-          appBarSwitch.changeShownAchieve();
+        if (providerPopUp.achievementAlarm == PageStatus.on) {
+          providerPopUp.achievementAlarmOnOff();
           shownAchieve(context, null, null, null);
         }
-        if (appBarSwitch.valueAdPopup == true) {
-          appBarSwitch.changeValueAdPopup();
+        if (providerPopUp.adPurchase == PopUpStatus.on) {
+          providerPopUp.adPurchaseOnOff();
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -102,7 +105,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
         //const InitBackend(),
         IconButton(
           onPressed: () {
-            appBarSwitch.changeValueAdPopup();
+            providerPopUp.adPurchaseOnOff();
           },
           splashRadius: 30,
           icon: const Icon(Icons.share),

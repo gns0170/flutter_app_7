@@ -33,6 +33,7 @@ class _ResultContextState extends State<ResultContext> {
     //ad
     myBanner3.load();
     var purchase = context.read<DashPurchases>();
+    var providerNavigation = context.watch<ProviderNavigation>();
 
     shownResultText = widget.proResult.explain;
     shownResultTitle = widget.proResult.title;
@@ -53,7 +54,7 @@ class _ResultContextState extends State<ResultContext> {
           },
           iconDetail:
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),
-      buttons(context),
+      const Buttons(),
       const Spacer(flex: 1),
       !purchase.adUpgrade
           ? adContainer(myBanner3, context)
@@ -69,37 +70,42 @@ dynamic shareResult() {
 }
 
 //버튼 모음
-Widget buttons(context) {
-  return Column(
-    children: [
-      const SizedBox(),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(width: 20),
-          DarkButton(
-              text: "업적",
-              onPressed: () {
-                drawerSwitch.changeAchievement();
-              },
-              width: (MediaQuery.of(context).size.width - 50) / 2,
-              height: 70),
-          const SizedBox(width: 10),
-          DarkButton(
-              text: "공유하기",
-              onPressed: () => shareResult(),
-              width: (MediaQuery.of(context).size.width - 50) / 2,
-              height: 70,
-              icon: Icons.share),
-          const SizedBox(width: 20),
-        ],
-      ),
-      const SizedBox(height: 5),
-      DarkButton(
-          text: "맨 처음으로",
-          onPressed: () {
-            Navigator.pop(context);
-          }),
-    ],
-  );
+class Buttons extends StatelessWidget {
+  const Buttons({Key? key}) : super(key: key);
+
+  Widget build(BuildContext context) {
+    var providerNavigation = context.watch<ProviderNavigation>();
+    return Column(
+      children: [
+        const SizedBox(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(width: 20),
+            DarkButton(
+                text: "업적",
+                onPressed: () {
+                  providerNavigation.achievementOnOff();
+                },
+                width: (MediaQuery.of(context).size.width - 50) / 2,
+                height: 70),
+            const SizedBox(width: 10),
+            DarkButton(
+                text: "공유하기",
+                onPressed: () => shareResult(),
+                width: (MediaQuery.of(context).size.width - 50) / 2,
+                height: 70,
+                icon: Icons.share),
+            const SizedBox(width: 20),
+          ],
+        ),
+        const SizedBox(height: 5),
+        DarkButton(
+            text: "맨 처음으로",
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ],
+    );
+  }
 }

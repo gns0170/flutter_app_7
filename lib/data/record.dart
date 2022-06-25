@@ -1,14 +1,17 @@
 import 'package:flutter_application_7/data/achievements.dart';
 import 'package:flutter_application_7/data/results.dart';
+import 'package:flutter_application_7/data/statistics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late List<int> recordR = [];
 late List<int> recordA = [];
+late List<int> recordS = [];
 
 class Record {
   //Data Process
   late List<String> stringRecordR = [];
   late List<String> stringRecordA = [];
+  late List<String> stringRecordS = [];
 
   void initRecord() {
     if (recordR.length != r.length) {
@@ -21,6 +24,12 @@ class Record {
       for (int i = 0; i < a.length - 2; i++) {
         recordA.add(0);
         stringRecordA.add('0');
+      }
+    }
+    if (recordS.length != s.length - 2) {
+      for (int i = 0; i < s.length; i++) {
+        recordS.add(0);
+        stringRecordS.add('0');
       }
     }
   }
@@ -43,6 +52,9 @@ class Record {
     for (int i = 0; i < recordA.length; i++) {
       recordA[i] = int.parse(stringRecordA[i]);
     }
+    for (int i = 0; i < recordS.length; i++) {
+      recordS[i] = int.parse(stringRecordS[i]);
+    }
   }
 
   void convertIntToString() {
@@ -52,6 +64,9 @@ class Record {
     for (int i = 0; i < recordA.length; i++) {
       stringRecordA[i] = recordA[i].toString();
     }
+    for (int i = 0; i < recordS.length; i++) {
+      stringRecordS[i] = recordS[i].toString();
+    }
   }
 
   Future<void> loadRecord() async {
@@ -59,6 +74,7 @@ class Record {
     initRecord();
     stringRecordR = prefs.getStringList('recordR') ?? stringRecordR;
     stringRecordA = prefs.getStringList('recordA') ?? stringRecordA;
+    stringRecordS = prefs.getStringList('recordS') ?? stringRecordS;
 
     convertStringToInt();
   }
@@ -68,5 +84,6 @@ class Record {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('recordR', stringRecordR);
     await prefs.setStringList('recordA', stringRecordA);
+    await prefs.setStringList('recordS', stringRecordS);
   }
 }

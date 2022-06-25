@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/home.dart';
 import 'package:flutter_application_7/screens/result/result.dart';
 import 'package:flutter_application_7/screens/result/result_context.dart';
@@ -35,6 +36,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
     //ad
     myBanner4.load();
     var purchase = context.read<DashPurchases>();
+    var providerNavigation = context.watch<ProviderNavigation>();
     //data Process
     List<charts.Series<TestData, String>> shownWeight() {
       List<TestData> proWeight = [
@@ -133,7 +135,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
           globalTabController?.index = 0;
         },
       ),
-      buttons(context),
+      const Buttons(),
       const Spacer(flex: 1),
       !purchase.adUpgrade
           ? adContainer(myBanner4, context)

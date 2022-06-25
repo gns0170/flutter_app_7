@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/provider/switch.dart';
 import 'package:flutter_application_7/screens/achievements/achievement.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter_application_7/screens/statistics.dart';
 
@@ -15,6 +16,7 @@ class BaseDrawerState extends State<BaseDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    var providerPopUp = context.watch<ProviderPopup>();
     return ListView(
       padding: const EdgeInsets.only(top: 80),
       children: [
@@ -43,7 +45,7 @@ class BaseDrawerState extends State<BaseDrawer> {
           onTap: () {
             //drawerSwitch.changeStatistics();
             Navigator.pop(context);
-            appBarSwitch.changeValueAdPopup();
+            providerPopUp.adPurchaseOnOff();
           },
         ),
       ],
