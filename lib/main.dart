@@ -6,17 +6,13 @@ import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.da
 import 'package:flutter_application_7/back/functions/iap/model/firebase_state.dart';
 import 'package:flutter_application_7/back/functions/iap/model/store_state.dart';
 import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
+import 'package:flutter_application_7/front/main_page.dart';
 import 'package:flutter_application_7/front/pages/achievements/achievement.dart';
-import 'package:flutter_application_7/front/pages/home.dart';
-import 'package:flutter_application_7/front/pages/questions.dart';
-import 'package:flutter_application_7/front/pages/result/result.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/switch.dart';
-import 'package:flutter_application_7/front/widgets/adver.dart';
 import 'package:flutter_application_7/front/widgets/parts/achievement_popup/achievement_show.dart';
-import 'package:flutter_application_7/front/widgets/parts/appbar.dart';
-import 'package:flutter_application_7/front/widgets/parts/drawer.dart';
 import 'package:flutter_application_7/front/widgets/parts/iap_widget.dart';
+import 'package:flutter_application_7/system_for_backend.dart';
 
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:provider/provider.dart';
@@ -112,77 +108,8 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     //Provider 불러오기
-    var providerNavigation = context.watch<ProviderNavigation>();
-    var providerPopUp = context.watch<ProviderPopup>();
-    var firebaseNotifier = context.watch<FirebaseNotifier>();
-    if (firebaseNotifier.state == FirebaseState.loading) {
-      return const PurchasesLoading();
-    } else if (firebaseNotifier.state == FirebaseState.notAvailable) {
-      return const PurchasesNotAvailable();
-    }
 
-    var purchases = context.watch<DashPurchases>();
-    var products = purchases.products;
-
-    //backend
-    Widget storeWidget;
-    switch (purchases.storeState) {
-      case StoreState.loading:
-        storeWidget = const PurchasesLoading();
-        break;
-      case StoreState.available:
-        storeWidget = PurchaseList(products: products);
-        break;
-      case StoreState.notAvailable:
-        storeWidget = const PurchasesNotAvailable();
-        break;
-    }
     R.loadRecord();
-
-    //글로벌 이벤트
-    Future.delayed(Duration.zero, () {
-      setState(() {
-        //Drawer 열기
-
-        if (providerNavigation.achievement == PageStatus.on) {
-          providerNavigation.achievementOnOff();
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const Achievement()));
-        }
-
-        //업적 달성시 표시.
-        if (providerPopUp.achievementAlarm == PageStatus.on) {
-          providerPopUp.achievementAlarmOnOff();
-          shownAchieve(context, null, null, null);
-        }
-
-        //adPurchase 팝업 다이얼로그 열기.
-        if (providerPopUp.adPurchase == PopUpStatus.on) {
-          providerPopUp.adPurchaseOnOff();
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                    content: SizedBox(
-                  height: 250,
-                  width: 100,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("광고 없애기", style: TextStyle(fontSize: 18)),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: firebaseNotifier.isLoggingIn
-                                ? const LoginPage()
-                                : storeWidget)
-                      ]),
-                ));
-              });
-        }
-      });
-    });
 
     return MaterialApp(
         title: 'A',
@@ -194,49 +121,6 @@ class MyAppState extends State<MyApp> {
                 size: 32,
               )),
         ),
-        home: const Page());
-  }
-}
-
-//메인 페이지 컨트롤러.
-class Page extends StatefulWidget {
-  const Page({Key? key}) : super(key: key);
-
-  @override
-  PageState createState() => PageState();
-}
-
-class PageState extends State<Page> {
-  @override
-  Widget build(BuildContext context) {
-    var pageProvider = context.watch<ProviderNavigation>();
-    var purchase = context.watch<DashPurchases>();
-    myBanner.load();
-
-    Widget page = const Home();
-
-    setState(() {
-      switch (pageProvider.pageView) {
-        case MainPage.home:
-          page = const Home();
-          break;
-        case MainPage.question:
-          page = const Question();
-          break;
-        case MainPage.result:
-          page = const Result();
-          break;
-      }
-    });
-
-    return Scaffold(
-        appBar: const BaseAppBar(),
-        drawer: const Drawer(child: BaseDrawer()),
-        body: page,
-        bottomNavigationBar: !purchase.adUpgrade
-            ? adContainer(myBanner, context)
-            : const SizedBox(
-                height: 10,
-              ));
+        home: const SystemForBackEnd());
   }
 }
