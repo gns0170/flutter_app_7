@@ -3,15 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
 import 'package:flutter_application_7/back/data/record.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
-import 'package:flutter_application_7/back/functions/iap/model/firebase_state.dart';
-import 'package:flutter_application_7/back/functions/iap/model/store_state.dart';
+
 import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
-import 'package:flutter_application_7/front/main_page.dart';
-import 'package:flutter_application_7/front/pages/achievements/achievement.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/switch.dart';
-import 'package:flutter_application_7/front/widgets/parts/achievement_popup/achievement_show.dart';
-import 'package:flutter_application_7/front/widgets/parts/iap_widget.dart';
 import 'package:flutter_application_7/system_for_backend.dart';
 
 import 'package:in_app_purchase/in_app_purchase.dart';

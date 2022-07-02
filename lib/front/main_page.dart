@@ -13,14 +13,14 @@ import 'package:flutter_application_7/front/widgets/parts/drawer.dart';
 import 'package:provider/provider.dart';
 
 //메인 페이지 컨트롤러.
-class Page extends StatefulWidget {
-  const Page({Key? key}) : super(key: key);
+class Pages extends StatefulWidget {
+  const Pages({Key? key}) : super(key: key);
 
   @override
-  PageState createState() => PageState();
+  PagesState createState() => PagesState();
 }
 
-class PageState extends State<Page> {
+class PagesState extends State<Pages> {
   @override
   Widget build(BuildContext context) {
     var pageProvider = context.watch<ProviderNavigation>();
