@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/pages/result/result_graph2.dart';
-import 'package:provider/provider.dart';
 import 'result_context.dart';
 import 'result_graph1.dart';
 
@@ -33,13 +31,12 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
 //views
   @override
   Widget build(BuildContext context) {
-    var checkWeight = context.watch<CheckWeight>();
     return TabBarView(
       controller: _tabController,
-      children: [
-        ResultContext(proResult: checkWeight.correctResult(context)),
-        const ResultGraph1(),
-        const ResultGraph2(),
+      children: const [
+        ResultContext(),
+        ResultGraph1(),
+        ResultGraph2(),
       ],
     );
   }

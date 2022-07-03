@@ -5,16 +5,20 @@ import 'package:flutter_application_7/back/functions/achievement_record.dart';
 import 'package:flutter_application_7/back/functions/result_record.dart';
 
 import 'package:flutter_application_7/front/provider/popup.dart';
-import 'package:provider/provider.dart';
 
 //가중치를 계산하고, 이를 통해 적절한 결과를 도출합니다.
 class CheckWeight extends ChangeNotifier {
   late List<int> _weightPlayStyle;
   late List<int> _weightPosition;
+
   List<int> get weightPlayStyle => _weightPlayStyle;
   List<int> get weightPosition => _weightPosition;
 
-  CheckWeight() {
+  ProviderPopup providerPopUp;
+  ResultState resultState;
+  AchievementState achievementState;
+
+  CheckWeight(this.providerPopUp, this.resultState, this.achievementState) {
     initWeights();
   }
 
@@ -45,12 +49,8 @@ class CheckWeight extends ChangeNotifier {
     notifyListeners();
   }
 
-  DataResult correctResult(BuildContext context) {
+  DataResult correctResult() {
     DataResult result;
-    var providerPopUp = context.watch<ProviderPopup>();
-    var resultState = context.watch<ResultState>();
-    var achievementState = context.watch<AchievementState>();
-    //RecordA check for achievement View
 
     //Weight 합해서 Result 찾기
     int indexPlayStyle = indexMaxOfList(weightPlayStyle);

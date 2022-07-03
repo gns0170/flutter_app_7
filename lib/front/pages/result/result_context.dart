@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/data/results.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/pages/result/result.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/widgets/parts/button.dart';
@@ -13,9 +13,8 @@ import 'package:share_plus/share_plus.dart';
 
 //first Screen
 class ResultContext extends StatefulWidget {
-  const ResultContext({Key? key, required this.proResult}) : super(key: key);
+  const ResultContext({Key? key}) : super(key: key);
 
-  final DataResult proResult;
   @override
   _ResultContextState createState() => _ResultContextState();
 }
@@ -25,12 +24,17 @@ class _ResultContextState extends State<ResultContext> {
   Widget shownResultText = Container();
   Widget shownResultTitle = Container();
 
+  //TODO: 이름, 구조 정리하고 기능 따로 빼기.
+  //TODO: 에러 발생, Another exception was thrown: setState() or markNeedsBuild() called during build.
+  // 구조적 문제로 추정
   @override
   Widget build(BuildContext context) {
     var purchase = context.read<DashPurchases>();
+    var checkWeight = context.read<CheckWeight>();
+    var proResult = checkWeight.correctResult();
 
-    shownResultText = widget.proResult.explain;
-    shownResultTitle = widget.proResult.title;
+    shownResultText = proResult.explain;
+    shownResultTitle = proResult.title;
     return Scaffold(
         body: centerColumn([
       purchase.adUpgrade == false

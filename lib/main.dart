@@ -83,7 +83,12 @@ Widget providerApp(Widget mainWidget) {
     ChangeNotifierProvider<ResultState>(create: (_) => ResultState()),
     ChangeNotifierProvider<AchievementState>(
         create: (context) => AchievementState(context.read<ResultState>())),
-    ChangeNotifierProvider<CheckWeight>(create: (_) => CheckWeight()),
+    ChangeNotifierProvider<CheckWeight>(
+        create: (context) => CheckWeight(
+              context.read<ProviderPopup>(),
+              context.read<ResultState>(),
+              context.read<AchievementState>(),
+            )),
   ], child: mainWidget);
 }
 

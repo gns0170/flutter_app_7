@@ -7,7 +7,9 @@ class ResultState extends ChangeNotifier {
   List<int> get recordR => _recordR;
 
   ResultState() {
-    initRecordR();
+    Future.delayed(Duration.zero, () {
+      initRecordR();
+    });
   }
 
   void initRecordR() {
