@@ -1,0 +1,24 @@
+기본적으로, 표기 화면과 위젯, 팝업은 Front
+그 외의 통신, 데이터, 데이터 가동 등은 Back
+
+작동 순서는 main.dart => system_for_backend.dart => front/main_page.dart 순
+
+##
+벡엔드에서 데이터와 통신은 통합 관리, 기능과 데이터 가공은 기능 별로 관리한다.
+
+프론트는 페이지, Provider, 위젯으로 구성된다.
+이 중 Provider Provider은 Navigation, PopUp 외의 Switch 등과 참조할만한 refer_value로 이루어져 있다.
+단, 여기서의 PopUp은 Page의 팝업으로, achievement 팝업과 같은 기타 다이얼로그 이벤트는 Back의 functions 에서 관리한다.
+
+##
+모든 데이터는 다음과 같이 관리된다.
+
+원본을 변경할 필요 없는 모든 데이터는 데이터 탭에서 관리된다.
+그 형태는 단순 선언이다.
+다른 곳에서는 해당 데이터 경로를 불러와 참조한다.
+
+지속적으로 변경이 필요한 데이터는 ChangeNotifier 형식으로 관리된다.
+그 형태는 Class 내에 정보를 저장하고 Main 에서 MultiProvider에 등록한다.
+다른 곳에서는 해당 데이터를 불러올 때 context.watch 같은 provider 함수를 통해 참조한다.
+
+

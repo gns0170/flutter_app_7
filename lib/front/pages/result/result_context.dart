@@ -27,8 +27,6 @@ class _ResultContextState extends State<ResultContext> {
 
   @override
   Widget build(BuildContext context) {
-    //ad 레이아웃
-
     var purchase = context.read<DashPurchases>();
 
     shownResultText = widget.proResult.explain;

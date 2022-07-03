@@ -39,5 +39,3 @@ class ProviderNavigation extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-class ProviderCustomNavigation extends ChangeNotifier {}

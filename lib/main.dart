@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
-import 'package:flutter_application_7/back/data/record.dart';
+import 'package:flutter_application_7/back/functions/achievement_record.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
 
 import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
+import 'package:flutter_application_7/back/functions/result_record.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
+import 'package:flutter_application_7/front/provider/popup.dart';
 import 'package:flutter_application_7/front/provider/switch.dart';
 import 'package:flutter_application_7/system_for_backend.dart';
 
@@ -54,13 +57,15 @@ void main() {
 //Provider 모음, runApp 전에 최상위로 실행됨.
 Widget providerApp(Widget mainWidget) {
   return MultiProvider(providers: [
-    ChangeNotifierProvider<FirebaseNotifier>(create: (_) => FirebaseNotifier()),
+    //Front
+    ChangeNotifierProvider<FirebaseNotifier>(
+        create: (_) => FirebaseNotifier()), //파이어베이스
     ChangeNotifierProvider<IAPRepo>(
-      create: (context) => IAPRepo(context.read<FirebaseNotifier>()),
+      create: (context) => IAPRepo(context.read<FirebaseNotifier>()), //IAP
     ),
     ChangeNotifierProvider<ProviderUpgrade>(
         create: ((context) =>
-            ProviderUpgrade(context.read<FirebaseNotifier>()))),
+            ProviderUpgrade(context.read<FirebaseNotifier>()))), //광고 업그레이드 결제
     ChangeNotifierProvider<DashPurchases>(
       create: (context) => DashPurchases(
         context.read<ProviderUpgrade>(),
@@ -68,18 +73,21 @@ Widget providerApp(Widget mainWidget) {
         context.read<IAPRepo>(),
       ),
       lazy: false,
-    ),
-    ChangeNotifierProvider<ProviderPopup>(create: (_) => ProviderPopup()),
+    ), //IAP 결제
+    ChangeNotifierProvider<ProviderPopup>(
+        create: (_) => ProviderPopup()), //스크린 팝업
     ChangeNotifierProvider<ProviderNavigation>(
-        create: (_) => ProviderNavigation()),
-    ChangeNotifierProvider<ProviderCustomNavigation>(
-        create: (_) => ProviderCustomNavigation())
+        create: (_) => ProviderNavigation()), //네비게이션
+
+    //Back
+    ChangeNotifierProvider<ResultState>(create: (_) => ResultState()),
+    ChangeNotifierProvider<AchievementState>(
+        create: (context) => AchievementState(context.read<ResultState>())),
+    ChangeNotifierProvider<CheckWeight>(create: (_) => CheckWeight()),
   ], child: mainWidget);
 }
 
-Record R = Record();
-
-//앱 루트
+//앱 루트, 기능 시작만.
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -97,15 +105,10 @@ class MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    // Load ads.
   }
 
   @override
   Widget build(BuildContext context) {
-    //Provider 불러오기
-
-    R.loadRecord();
-
     return MaterialApp(
         title: 'A',
         theme: ThemeData(

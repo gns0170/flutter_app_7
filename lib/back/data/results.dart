@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/front/widgets/parts/texts.dart';
-import '../../front/provider/values/colors.dart' as custom_color;
+import 'package:flutter_application_7/front/provider/values/colors.dart'
+    as custom_color;
 
 class DataResult {
   final String key;

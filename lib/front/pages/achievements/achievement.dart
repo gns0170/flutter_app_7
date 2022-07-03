@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/data/achievements.dart';
-import 'package:flutter_application_7/back/data/record.dart';
+import 'package:flutter_application_7/back/data/achievements/achievements.dart';
+import 'package:flutter_application_7/back/functions/achievement_record.dart';
 import 'package:flutter_application_7/front/provider/values/colors.dart'
     as custom_colors;
 import '../../widgets/parts/layout.dart';
+import 'package:provider/provider.dart';
 
 //ListView
 class Achievement extends StatefulWidget {
@@ -14,12 +15,13 @@ class Achievement extends StatefulWidget {
 }
 
 class _AchievementState extends State<Achievement> {
-  //dataProcess
-  List<DataAchievement> popUpAchievement = a;
-
   @override
   Widget build(BuildContext context) {
-    //dataProcess
+    var achievementState = context.watch<AchievementState>();
+
+    //간략화
+    List<int> recordA = achievementState.recordA;
+
     //Views
     return Scaffold(
         appBar: AppBar(),
@@ -29,19 +31,15 @@ class _AchievementState extends State<Achievement> {
               width: MediaQuery.of(context).size.width - 40,
               //height: MediaQuery.of(context).size.height - 80,
               child: ListView.builder(
-                itemCount: popUpAchievement.length,
+                itemCount: a.length,
                 itemBuilder: (BuildContext context, int index) {
-                  int proPNumber = popUpAchievement[index].pNumber;
-                  String proTitle = popUpAchievement[index].title;
-                  String proText = popUpAchievement[index].text;
-                  dynamic proIcon = popUpAchievement[index].icon;
+                  int proPNumber = a[index].pNumber;
+                  String proTitle = a[index].title;
+                  String proText = a[index].text;
+                  dynamic proIcon = a[index].icon;
 
                   if (recordA[a[index].pNumber] == 0 && proIcon != "Bar") {
                     proIcon = iconBasicA;
-                    // if (index > 8) {
-                    //   proTitle = "???";
-                    //   proText = "?????";
-                    // }
                   }
                   AchieveTile proAchieve = AchieveTile(
                       popUpAchieve: DataAchievement(

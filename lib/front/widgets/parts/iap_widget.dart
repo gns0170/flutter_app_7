@@ -1,9 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/iap/model/firebase_state.dart';
 import 'package:flutter_application_7/back/functions/iap/model/purchasable_product.dart';
+import 'package:flutter_application_7/back/functions/iap/model/store_state.dart';
 import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
 import 'package:provider/provider.dart';
+
+//iap 팝업
+class PurchasePopUp extends StatelessWidget {
+  const PurchasePopUp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    var firebaseNotifier = context.watch<FirebaseNotifier>();
+    if (firebaseNotifier.state == FirebaseState.loading) {
+      return const PurchasesLoading();
+    } else if (firebaseNotifier.state == FirebaseState.notAvailable) {
+      return const PurchasesNotAvailable();
+    }
+    var purchases = context.watch<DashPurchases>();
+    var products = purchases.products;
+
+    Widget storeWidget;
+    switch (purchases.storeState) {
+      case StoreState.loading:
+        storeWidget = const PurchasesLoading();
+        break;
+      case StoreState.available:
+        storeWidget = PurchaseList(products: products);
+        break;
+      case StoreState.notAvailable:
+        storeWidget = const PurchasesNotAvailable();
+        break;
+    }
+    return AlertDialog(
+        content: SizedBox(
+      height: 250,
+      width: 100,
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text("광고 없애기", style: TextStyle(fontSize: 18)),
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child:
+                firebaseNotifier.isLoggingIn ? const LoginPage() : storeWidget)
+      ]),
+    ));
+  }
+}
 
 class PurchasesLoading extends StatelessWidget {
   const PurchasesLoading({Key? key}) : super(key: key);

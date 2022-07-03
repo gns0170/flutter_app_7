@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 
 import 'package:provider/provider.dart';
@@ -16,30 +17,12 @@ class Home extends StatefulWidget {
   HomeState createState() => HomeState();
 }
 
-//global dataProcess
-List<int> globalWeight = [0, 0, 0, 0];
-void proAddWeight(List<int> a) {
-  if (a.length == 4) {
-    for (int index = 0; index < 4; index++) {
-      globalWeight[index] = globalWeight[index] + a[index];
-    }
-  }
-}
-
-List<int> globalWeightPosition = [0, 0, 0, 0, 0];
-void proAddWeightPosition(List<int> a) {
-  if (a.length == 5) {
-    for (int index = 0; index < 5; index++) {
-      globalWeightPosition[index] = globalWeightPosition[index] + a[index];
-    }
-  }
-}
-
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     var firebaseNotifier = context.watch<FirebaseNotifier>();
     var providerNavigation = context.watch<ProviderNavigation>();
+    var checkWeight = context.watch<CheckWeight>();
 
     if (firebaseNotifier.isLoggingIn) {
       firebaseNotifier.login();
@@ -59,8 +42,7 @@ class HomeState extends State<Home> {
         onPressed: () {
           providerNavigation.changePage(MainPage.question);
           //성향, 포지션 점수 초기화
-          globalWeight = [0, 0, 0, 0];
-          globalWeightPosition = [0, 0, 0, 0, 0];
+          checkWeight.initWeights();
         },
         text: "시작!",
         width: 115,

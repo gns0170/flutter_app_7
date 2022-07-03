@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/front/provider/switch.dart';
+import 'package:flutter_application_7/front/provider/popup.dart';
 import 'package:flutter_application_7/front/pages/achievements/achievement.dart';
 import 'package:provider/provider.dart';
 

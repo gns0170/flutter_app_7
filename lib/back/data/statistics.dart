@@ -1,4 +1,4 @@
-import 'achievements.dart';
+import 'achievements/achievements.dart';
 import 'results.dart';
 
 enum StatisticKey {

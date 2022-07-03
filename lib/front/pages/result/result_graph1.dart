@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
-import 'package:flutter_application_7/front/pages/home.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/pages/result/result.dart';
 import 'package:flutter_application_7/front/pages/result/result_context.dart';
 import 'package:flutter_application_7/front/widgets/parts/layout.dart';
@@ -21,49 +21,80 @@ class ResultGraph1 extends StatefulWidget {
   _ResultGraph1State createState() => _ResultGraph1State();
 }
 
-class TestData {
+class ChartData {
   String name;
   int weight;
   dynamic color;
 
-  TestData(this.name, this.weight, this.color);
+  ChartData(this.name, this.weight, this.color);
 }
 
 class _ResultGraph1State extends State<ResultGraph1> {
   @override
   Widget build(BuildContext context) {
-    //ad
     var purchase = context.read<DashPurchases>();
+    var checkWeight = context.watch<CheckWeight>();
 
-    //data Process
-    List<charts.Series<TestData, String>> shownWeight() {
-      List<TestData> proWeight = [
-        TestData("화려한", 0, custom_color.primaryColor3.withOpacity(1)),
-        TestData("정교한", 0, custom_color.primaryColor3.withOpacity(0.8)),
-        TestData("협력하는", 0, custom_color.primaryColor3.withOpacity(0.6)),
-        TestData("숭고한", 0, custom_color.primaryColor3.withOpacity(0.4)),
+    //List 데이터
+    List<charts.Series<ChartData, String>> shownWeight() {
+      List<ChartData> dataList = [
+        ChartData("화려한", 0, custom_color.primaryColor3.withOpacity(1)),
+        ChartData("정교한", 0, custom_color.primaryColor3.withOpacity(0.8)),
+        ChartData("협력하는", 0, custom_color.primaryColor3.withOpacity(0.6)),
+        ChartData("숭고한", 0, custom_color.primaryColor3.withOpacity(0.4)),
       ];
-      int minWeight = globalWeight.reduce(min);
-      int maxWeight = globalWeight.reduce(max);
-      int semiSumWeight = 0;
+
+      //List 내에서의 최대/최솟값
+      int minWeight = checkWeight.weightPlayStyle.reduce(min);
+      int maxWeight = checkWeight.weightPlayStyle.reduce(max);
+      int sum = 0;
+
       for (int index = 0; index < 4; index++) {
-        proWeight[index].weight = globalWeight[index] + maxWeight - minWeight;
-        semiSumWeight = semiSumWeight + proWeight[index].weight;
+        //차트 가중치 조정
+        dataList[index].weight =
+            checkWeight.weightPlayStyle[index] + maxWeight - minWeight;
+        //차트 가중치 총합
+        sum += dataList[index].weight;
       }
 
       return [
-        charts.Series<TestData, String>(
+        charts.Series<ChartData, String>(
           id: "WeightStyle",
-          domainFn: (TestData semi, _) => semi.name,
-          measureFn: (TestData semi, _) => semi.weight,
-          colorFn: (TestData semi, _) =>
-              charts.ColorUtil.fromDartColor(semi.color),
-          data: proWeight,
-          labelAccessorFn: (TestData semi, _) =>
-              '${semi.name}\n${(semi.weight / semiSumWeight * 1000).toInt() / 10}%',
+          domainFn: (ChartData data, _) => data.name,
+          measureFn: (ChartData data, _) => data.weight,
+          colorFn: (ChartData data, _) =>
+              charts.ColorUtil.fromDartColor(data.color),
+          data: dataList,
+          labelAccessorFn: (ChartData data, _) =>
+              '${data.name}\n${(data.weight / sum * 1000).toInt() / 10}%',
         )
       ];
     }
+
+    // //List<int> 에서 최댓값을 구하는 함수
+    // int maxWeightOfListInt(List<int> list) {
+    //   int maxWeight = list[0];
+    //   list.map((element) => element > maxWeight ? maxWeight = element : null);
+    //   return maxWeight;
+    // }
+
+    // //List<int> 에서 최솟값을 구하는 함수
+    // int minWeightOfListInt(List<int> list) {
+    //   int minWeight = list[0];
+    //   list.map((element) => element < minWeight ? minWeight = element : null);
+    //   return minWeight;
+    // }
+
+    // List<int> chartWeightAdjust(List<int> list) {
+    //   int sum = 0;
+    //   List<int> resultList = [];
+    //   for (int i = 0; i < list.length; i++) {
+    //     resultList
+    //         .add(list[i] + maxWeightOfListInt(list) - minWeightOfListInt(list));
+    //     sum += resultList[i];
+    //   }
+    //   return resultList;
+    // }
 
     //Views
     Widget title() {

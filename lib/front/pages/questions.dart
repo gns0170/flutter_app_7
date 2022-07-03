@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/data/questions.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/widgets/parts/button.dart';
 import 'package:flutter_application_7/front/widgets/parts/layout.dart';
 import 'package:flutter_application_7/front/widgets/parts/texts.dart';
 
 import 'package:provider/provider.dart';
-
-import './home.dart';
 
 class Question extends StatefulWidget {
   const Question({Key? key}) : super(key: key);
@@ -18,26 +17,24 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-  List<DataQuestion> dataQuestions = q;
   String semiKey = 'q21';
   int semiNumberPage = 1;
 
   @override
   Widget build(BuildContext context) {
     var providerNavigation = context.watch<ProviderNavigation>();
-
-    //ad 레이아웃
     var purchase = context.read<DashPurchases>();
+    var checkWeight = context.watch<CheckWeight>();
 
     //data Process
-    dynamic shownQuestion;
-    void selectQuestion() {
-      setState(() {
-        shownQuestion = q.singleWhere((element) => element.key == semiKey);
-      });
+    dynamic shownQuestion = q.singleWhere((element) => element.key == semiKey);
+    Future<void> selectQuestion(index) async {
+      checkWeight.addWeightPlayStyle(shownQuestion.options[index].weightStyle);
+      checkWeight
+          .addWeightPosition(shownQuestion.options[index].weightPosition);
+      //provider로 인해 setState 불필요
+      shownQuestion = q.singleWhere((element) => element.key == semiKey);
     }
-
-    selectQuestion();
 
     //페이지 전환
     void changePage() {
@@ -48,6 +45,8 @@ class _QuestionState extends State<Question> {
       }
     }
 
+    //TODO: 나중에 selectQuestion 부분은 따로 정리할 수 있도록 하자.
+    //TODO: 밑에 변수 정리도 좀 하자.
     //views
     return Scaffold(
         body: centerColumn([
@@ -66,18 +65,21 @@ class _QuestionState extends State<Question> {
                 text: shownQuestion.options[index].text,
                 left: true,
                 onPressed: () {
+                  //페이지 바꾸기
                   changePage();
-                  proAddWeight(shownQuestion.options[index].weightStyle);
-                  proAddWeightPosition(
-                      shownQuestion.options[index].weightPosition);
+                  //결과를 위한 가중치 수정
+
+                  //페이지 전환
                   semiKey = shownQuestion.options[index].nextKey;
-                  selectQuestion();
+                  selectQuestion(index);
                 },
                 height: 50,
               );
             }),
       ),
-      const Spacer(flex: 2),
+      purchase.adUpgrade == false
+          ? const Spacer(flex: 2)
+          : const Spacer(flex: 1),
       theNumberQuestions(semiNumberPage),
       purchase.adUpgrade == false
           ? const Spacer(flex: 1)

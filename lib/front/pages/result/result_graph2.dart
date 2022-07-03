@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
-import 'package:flutter_application_7/front/pages/home.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/pages/result/result.dart';
 import 'package:flutter_application_7/front/pages/result/result_context.dart';
 import 'package:flutter_application_7/front/widgets/parts/layout.dart';
@@ -21,50 +21,53 @@ class ResultGraph2 extends StatefulWidget {
   _ResultGraph2State createState() => _ResultGraph2State();
 }
 
-class TestData {
+class ChartData {
   String name;
   int weight;
   dynamic color;
 
-  TestData(this.name, this.weight, this.color);
+  ChartData(this.name, this.weight, this.color);
 }
 
 class _ResultGraph2State extends State<ResultGraph2> {
   @override
   Widget build(BuildContext context) {
-    //ad 레이아웃
     var purchase = context.read<DashPurchases>();
+    var checkWeight = context.watch<CheckWeight>();
 
-    //data Process
-    List<charts.Series<TestData, String>> shownWeight() {
-      List<TestData> proWeight = [
-        TestData("탑", 0, custom_color.primaryColor3.withOpacity(1)),
-        TestData("정글", 0, custom_color.primaryColor3.withOpacity(0.83)),
-        TestData("미드", 0, custom_color.primaryColor3.withOpacity(0.66)),
-        TestData("원딜", 0, custom_color.primaryColor3.withOpacity(0.49)),
-        TestData("서포터", 0, custom_color.primaryColor3.withOpacity(0.32)),
+    //List 데이터
+    List<charts.Series<ChartData, String>> shownWeight() {
+      List<ChartData> dataList = [
+        ChartData("탑", 0, custom_color.primaryColor3.withOpacity(1)),
+        ChartData("정글", 0, custom_color.primaryColor3.withOpacity(0.83)),
+        ChartData("미드", 0, custom_color.primaryColor3.withOpacity(0.66)),
+        ChartData("원딜", 0, custom_color.primaryColor3.withOpacity(0.49)),
+        ChartData("서포터", 0, custom_color.primaryColor3.withOpacity(0.32)),
       ];
-      int minWeight = globalWeightPosition.reduce(min);
-      int maxWeight = globalWeightPosition.reduce(max);
+      //List 내에서의 최대/최솟값
+      int minWeight = checkWeight.weightPosition.reduce(min);
+      int maxWeight = checkWeight.weightPosition.reduce(max);
+      int sum = 0;
 
-      int semiSumWeight = 0;
-      for (int index = 0; index < 5; index++) {
-        proWeight[index].weight =
-            globalWeightPosition[index] + maxWeight - minWeight;
-        semiSumWeight = semiSumWeight + proWeight[index].weight;
+      for (int index = 0; index < dataList.length; index++) {
+        //차트 가중치 조정
+        dataList[index].weight =
+            checkWeight.weightPosition[index] + maxWeight - minWeight;
+        //차트 가중치 총합
+        sum += dataList[index].weight;
       }
 
       return [
-        charts.Series<TestData, String>(
-          id: "WeightStyle",
-          domainFn: (TestData semi, _) => semi.name,
-          measureFn: (TestData semi, _) => semi.weight,
-          colorFn: (TestData semi, _) =>
-              charts.ColorUtil.fromDartColor(semi.color),
-          data: proWeight,
-          labelAccessorFn: (TestData semi, _) => semi.name.length != 3
-              ? ' ${semi.name}\n${(semi.weight / semiSumWeight * 1000).toInt() / 10}%  '
-              : '${semi.name} \n ${(semi.weight / semiSumWeight * 1000).toInt() / 10}%',
+        charts.Series<ChartData, String>(
+          id: "WeightPosition",
+          domainFn: (ChartData data, _) => data.name,
+          measureFn: (ChartData data, _) => data.weight,
+          colorFn: (ChartData data, _) =>
+              charts.ColorUtil.fromDartColor(data.color),
+          data: dataList,
+          labelAccessorFn: (ChartData data, _) => data.name.length != 3
+              ? ' ${data.name}\n${(data.weight / sum * 1000).toInt() / 10}%  '
+              : '${data.name} \n ${(data.weight / sum * 1000).toInt() / 10}%',
         )
       ];
     }

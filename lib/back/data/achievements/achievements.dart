@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/data/record.dart';
 
 class DataAchievement {
   int pNumber;
@@ -67,79 +66,3 @@ List<DataAchievement> a = [
   DataAchievement(16, "자강두천", "자존심 강한 두 천재의 대결",
       const Text('!', style: TextStyle(fontSize: 40, color: Colors.black87))),
 ];
-
-//cases
-class CheckAcases {
-  List<bool> aCases = [
-    false,
-    //1
-    recordR[0] == 1 &&
-            recordR[4] == 1 &&
-            recordR[8] == 1 &&
-            recordR[12] == 1 &&
-            recordR[16] == 1
-        ? true
-        : false,
-    recordR[1] == 1 &&
-            recordR[5] == 1 &&
-            recordR[9] == 1 &&
-            recordR[13] == 1 &&
-            recordR[17] == 1
-        ? true
-        : false,
-    recordR[2] == 1 &&
-            recordR[6] == 1 &&
-            recordR[10] == 1 &&
-            recordR[14] == 1 &&
-            recordR[18] == 1
-        ? true
-        : false,
-    recordR[3] == 1 &&
-            recordR[7] == 1 &&
-            recordR[11] == 1 &&
-            recordR[15] == 1 &&
-            recordR[19] == 1
-        ? true
-        : false,
-    //2
-    recordR[0] == 1 && recordR[1] == 1 && recordR[2] == 1 && recordR[3] == 1
-        ? true
-        : false,
-    recordR[4] == 1 && recordR[5] == 1 && recordR[6] == 1 && recordR[7] == 1
-        ? true
-        : false,
-    recordR[8] == 1 && recordR[9] == 1 && recordR[10] == 1 && recordR[11] == 1
-        ? true
-        : false,
-    recordR[12] == 1 && recordR[13] == 1 && recordR[14] == 1 && recordR[15] == 1
-        ? true
-        : false,
-    recordR[16] == 1 && recordR[17] == 1 && recordR[18] == 1 && recordR[19] == 1
-        ? true
-        : false,
-    //3
-    false,
-    false,
-    false,
-    false,
-    false,
-    //4
-    ach4_1(),
-    false,
-  ];
-  CheckAcases();
-  void setRecordAByAcases() {
-    for (int i = 0; i < recordA.length; i++) {
-      recordA[i] = aCases[a[i].pNumber] == true ? 1 : recordA[i];
-    }
-  }
-}
-
-//전인
-bool ach4_1() {
-  bool b = true;
-  for (int i = 0; i < 17; i++) {
-    b = recordA[i] == 1 ? b : false;
-  }
-  return b;
-}

@@ -27,6 +27,7 @@ class PagesState extends State<Pages> {
     var purchase = context.watch<DashPurchases>();
     myBanner.load();
 
+    //페이지 분류
     Widget page = const Home();
 
     setState(() {

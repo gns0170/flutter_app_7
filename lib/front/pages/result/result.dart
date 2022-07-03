@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/data/achievements.dart';
-import 'package:flutter_application_7/back/data/record.dart';
-import 'package:flutter_application_7/back/data/results.dart';
-import 'package:flutter_application_7/front/pages/home.dart';
+import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/pages/result/result_graph2.dart';
-import 'package:flutter_application_7/front/provider/switch.dart';
-import 'package:flutter_application_7/front/provider/values/refer_value.dart';
-import 'package:flutter_application_7/main.dart';
-
 import 'package:provider/provider.dart';
-
-import 'dart:math';
 import 'result_context.dart';
 import 'result_graph1.dart';
 
@@ -25,8 +16,6 @@ class Result extends StatefulWidget {
 dynamic globalTabController;
 
 class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
-  //related variables
-
   late TabController _tabController;
   @override
   void initState() {
@@ -41,52 +30,14 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  //dataProcess
-  DataResult selectResult() {
-    int maxWeight = globalWeight.reduce(max);
-    int maxWeightPosition = globalWeightPosition.reduce(max);
-    int index;
-    int indexPosition;
-    DataResult proResult;
-    var providerPopUp = context.watch<ProviderPopup>();
-    //RecordA check for achievement View
-    List<int> tempRecordA = recordA;
-
-    for (index = 0; globalWeight[index] != maxWeight; index++) {}
-    for (indexPosition = 0;
-        globalWeightPosition[indexPosition] != maxWeightPosition;
-        indexPosition++) {}
-
-    int indexComposed = indexPosition * 4 + index;
-    proResult = r[indexComposed];
-    recordR[indexComposed]++;
-
-    CheckAcases checkCase = CheckAcases();
-    checkCase.setRecordAByAcases();
-
-    //RecordA check for achievement view
-    for (index = 0; index < recordA.length; index++) {
-      if (tempRecordA[index] != recordA[index]) {
-        referDas.add(
-            DataAchievementShown(a[index].title, a[index].text, a[index].icon));
-      }
-    }
-    providerPopUp.achievementAlarmOnOff();
-    initReferDas();
-
-    //end the record
-    R.saveRecord();
-
-    return proResult;
-  }
-
 //views
   @override
   Widget build(BuildContext context) {
+    var checkWeight = context.watch<CheckWeight>();
     return TabBarView(
       controller: _tabController,
       children: [
-        ResultContext(proResult: selectResult()),
+        ResultContext(proResult: checkWeight.correctResult(context)),
         const ResultGraph1(),
         const ResultGraph2(),
       ],

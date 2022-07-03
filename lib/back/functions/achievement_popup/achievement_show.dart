@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/front/provider/values/refer_value.dart';
-import 'package:flutter_application_7/front/widgets/parts/achievement_popup/achievement_view.dart';
+import 'package:flutter_application_7/back/functions/achievement_popup/achievement_view.dart';
+import 'package:flutter_application_7/back/functions/achievement_popup/model.dart';
+
 import 'package:flutter_application_7/front/provider/values/colors.dart'
     as custom_colors;
 
 //Higher Process
 void shownAchieve(context, title, subTitle, icon) async {
-  for (int index = 0; index < referDas.length; index++) {
+  for (int index = 0; index < popUpAchievement.length; index++) {
     if (index == 0) {
-      showAchievementView(context, referDas[index].title,
-          referDas[index].subTitle, referDas[index].icon);
+      showAchievementView(context, popUpAchievement[index].title,
+          popUpAchievement[index].subTitle, popUpAchievement[index].icon);
     } else {
       await Future.delayed(const Duration(seconds: 4)).then((value) =>
-          showAchievementView(context, referDas[index].title,
-              referDas[index].subTitle, referDas[index].icon));
+          showAchievementView(context, popUpAchievement[index].title,
+              popUpAchievement[index].subTitle, popUpAchievement[index].icon));
     }
   }
 }
