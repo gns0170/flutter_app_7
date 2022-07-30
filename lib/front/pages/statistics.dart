@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/data/statistics.dart';
+import 'package:flutter_application_7/back/functions/statistics_record.dart';
 import 'package:flutter_application_7/front/widgets/parts/texts.dart';
-import 'dart:developer';
 import 'package:flutter_application_7/front/provider/values/colors.dart'
     as custom_colors;
+import 'package:provider/provider.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);
@@ -15,7 +16,10 @@ class Statistics extends StatefulWidget {
 class StatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
-    log("Tes12t");
+    var recordStatistics = context.watch<RecordStatistic>();
+    //간략화
+    List<int> recordS = recordStatistics.recordS;
+
     return Scaffold(
         appBar: AppBar(),
         body: Container(
@@ -44,7 +48,8 @@ class StatisticsState extends State<Statistics> {
                             DataCell(Text(s[index].title)),
                             const DataCell(Text('')),
                             const DataCell(Text('')),
-                            DataCell(Text('2' + s[index].unit)),
+                            DataCell(Text(
+                                recordS[index].toString() + s[index].unit)),
                           ])))
             ],
           )),

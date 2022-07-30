@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/data/questions.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
+import 'package:flutter_application_7/back/functions/statistics_record.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/widgets/parts/button.dart';
 import 'package:flutter_application_7/front/widgets/parts/layout.dart';
@@ -20,12 +21,15 @@ class _QuestionState extends State<Question> {
   String semiKey = 'q21';
   int semiNumberPage = 1;
 
+  //back 중 레코드 부분
+
   @override
   Widget build(BuildContext context) {
     var providerNavigation = context.watch<ProviderNavigation>();
     var purchase = context.read<DashPurchases>();
     var checkWeight = context.watch<CheckWeight>();
 
+    // var recordStatistics = context.watch<RecordStatistic>();
     //data Process
     dynamic shownQuestion = q.singleWhere((element) => element.key == semiKey);
     Future<void> selectQuestion(index) async {

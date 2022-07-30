@@ -77,6 +77,7 @@ class CheckWeight extends ChangeNotifier {
   }
 }
 
+//가중치가 가장 큰 값
 int indexMaxOfList(List<int> list) {
   int max = 0;
   int index = 0;

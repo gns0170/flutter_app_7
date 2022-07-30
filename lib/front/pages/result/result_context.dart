@@ -20,10 +20,6 @@ class ResultContext extends StatefulWidget {
 }
 
 class _ResultContextState extends State<ResultContext> {
-  //Views
-  Widget shownResultText = Container();
-  Widget shownResultTitle = Container();
-
   //TODO: 이름, 구조 정리하고 기능 따로 빼기.
   //TODO: 에러 발생, Another exception was thrown: setState() or markNeedsBuild() called during build.
   // 구조적 문제로 추정
@@ -31,18 +27,16 @@ class _ResultContextState extends State<ResultContext> {
   Widget build(BuildContext context) {
     var purchase = context.read<DashPurchases>();
     var checkWeight = context.read<CheckWeight>();
-    var proResult = checkWeight.correctResult();
+    var result = checkWeight.correctResult();
 
-    shownResultText = proResult.explain;
-    shownResultTitle = proResult.title;
     return Scaffold(
         body: centerColumn([
       purchase.adUpgrade == false
           ? const Spacer(flex: 2)
           : const Spacer(flex: 1),
-      shownResultTitle,
+      result.title,
       const SizedBox(height: 6),
-      views(shownResultText, context, 350),
+      views(result.explain, context, 350),
       const SizedBox(height: 8),
       DarkerButton(
           text: '그래프로 보기',

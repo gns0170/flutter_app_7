@@ -7,6 +7,7 @@ import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.da
 import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
 import 'package:flutter_application_7/back/functions/result_record.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
+import 'package:flutter_application_7/back/functions/statistics_record.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/popup.dart';
 import 'package:flutter_application_7/front/provider/switch.dart';
@@ -83,6 +84,7 @@ Widget providerApp(Widget mainWidget) {
     ChangeNotifierProvider<ResultState>(create: (_) => ResultState()),
     ChangeNotifierProvider<AchievementState>(
         create: (context) => AchievementState(context.read<ResultState>())),
+    ChangeNotifierProvider<RecordStatistic>(create: (_) => RecordStatistic()),
     ChangeNotifierProvider<CheckWeight>(
         create: (context) => CheckWeight(
               context.read<ProviderPopup>(),
