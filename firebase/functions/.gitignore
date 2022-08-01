@@ -9,4 +9,4 @@ typings/
 node_modules/
 
 # Personal info
-lib/src/assets/service-account.json
+/src/assets/service-account.json
