@@ -16,5 +16,13 @@ Future<Object> loadLocalRecord(String name) async {
   }
 }
 
+Future<void> initLocalRecord() async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.remove('recordA');
+  prefs.remove('recordR');
+  prefs.remove('recordS');
+  print('Local storage initialized completed');
+}
+
 String encode(List<int> record) => json.encode(record);
 List<int> decode(String record) => json.decode(record) as List<int>;

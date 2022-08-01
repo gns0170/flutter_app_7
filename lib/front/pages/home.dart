@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
+import 'package:flutter_application_7/back/connection/local/record.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
+import 'package:flutter_application_7/front/pages/statistics.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
-
+import 'package:flutter_application_7/back/functions/statistics_record.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/parts/layout.dart';
@@ -23,6 +25,7 @@ class HomeState extends State<Home> {
     var firebaseNotifier = context.watch<FirebaseNotifier>();
     var providerNavigation = context.watch<ProviderNavigation>();
     var checkWeight = context.watch<CheckWeight>();
+    var recordS = context.watch<RecordStatistic>();
 
     if (firebaseNotifier.isLoggingIn) {
       firebaseNotifier.login();
@@ -39,11 +42,6 @@ class HomeState extends State<Home> {
         height: 20,
       ),
       DarkButton(
-        onPressed: () {
-          providerNavigation.changePage(MainPage.question);
-          //성향, 포지션 점수 초기화
-          checkWeight.initWeights();
-        },
         text: "시작!",
         width: 115,
         height: 63,
@@ -52,6 +50,14 @@ class HomeState extends State<Home> {
           fontSize: 32,
           fontWeight: FontWeight.bold,
         ),
+        onPressed: () {
+          providerNavigation.changePage(MainPage.question);
+          //성향, 포지션 점수 초기화
+          checkWeight.initWeights();
+
+          //통계 수정
+          recordS.updateRecordS(0);
+        },
       ),
       const Spacer(flex: 3),
       DarkButton(
@@ -61,6 +67,8 @@ class HomeState extends State<Home> {
           setState(() {
             firebaseNotifier.login();
           });
+          //local storage init
+          initLocalRecord();
         },
         icon: Icons.reply,
       ),

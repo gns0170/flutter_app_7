@@ -5,7 +5,7 @@ import 'package:flutter_application_7/back/data/statistics.dart';
 
 //조건이 성립하면 통계를 업데이트 합니다.
 class RecordStatistic extends ChangeNotifier {
-  late List<int> _recordS;
+  late List<int> _recordS = [];
 
   List<int> get recordS => _recordS;
 
@@ -33,7 +33,13 @@ class RecordStatistic extends ChangeNotifier {
   }
 
   void updateRecordS(int i) {
+    // switch(i){
+    // case 0:
     _recordS[i]++;
+    // case 1:
+
+    // }
+
     notifyListeners();
   }
 
