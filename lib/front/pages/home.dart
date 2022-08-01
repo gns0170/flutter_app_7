@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
 import 'package:flutter_application_7/back/connection/local/record.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
-import 'package:flutter_application_7/front/pages/statistics.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/back/functions/statistics_record.dart';
 import 'package:provider/provider.dart';
