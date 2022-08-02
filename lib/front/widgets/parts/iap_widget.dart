@@ -76,6 +76,8 @@ class PurchaseList extends StatelessWidget {
   Widget build(BuildContext context) {
     var purchases = context.watch<DashPurchases>();
     var products = purchases.products;
+    products.map((e) => e.title
+        .replaceFirst(" (com.testpotato.right_position(unreviewed))", " "));
     return Column(
       children: products
           .map((product) => PurchaseWidget(

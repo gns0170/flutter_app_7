@@ -33,14 +33,8 @@ class RecordStatistic extends ChangeNotifier {
   }
 
   void updateRecordS(int i) {
-    // switch(i){
-    // case 0:
     _recordS[i]++;
-    // case 1:
-
-    // }
-
-    notifyListeners();
+    saveRecordS();
   }
 
   void saveRecordS() {

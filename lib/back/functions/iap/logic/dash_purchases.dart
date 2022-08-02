@@ -74,6 +74,7 @@ class DashPurchases extends ChangeNotifier {
 
     products =
         response.productDetails.map((e) => PurchasableProduct(e)).toList();
+
     storeState = StoreState.available;
 
     notifyListeners();

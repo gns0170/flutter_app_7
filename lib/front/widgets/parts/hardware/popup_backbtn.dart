@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class PopUpBackButtonPressed extends StatelessWidget {
@@ -24,5 +25,14 @@ class PopUpBackButtonPressed extends StatelessWidget {
             child: const Text("잠깐"))
       ],
     );
+  }
+}
+
+class BackButtonPressedHome extends StatelessWidget {
+  const BackButtonPressedHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('');
   }
 }

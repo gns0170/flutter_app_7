@@ -6,6 +6,7 @@ import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/popup.dart';
 import 'package:flutter_application_7/front/widgets/parts/hardware/popup_backbtn.dart';
 import 'package:flutter_application_7/front/widgets/parts/iap_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,8 @@ class SystemForBackEnd extends StatefulWidget {
 }
 
 class _SystemForBackEndState extends State<SystemForBackEnd> {
+  DateTime? backbuttonpressedTime; // back button time for home
+
   @override
   Widget build(BuildContext context) {
     //Provider - Navigation / Pop Up
@@ -54,9 +57,22 @@ class _SystemForBackEndState extends State<SystemForBackEnd> {
     /// 하드웨어 컨트롤
 
     //뒤로가기 설정
-    Future<bool> backButtonPressed() {
+    Future<bool> backButtonPressed() async {
+      final now = DateTime.now();
       if (mainNavigator.pageView == MainPage.home) {
-        return Future.value(true);
+        if (backbuttonpressedTime == null ||
+            now.difference(backbuttonpressedTime!) >
+                const Duration(seconds: 3)) {
+          Fluttertoast.showToast(
+              msg: "Double Click to exit app",
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
+          backbuttonpressedTime = DateTime.now();
+          return Future.value(false);
+        } else {
+          return Future.value(true);
+        }
+        // }
       } else {
         showDialog(
             context: context,
