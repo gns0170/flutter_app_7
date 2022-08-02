@@ -3,6 +3,8 @@
 
 작동 순서는 main.dart => system_for_backend.dart => front/main_page.dart 순
 
+system_for_backend.dart 에서는 네비게이터를 포함한 Provider 조건 컨트롤, 앱 시작시 필요한 데이터 벡 조작, 또는 하드웨어 컨트롤을 실시한다.
+
 ##
 벡엔드에서 데이터와 통신은 통합 관리, 기능과 데이터 가공은 기능 별로 관리한다.
 

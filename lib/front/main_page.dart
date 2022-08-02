@@ -30,47 +30,17 @@ class PagesState extends State<Pages> {
     //페이지 분류
     Widget page = const Home();
 
-    //뒤로가기 설정
-    Future<bool> backButtonPressed() {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text("메인으로 갑니다?"),
-                actions: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          page = const Home();
-                        });
-                        Navigator.pop(context);
-                      },
-                      child: const Text("물론")),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("잠깐"))
-                ],
-              ));
-      return Future.value(false);
-    }
-
-    Widget pageSecond(pageName) {
-      return WillPopScope(
-          child: pageName, onWillPop: () => backButtonPressed());
-    }
-
     setState(() {
       switch (pageProvider.pageView) {
         case MainPage.home:
           page = const Home();
           break;
         case MainPage.question:
-          page = pageSecond(const Question());
+          page = const Question();
 
           break;
         case MainPage.result:
-          page = pageSecond(const Result());
+          page = const Result();
 
           break;
       }

@@ -4,6 +4,7 @@ import 'package:flutter_application_7/front/main_page.dart';
 import 'package:flutter_application_7/front/pages/achievements/achievement.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/popup.dart';
+import 'package:flutter_application_7/front/widgets/parts/hardware/popup_backbtn.dart';
 import 'package:flutter_application_7/front/widgets/parts/iap_widget.dart';
 
 import 'package:provider/provider.dart';
@@ -17,9 +18,10 @@ class SystemForBackEnd extends StatefulWidget {
 class _SystemForBackEndState extends State<SystemForBackEnd> {
   @override
   Widget build(BuildContext context) {
-    //Test
+    //Provider - Navigation / Pop Up
     var providerNavigation = context.watch<ProviderNavigation>();
     var providerPopUp = context.watch<ProviderPopup>();
+    var mainNavigator = context.watch<ProviderNavigation>();
 
     //글로벌 이벤트
     Future.delayed(Duration.zero, () {
@@ -49,6 +51,27 @@ class _SystemForBackEndState extends State<SystemForBackEnd> {
       });
     });
 
-    return const Scaffold(body: Pages());
+    /// 하드웨어 컨트롤
+
+    //뒤로가기 설정
+    Future<bool> backButtonPressed() {
+      if (mainNavigator.pageView == MainPage.home) {
+        return Future.value(true);
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) => const PopUpBackButtonPressed());
+        return Future.value(false);
+      }
+    }
+
+    //BackButton Controlling
+    Widget backButtonControl(pageName) {
+      return WillPopScope(
+          child: pageName, onWillPop: () => backButtonPressed());
+    }
+
+    // Execution Code
+    return Scaffold(body: backButtonControl(const Pages()));
   }
 }
