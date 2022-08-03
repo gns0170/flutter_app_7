@@ -36,7 +36,6 @@ class CheckWeight extends ChangeNotifier {
         _weightPlayStyle[index] += list[index];
       }
     }
-    notifyListeners();
   }
 
   //가중치 덧셈 2
@@ -46,7 +45,6 @@ class CheckWeight extends ChangeNotifier {
         weightPosition[index] += list[index];
       }
     }
-    notifyListeners();
   }
 
   DataResult getResult() {
@@ -63,21 +61,26 @@ class CheckWeight extends ChangeNotifier {
 
     result = r[indexComposed];
 
-    //Record에 Result 저장하기
-    recordResult.updateRecordR(indexComposed);
+    checkRecord(indexComposed);
 
-    //Achievement 달성 여부 확인
-    recordAchievement.updateRecordA();
-
-    //achievement 팝업 작동
-    providerPopUp.achievementAlarmOnOff();
-    initPopUpAchievement();
-
-    //저장
-    recordResult.saveRecordR();
-
-    notifyListeners();
     return result;
+  }
+
+  void checkRecord(int indexComposed) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      //Record에 Result 저장하기
+      recordResult.updateRecordR(indexComposed);
+
+      //Achievement 달성 여부 확인
+      recordAchievement.updateRecordA();
+
+      //achievement 팝업 작동
+      providerPopUp.achievementAlarmOnOff();
+      initPopUpAchievement();
+
+      //저장
+      recordResult.saveRecordR();
+    });
   }
 }
 

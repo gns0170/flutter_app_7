@@ -7,9 +7,7 @@ class RecordResult extends ChangeNotifier {
   List<int> get recordR => _recordR;
 
   RecordResult() {
-    Future.delayed(Duration.zero, () {
-      initRecordR();
-    });
+    initRecordR();
   }
 
   void initRecordR() {
@@ -26,16 +24,13 @@ class RecordResult extends ChangeNotifier {
         }
       }
     }
-    notifyListeners();
   }
 
   void updateRecordR(int i) {
     _recordR[i]++;
-    notifyListeners();
   }
 
-  void saveRecordR() {
+  Future<void> saveRecordR() async {
     saveLocalRecord(recordR, 'recordR');
-    notifyListeners();
   }
 }

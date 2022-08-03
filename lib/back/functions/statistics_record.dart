@@ -39,6 +39,5 @@ class RecordStatistic extends ChangeNotifier {
 
   void saveRecordS() {
     saveLocalRecord(recordS, 'recordS');
-    notifyListeners();
   }
 }

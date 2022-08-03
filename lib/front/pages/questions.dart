@@ -44,7 +44,9 @@ class _QuestionState extends State<Question> {
       if (semiNumberPage == 10) {
         providerNavigation.changePage(MainPage.result);
       } else {
-        semiNumberPage++;
+        setState(() {
+          semiNumberPage++;
+        });
       }
     }
 

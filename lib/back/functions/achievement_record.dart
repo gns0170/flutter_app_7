@@ -27,11 +27,10 @@ class RecordAchievement extends ChangeNotifier {
         }
       }
     }
-    notifyListeners();
   }
 
   //정해둔 조건에 만족하면 record 업데이트
-  void updateRecordA() {
+  Future<void> updateRecordA() async {
     for (int i = 0; i < recordA.length; i++) {
       if (_recordA[i] == 0 &&
           aCases(recordResult.recordR, _recordA)[a[i].pNumber] == true) {
@@ -40,11 +39,9 @@ class RecordAchievement extends ChangeNotifier {
         changePopUpAchievement(i);
       }
     }
-    notifyListeners();
   }
 
   void saveRecordA() {
     saveLocalRecord(recordA, 'recordA');
-    notifyListeners();
   }
 }

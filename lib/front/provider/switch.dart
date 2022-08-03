@@ -7,10 +7,6 @@ class ProviderUpgrade extends ChangeNotifier {
   FirebaseNotifier firebaseNotifier;
 
   ProviderUpgrade(this.firebaseNotifier);
-  void changeAd() {
-    _ad = !_ad;
-    notifyListeners();
-  }
 
   void noAd() {
     _ad = false;

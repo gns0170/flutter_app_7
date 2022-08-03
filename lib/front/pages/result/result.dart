@@ -15,12 +15,6 @@ dynamic globalTabController;
 
 class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-    globalTabController = _tabController;
-  }
 
   @override
   void dispose() {
@@ -31,6 +25,8 @@ class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
 //views
   @override
   Widget build(BuildContext context) {
+    _tabController = TabController(length: 3, vsync: this);
+    globalTabController = _tabController;
     return TabBarView(
       controller: _tabController,
       children: const [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/back/data/results.dart';
 import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/front/pages/result/result.dart';
@@ -23,11 +24,16 @@ class _ResultContextState extends State<ResultContext> {
   //TODO: 이름, 구조 정리하고 기능 따로 빼기.
   //TODO: 에러 발생, Another exception was thrown: setState() or markNeedsBuild() called during build.
   // 구조적 문제로 추정
+  late DashPurchases purchase;
+  late CheckWeight checkWeight;
+  late DataResult result;
+
   @override
   Widget build(BuildContext context) {
-    var purchase = context.read<DashPurchases>();
-    var checkWeight = context.read<CheckWeight>();
-    var result = checkWeight.getResult();
+    checkWeight = context.read<CheckWeight>();
+    purchase = context.read<DashPurchases>();
+
+    result = checkWeight.getResult();
 
     return Scaffold(
         body: centerColumn([
