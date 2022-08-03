@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_7/back/connection/local/record.dart';
 import 'package:flutter_application_7/back/data/results.dart';
 
-class ResultState extends ChangeNotifier {
+class RecordResult extends ChangeNotifier {
   late List<int> _recordR = [];
   List<int> get recordR => _recordR;
 
-  ResultState() {
+  RecordResult() {
     Future.delayed(Duration.zero, () {
       initRecordR();
     });

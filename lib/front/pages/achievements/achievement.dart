@@ -17,10 +17,10 @@ class Achievement extends StatefulWidget {
 class _AchievementState extends State<Achievement> {
   @override
   Widget build(BuildContext context) {
-    var achievementState = context.watch<AchievementState>();
+    var recordAchievement = context.watch<RecordAchievement>();
 
     //간략화
-    List<int> recordA = achievementState.recordA;
+    List<int> recordA = recordAchievement.recordA;
 
     //Views
     return Scaffold(

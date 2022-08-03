@@ -81,15 +81,15 @@ Widget providerApp(Widget mainWidget) {
         create: (_) => ProviderNavigation()), //네비게이션
 
     //Back
-    ChangeNotifierProvider<ResultState>(create: (_) => ResultState()),
-    ChangeNotifierProvider<AchievementState>(
-        create: (context) => AchievementState(context.read<ResultState>())),
+    ChangeNotifierProvider<RecordResult>(create: (_) => RecordResult()),
+    ChangeNotifierProvider<RecordAchievement>(
+        create: (context) => RecordAchievement(context.read<RecordResult>())),
     ChangeNotifierProvider<RecordStatistic>(create: (_) => RecordStatistic()),
     ChangeNotifierProvider<CheckWeight>(
         create: (context) => CheckWeight(
               context.read<ProviderPopup>(),
-              context.read<ResultState>(),
-              context.read<AchievementState>(),
+              context.read<RecordResult>(),
+              context.read<RecordAchievement>(),
             )),
   ], child: mainWidget);
 }

@@ -26,7 +26,7 @@ class _SystemForBackEndState extends State<SystemForBackEnd> {
     var providerPopUp = context.watch<ProviderPopup>();
     var mainNavigator = context.watch<ProviderNavigation>();
 
-    //글로벌 이벤트
+    //Future 글로벌 이벤트
     Future.delayed(Duration.zero, () {
       setState(() {
         //Drawer 열기
@@ -64,7 +64,7 @@ class _SystemForBackEndState extends State<SystemForBackEnd> {
             now.difference(backbuttonpressedTime!) >
                 const Duration(seconds: 3)) {
           Fluttertoast.showToast(
-              msg: "Double Click to exit app",
+              msg: "나가려면 2번 누르세요.",
               backgroundColor: Colors.black,
               textColor: Colors.white);
           backbuttonpressedTime = DateTime.now();

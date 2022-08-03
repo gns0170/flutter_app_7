@@ -27,12 +27,3 @@ class PopUpBackButtonPressed extends StatelessWidget {
     );
   }
 }
-
-class BackButtonPressedHome extends StatelessWidget {
-  const BackButtonPressedHome({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('');
-  }
-}

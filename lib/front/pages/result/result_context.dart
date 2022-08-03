@@ -27,7 +27,7 @@ class _ResultContextState extends State<ResultContext> {
   Widget build(BuildContext context) {
     var purchase = context.read<DashPurchases>();
     var checkWeight = context.read<CheckWeight>();
-    var result = checkWeight.correctResult();
+    var result = checkWeight.getResult();
 
     return Scaffold(
         body: centerColumn([
@@ -42,7 +42,6 @@ class _ResultContextState extends State<ResultContext> {
           text: '그래프로 보기',
           onPressed: () {
             globalTabController?.index = 1;
-            // appBarSwitch.changeShownAchieve();
           },
           iconDetail:
               const Icon(Icons.arrow_right_alt, size: 50, color: Colors.white)),

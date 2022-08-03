@@ -3,7 +3,7 @@ import 'package:flutter_application_7/back/data/results.dart';
 import 'package:flutter_application_7/back/functions/achievement_popup/model.dart';
 import 'package:flutter_application_7/back/functions/achievement_record.dart';
 import 'package:flutter_application_7/back/functions/result_record.dart';
-
+import 'dart:math';
 import 'package:flutter_application_7/front/provider/popup.dart';
 
 //가중치를 계산하고, 이를 통해 적절한 결과를 도출합니다.
@@ -15,10 +15,10 @@ class CheckWeight extends ChangeNotifier {
   List<int> get weightPosition => _weightPosition;
 
   ProviderPopup providerPopUp;
-  ResultState resultState;
-  AchievementState achievementState;
+  RecordResult recordResult;
+  RecordAchievement recordAchievement;
 
-  CheckWeight(this.providerPopUp, this.resultState, this.achievementState) {
+  CheckWeight(this.providerPopUp, this.recordResult, this.recordAchievement) {
     initWeights();
   }
 
@@ -49,28 +49,32 @@ class CheckWeight extends ChangeNotifier {
     notifyListeners();
   }
 
-  DataResult correctResult() {
+  DataResult getResult() {
     DataResult result;
+    int indexPlayStyle;
+    int indexPosition;
+    int indexComposed;
 
     //Weight 합해서 Result 찾기
-    int indexPlayStyle = indexMaxOfList(weightPlayStyle);
-    int indexPosition = indexMaxOfList(weightPosition);
+    indexPlayStyle = indexMaxOfList(weightPlayStyle);
+    indexPosition = indexMaxOfList(weightPosition);
 
-    int indexComposed = indexPosition * 4 + indexPlayStyle;
+    indexComposed = indexPosition * 4 + indexPlayStyle;
 
     result = r[indexComposed];
+
     //Record에 Result 저장하기
-    resultState.updateRecordR(indexComposed);
+    recordResult.updateRecordR(indexComposed);
 
     //Achievement 달성 여부 확인
-    achievementState.updateRecordA();
+    recordAchievement.updateRecordA();
 
     //achievement 팝업 작동
     providerPopUp.achievementAlarmOnOff();
     initPopUpAchievement();
 
     //저장
-    resultState.saveRecordR();
+    recordResult.saveRecordR();
 
     notifyListeners();
     return result;
@@ -79,15 +83,8 @@ class CheckWeight extends ChangeNotifier {
 
 //가중치가 가장 큰 값
 int indexMaxOfList(List<int> list) {
-  int max = 0;
-  int index = 0;
   int indexMax = 0;
-  list.map((element) {
-    if (element > max) {
-      max = element;
-      indexMax = index;
-    }
-    index++;
-  });
+  indexMax = list.indexOf(list.reduce(max));
+
   return indexMax;
 }

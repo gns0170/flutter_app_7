@@ -18,6 +18,8 @@ class Home extends StatefulWidget {
   HomeState createState() => HomeState();
 }
 
+List<int> testInt = [1, 2, 3, 4];
+
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -63,11 +65,11 @@ class HomeState extends State<Home> {
         text: "나는 롤을 모른다!",
         height: 50,
         onPressed: () {
-          setState(() {
-            firebaseNotifier.login();
-          });
-          //local storage init
-          initLocalRecord();
+          // setState(() {
+          //   firebaseNotifier.login();
+          // });
+          // //local storage init
+          // initLocalRecord();
         },
         icon: Icons.reply,
       ),

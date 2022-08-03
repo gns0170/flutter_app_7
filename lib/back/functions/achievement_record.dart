@@ -5,12 +5,12 @@ import 'package:flutter_application_7/back/functions/result_record.dart';
 import 'package:flutter_application_7/back/data/achievements/achievements.dart';
 import 'package:flutter_application_7/back/data/achievements/cases.dart';
 
-class AchievementState extends ChangeNotifier {
+class RecordAchievement extends ChangeNotifier {
   late List<int> _recordA = [];
   List<int> get recordA => _recordA;
-  ResultState resultState;
+  RecordResult recordResult;
 
-  AchievementState(this.resultState) {
+  RecordAchievement(this.recordResult) {
     initRecordA();
   }
 
@@ -34,7 +34,7 @@ class AchievementState extends ChangeNotifier {
   void updateRecordA() {
     for (int i = 0; i < recordA.length; i++) {
       if (_recordA[i] == 0 &&
-          aCases(resultState.recordR, _recordA)[a[i].pNumber] == true) {
+          aCases(recordResult.recordR, _recordA)[a[i].pNumber] == true) {
         _recordA[i] = 1;
         //achievement Popup에 add 하기
         changePopUpAchievement(i);
