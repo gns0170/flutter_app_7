@@ -23,4 +23,6 @@ system_for_backend.dart 에서는 네비게이터를 포함한 Provider 조건 �
 그 형태는 Class 내에 정보를 저장하고 Main 에서 MultiProvider에 등록한다.
 다른 곳에서는 해당 데이터를 불러올 때 context.watch 같은 provider 함수를 통해 참조한다.
 
+ChangeNotifier 상에서 notifyListeners() 를 사용하는 경우, 새 클래스의 lifecycle 중 buildtime이 겹치는 경우에 한하여 
+WidgetsBinding.instance.addPostFrameCallback 를 통해 notifyListeners() 코드의 실행을 뒤로 미룬다.
 
