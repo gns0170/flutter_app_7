@@ -58,7 +58,7 @@ class HomeState extends State<Home> {
           height: 50,
           onPressed: () {
             // setState(() {
-            //   firebaseNotifier.login();
+            //   firebaseNotifier.login();asdasd
             // });
             // //local storage init
             // initLocalRecord();
