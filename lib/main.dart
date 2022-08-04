@@ -1,44 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
 import 'package:flutter_application_7/back/functions/achievement_record.dart';
-import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
-
-import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/repo/iap_repo.dart';
 import 'package:flutter_application_7/back/functions/result_record.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
 import 'package:flutter_application_7/back/functions/statistics_record.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/popup.dart';
-import 'package:flutter_application_7/front/provider/switch.dart';
-import 'package:flutter_application_7/system_for_backend.dart';
-
+import 'package:flutter_application_7/back/functions/switch.dart';
+import 'package:flutter_application_7/system_event.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_7/front/provider/values/colors.dart'
     as custom_colors;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-//inapp Test
-
-//inappTest
-
-//Route Aware Test
-abstract class RouteAware {
-  /// Called when the top route has been popped off, and the current route
-  /// shows up.
-  void didPopNext() {}
-
-  /// Called when the current route has been pushed.
-  void didPush() {}
-
-  /// Called when the current route has been popped off.
-  void didPop() {}
-
-  /// Called when a new route has been pushed, and the current route is no
-  /// longer visible.
-  void didPushNext() {}
-}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,11 +44,8 @@ Widget providerApp(Widget mainWidget) {
         create: ((context) =>
             ProviderUpgrade(context.read<FirebaseNotifier>()))), //광고 업그레이드 결제
     ChangeNotifierProvider<DashPurchases>(
-      create: (context) => DashPurchases(
-        context.read<ProviderUpgrade>(),
-        context.read<FirebaseNotifier>(),
-        context.read<IAPRepo>(),
-      ),
+      create: (context) => DashPurchases(context.read<ProviderUpgrade>(),
+          context.read<FirebaseNotifier>(), context.read<IAPRepo>()),
       lazy: false,
     ), //IAP 결제
     ChangeNotifierProvider<ProviderPopup>(
@@ -86,11 +59,8 @@ Widget providerApp(Widget mainWidget) {
         create: (context) => RecordAchievement(context.read<RecordResult>())),
     ChangeNotifierProvider<RecordStatistic>(create: (_) => RecordStatistic()),
     ChangeNotifierProvider<CheckWeight>(
-        create: (context) => CheckWeight(
-              context.read<ProviderPopup>(),
-              context.read<RecordResult>(),
-              context.read<RecordAchievement>(),
-            )),
+        create: (context) => CheckWeight(context.read<ProviderPopup>(),
+            context.read<RecordResult>(), context.read<RecordAchievement>())),
   ], child: mainWidget);
 }
 
@@ -104,17 +74,6 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    super.initState();
-
-    // fix screen direction
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.portraitUp,
-    ]);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'A',
@@ -126,6 +85,6 @@ class MyAppState extends State<MyApp> {
                 size: 32,
               )),
         ),
-        home: const SystemForBackEnd());
+        home: const SystemEvent());
   }
 }

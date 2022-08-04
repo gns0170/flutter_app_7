@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
-
-import 'package:flutter_application_7/front/pages/home.dart';
-import 'package:flutter_application_7/front/pages/questions.dart';
-import 'package:flutter_application_7/front/pages/result/result.dart';
+import 'package:flutter_application_7/back/data/admob.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/logic/dash_purchases.dart';
+import 'package:flutter_application_7/front/common/adver.dart';
+import 'package:flutter_application_7/front/common/appbar.dart';
+import 'package:flutter_application_7/front/common/drawer.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
-import 'package:flutter_application_7/front/widgets/adver.dart';
-import 'package:flutter_application_7/front/widgets/parts/appbar.dart';
-import 'package:flutter_application_7/front/widgets/parts/drawer.dart';
+import 'package:flutter_application_7/front/widgets/home.dart';
+import 'package:flutter_application_7/front/widgets/questions.dart';
+import 'package:flutter_application_7/front/widgets/result/result.dart';
 
 import 'package:provider/provider.dart';
 

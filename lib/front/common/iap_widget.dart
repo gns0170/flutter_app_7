@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
-import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
-import 'package:flutter_application_7/back/functions/iap/model/firebase_state.dart';
-import 'package:flutter_application_7/back/functions/iap/model/purchasable_product.dart';
-import 'package:flutter_application_7/back/functions/iap/model/store_state.dart';
-import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/model/firebase_state.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/model/purchasable_product.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/model/store_state.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/repo/iap_repo.dart';
 import 'package:provider/provider.dart';
 
 //iap 팝업

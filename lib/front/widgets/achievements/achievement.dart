@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/data/achievements/achievements.dart';
 import 'package:flutter_application_7/back/functions/achievement_record.dart';
+import 'package:flutter_application_7/front/common/layout.dart';
 import 'package:flutter_application_7/front/provider/values/colors.dart'
     as custom_colors;
-import '../../widgets/parts/layout.dart';
 import 'package:provider/provider.dart';
 
 //ListView

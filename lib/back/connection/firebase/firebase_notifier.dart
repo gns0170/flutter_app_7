@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import './constants.dart';
-import '../../functions/iap/model/firebase_state.dart';
+import '../../functions/in_app_purchase/model/firebase_state.dart';
 
 class FirebaseNotifier extends ChangeNotifier {
   bool loggedIn = false;

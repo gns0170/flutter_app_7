@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/functions/iap/repo/iap_repo.dart';
-import 'package:flutter_application_7/front/provider/switch.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/repo/iap_repo.dart';
+import 'package:flutter_application_7/back/functions/switch.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../constants.dart';

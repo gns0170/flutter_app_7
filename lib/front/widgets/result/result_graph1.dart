@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/logic/dash_purchases.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
-import 'package:flutter_application_7/front/pages/result/result.dart';
-import 'package:flutter_application_7/front/pages/result/result_context.dart';
-import 'package:flutter_application_7/front/widgets/parts/layout.dart';
-import 'package:flutter_application_7/front/widgets/parts/texts.dart';
+import 'package:flutter_application_7/front/common/button.dart';
+import 'package:flutter_application_7/front/common/layout.dart';
+import 'package:flutter_application_7/front/common/texts.dart';
+import 'package:flutter_application_7/front/widgets/result/result.dart';
+import 'package:flutter_application_7/front/widgets/result/result_context.dart';
 
 import 'package:provider/provider.dart';
-import '../../widgets/parts/button.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
 import 'package:flutter_application_7/front/provider/values/colors.dart'

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/data/results.dart';
-import 'package:flutter_application_7/back/functions/iap/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/functions/in_app_purchase/logic/dash_purchases.dart';
 import 'package:flutter_application_7/back/functions/select_correct_result/check_weight.dart';
-import 'package:flutter_application_7/front/pages/result/result.dart';
+import 'package:flutter_application_7/front/common/button.dart';
+import 'package:flutter_application_7/front/common/layout.dart';
+import 'package:flutter_application_7/front/common/view.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
-import 'package:flutter_application_7/front/widgets/parts/button.dart';
-import 'package:flutter_application_7/front/widgets/parts/layout.dart';
-import 'package:flutter_application_7/front/widgets/parts/view.dart';
-
+import 'package:flutter_application_7/front/widgets/result/result.dart';
 import 'package:provider/provider.dart';
-
 import 'package:share_plus/share_plus.dart';
 
 //first Screen

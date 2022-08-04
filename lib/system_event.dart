@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_7/back/functions/achievement_popup/achievement_show.dart';
+import 'package:flutter_application_7/front/common/hardware/popup_backbtn.dart';
+import 'package:flutter_application_7/front/common/iap_widget.dart';
 import 'package:flutter_application_7/front/main_page.dart';
-import 'package:flutter_application_7/front/pages/achievements/achievement.dart';
 import 'package:flutter_application_7/front/provider/navigation.dart';
 import 'package:flutter_application_7/front/provider/popup.dart';
-import 'package:flutter_application_7/front/widgets/parts/hardware/popup_backbtn.dart';
-import 'package:flutter_application_7/front/widgets/parts/iap_widget.dart';
+import 'package:flutter_application_7/front/widgets/achievements/achievement.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:provider/provider.dart';
 
-class SystemForBackEnd extends StatefulWidget {
-  const SystemForBackEnd({Key? key}) : super(key: key);
+class SystemEvent extends StatefulWidget {
+  const SystemEvent({Key? key}) : super(key: key);
   @override
-  _SystemForBackEndState createState() => _SystemForBackEndState();
+  _SystemEventState createState() => _SystemEventState();
 }
 
-class _SystemForBackEndState extends State<SystemForBackEnd> {
+class _SystemEventState extends State<SystemEvent> {
   DateTime? backbuttonpressedTime; // back button time for home
+  @override
+  void initState() {
+    super.initState();
+
+    // fix screen direction
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {

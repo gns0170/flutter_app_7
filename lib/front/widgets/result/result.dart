@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/front/pages/result/result_graph2.dart';
+import 'package:flutter_application_7/front/widgets/result/result_graph2.dart';
 import 'result_context.dart';
 import 'result_graph1.dart';
 
