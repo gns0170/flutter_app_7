@@ -48,36 +48,41 @@ Static이 아닌 동적 데이터는 functions에서 직접 다룸.
 ############################
 시각화하면 다음과 같다. (참조)
 
-Front - widgets    -    home            -       ...
+Front -     mainpage    - widgets   -    home            -       ...
+                                          
+                                    -    question        -
+                                    -    result       -       widgets         -   ...
+                                                      -       common          -   ...
+                                                      -       navigaton.dart
+                                                      -       index.dart
+                                    -    achievement     -
+                                    -    statistics      -
+
+                        - common    -    layout.dart 
+                                    -    text.dart
+                                    -    container.dart
+                                    -    values
+                                          ...
+                        - navigaton.dart
+                        - main_page.dart
+      -     system_event.dart
+      -     main.dart
+      -     hardware
+
+
+Back  - widgets   - mainpage  - home            -     ...
                             
-                        question        -
-                        result          -       widgets         -   ...
-                                        -       common          -   ...
-                                        -       navigaton.dart
-                                        -       index.dart
-                        achievement     -
-                        statistics      -
+                              - question        -
+                              - result          -     index.dart
+                                          -     data          -   ...
+                                                
+                              - achievement     -
+                              - statistics      -
+                              
+                  - functions - iap
+                              - ...
 
-      - common     -    layout.dart 
-                   -    text.dart
-                   -    container.dart
-                   -    values
-                        ...
-      - navigaton.dart
-      - main_page.dart
-
-
-
-Back  - widgets    -    home            -     ...
-                            
-                        question        -
-                        result          -     index.dart
-                                        -     data          -   ...
-                                               
-                        achievement     -
-                        statistics      -
-
-      - data       -    achievement     -    data_type.dart
+                  - data      - achievement     -    data_type.dart
                                         -    index.dart
                                         -    basic_functions.dart
 
