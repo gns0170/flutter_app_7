@@ -10,7 +10,7 @@ class Buttons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var providerNavigation = context.watch<ProviderNavigation>();
+    var providerNavigation = context.watch<MainNavigation>();
     return Column(
       children: [
         const SizedBox(),

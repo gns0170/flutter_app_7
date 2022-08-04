@@ -50,8 +50,8 @@ Widget providerApp(Widget mainWidget) {
     ), //IAP 결제
     ChangeNotifierProvider<ProviderPopup>(
         create: (_) => ProviderPopup()), //스크린 팝업
-    ChangeNotifierProvider<ProviderNavigation>(
-        create: (_) => ProviderNavigation()), //네비게이션
+    ChangeNotifierProvider<MainNavigation>(
+        create: (_) => MainNavigation()), //네비게이션
 
     //Back
     ChangeNotifierProvider<RecordResult>(create: (_) => RecordResult()),

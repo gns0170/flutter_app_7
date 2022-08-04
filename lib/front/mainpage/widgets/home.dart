@@ -22,7 +22,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     var firebaseNotifier = context.watch<FirebaseNotifier>();
-    var providerNavigation = context.watch<ProviderNavigation>();
+    var providerNavigation = context.watch<MainNavigation>();
     var checkWeight = context.watch<CheckWeight>();
     var recordS = context.watch<RecordStatistic>();
 

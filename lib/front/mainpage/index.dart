@@ -22,7 +22,7 @@ class Pages extends StatefulWidget {
 class PagesState extends State<Pages> {
   @override
   Widget build(BuildContext context) {
-    var pageProvider = context.watch<ProviderNavigation>();
+    var pageProvider = context.watch<MainNavigation>();
     var purchase = context.watch<DashPurchases>();
     myBanner.load();
 

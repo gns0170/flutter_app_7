@@ -7,7 +7,7 @@ class PopUpBackButtonPressed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mainNavigator = context.watch<ProviderNavigation>();
+    var mainNavigator = context.watch<MainNavigation>();
     return AlertDialog(
       title: const Text("메인으로 갑니다?"),
       actions: <Widget>[

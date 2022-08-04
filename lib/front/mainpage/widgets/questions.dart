@@ -23,7 +23,7 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
-    var providerNavigation = context.watch<ProviderNavigation>();
+    var providerNavigation = context.watch<MainNavigation>();
     var purchase = context.read<DashPurchases>();
     var checkWeight = context.watch<CheckWeight>();
 

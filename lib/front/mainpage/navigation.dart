@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 
 enum MainPage { home, question, result }
 
-enum PopPage {
-  achievement,
-  statistics,
-}
-
 enum PageStatus { on, off }
 
-class ProviderNavigation extends ChangeNotifier {
+class MainNavigation extends ChangeNotifier {
   //Single Page 관리
   MainPage _pageView = MainPage.home;
   MainPage get pageView => _pageView;

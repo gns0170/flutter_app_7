@@ -33,9 +33,9 @@ class _SystemEventState extends State<SystemEvent> {
   @override
   Widget build(BuildContext context) {
     //Provider - Navigation / Pop Up
-    var providerNavigation = context.watch<ProviderNavigation>();
+    var providerNavigation = context.watch<MainNavigation>();
     var providerPopUp = context.watch<ProviderPopup>();
-    var mainNavigator = context.watch<ProviderNavigation>();
+    var mainNavigator = context.watch<MainNavigation>();
 
     //Future 글로벌 이벤트
     Future.delayed(Duration.zero, () {
