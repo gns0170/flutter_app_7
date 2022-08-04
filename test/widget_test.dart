@@ -6,7 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/functions/in_app_purchase/logic/dash_purchases.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/functions/in_app_purchase/logic/dash_purchases.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_application_7/main.dart';

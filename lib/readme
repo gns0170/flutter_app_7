@@ -26,3 +26,62 @@ system_for_backend.dart 에서는 네비게이터를 포함한 Provider 조건 �
 ChangeNotifier 상에서 notifyListeners() 를 사용하는 경우, 새 클래스의 lifecycle 중 buildtime이 겹치는 경우에 한하여 
 WidgetsBinding.instance.addPostFrameCallback 를 통해 notifyListeners() 코드의 실행을 뒤로 미룬다.
 
+
+###
+new!
+SW Structure 설립
+모든 구조는 Front , Back으로 나눔.
+
+Front 의 경우 Navigator, Pages, Toast, Dialog 등 UI와 관련이 없는 부분은 Backend 을 통해 받아옴.
+Front 는 navigaton.dart, common, widgets 구조가 반복 됨. Pop Up 또한 적용 범위가 맞는 곳의 common에 저장.
+widgets는 흔히 아는 pages를 뜻함. 좀더 자세히는 Stack Navigator, Tab Navigator, change Page(Single Page) 구조로 연결된 모든 페이지/위젯이 담김.
+
+Back은 Front와 동일하게 가되, 통신 부분은 최상단의 communication 폴더에서 일괄적으로 처리, 나머지는 pages.dart, data, functions 로 이루어짐. 
+data 폴더는 data_type.dart, index.dart, basic_functions.dart 등으로 이루어짐. 데이터에 관한 기초 처리를 다룸.
+
+Static이 아닌 동적 데이터는 functions에서 직접 다룸.
+
+이후 규모가 확장되어 DB가 필요한 경우, DB COnnection 만 connection 폴더에서 다루고, 정적 데이터의 처리는 여전히 data 폴더에서 처리하도록 함.
+
+모든 처리는 확장성/수정 용이함을 우선적으로 고려하였으며, 가독성 완화를 위해 노력함.
+
+############################
+시각화하면 다음과 같다. (참조)
+
+Front - widgets    -    home            -       ...
+                            
+                        question        -
+                        result          -       widgets         -   ...
+                                        -       common          -   ...
+                                        -       navigaton.dart
+                                        -       index.dart
+                        achievement     -
+                        statistics      -
+
+      - common     -    layout.dart 
+                   -    text.dart
+                   -    container.dart
+                   -    values
+                        ...
+      - navigaton.dart
+      - main_page.dart
+
+
+
+Back  - widgets    -    home            -     ...
+                            
+                        question        -
+                        result          -     index.dart
+                                        -     data          -   ...
+                                               
+                        achievement     -
+                        statistics      -
+
+      - data       -    achievement     -    data_type.dart
+                                        -    index.dart
+                                        -    basic_functions.dart
+
+      - connection -    local_storage   -    functions.dart
+                                        -    connect.dart
+                                        -    constant.dart
+

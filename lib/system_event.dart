@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_7/back/functions/achievement_popup/achievement_show.dart';
-import 'package:flutter_application_7/front/common/hardware/popup_backbtn.dart';
-import 'package:flutter_application_7/front/common/iap_widget.dart';
-import 'package:flutter_application_7/front/main_page.dart';
-import 'package:flutter_application_7/front/provider/navigation.dart';
-import 'package:flutter_application_7/front/provider/popup.dart';
-import 'package:flutter_application_7/front/widgets/achievements/achievement.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/functions/achievement_popup/achievement_show.dart';
+import 'package:flutter_application_7/hardware/popup_backbtn.dart';
+import 'package:flutter_application_7/front/mainpage/common/iap_widget.dart';
+import 'package:flutter_application_7/front/mainpage/index.dart';
+import 'package:flutter_application_7/front/mainpage/navigation.dart';
+import 'package:flutter_application_7/front/mainpage/common/popup.dart';
+import 'package:flutter_application_7/front/mainpage/widgets/achievements/achievement.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:provider/provider.dart';
