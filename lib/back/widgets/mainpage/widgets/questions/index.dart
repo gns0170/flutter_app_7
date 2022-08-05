@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/functions/check_weight.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/questions/data/questions.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/questions/functions/select_question.dart';
 import 'package:flutter_application_7/front/mainpage/navigation.dart';
@@ -6,12 +7,14 @@ import 'package:flutter_application_7/front/mainpage/navigation.dart';
 class QuestionsBack extends ChangeNotifier {
   SelectQuestion selectQuestion;
   MainNavigation mainNavigation;
-  QuestionsBack(this.selectQuestion, this.mainNavigation) {
+  CheckWeight checkWeight;
+  QuestionsBack(this.selectQuestion, this.mainNavigation, this.checkWeight) {
     selectQuestion.initState();
   }
 
   void initState() {
     selectQuestion.initState();
+    checkWeight.initState();
     _pageNumber = 1;
   }
 

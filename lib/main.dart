@@ -3,6 +3,7 @@ import 'package:flutter_application_7/back/connection/firebase/firebase_notifier
 import 'package:flutter_application_7/back/widgets/mainpage/functions/in_app_purchase/logic/dash_purchases.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/functions/in_app_purchase/repo/iap_repo.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/achievement/functions/achievement_record.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/widgets/home/index.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/questions/functions/select_question.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/questions/index.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/functions/result_record.dart';
@@ -61,17 +62,21 @@ Widget providerApp(Widget mainWidget) {
     ChangeNotifierProvider<RecordAchievement>(
         create: (context) => RecordAchievement(context.read<RecordResult>())),
     // Common
+    ChangeNotifierProvider<RecordStatistic>(create: (_) => RecordStatistic()),
     ChangeNotifierProvider<CheckWeight>(
         create: (context) => CheckWeight(context.read<ProviderPopup>(),
             context.read<RecordResult>(), context.read<RecordAchievement>())),
+    // Home
+    ChangeNotifierProvider<HomeBack>(
+        create: (context) => HomeBack(context.read<FirebaseNotifier>(),
+            context.read<MainNavigation>(), context.read<RecordStatistic>())),
+
     // Questions
     ChangeNotifierProvider<SelectQuestion>(
         create: (context) => SelectQuestion(context.read<CheckWeight>())),
     ChangeNotifierProvider<QuestionsBack>(
-        create: (context) => QuestionsBack(
-            context.read<SelectQuestion>(), context.read<MainNavigation>())),
-
-    ChangeNotifierProvider<RecordStatistic>(create: (_) => RecordStatistic()),
+        create: (context) => QuestionsBack(context.read<SelectQuestion>(),
+            context.read<MainNavigation>(), context.read<CheckWeight>())),
   ], child: mainWidget);
 }
 

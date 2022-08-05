@@ -19,11 +19,11 @@ class CheckWeight extends ChangeNotifier {
   RecordAchievement recordAchievement;
 
   CheckWeight(this.providerPopUp, this.recordResult, this.recordAchievement) {
-    initWeights();
+    initState();
   }
 
   //가중치 초기화
-  void initWeights() {
+  void initState() {
     _weightPlayStyle = [0, 0, 0, 0];
     _weightPosition = [0, 0, 0, 0, 0];
     notifyListeners();

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
-import 'package:flutter_application_7/back/widgets/mainpage/functions/check_weight.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/widgets/home/index.dart';
 import 'package:flutter_application_7/front/mainpage/common/button.dart';
 import 'package:flutter_application_7/front/mainpage/common/layout.dart';
-import 'package:flutter_application_7/front/mainpage/navigation.dart';
-import 'package:flutter_application_7/back/widgets/mainpage/widgets/statistics/functions/statistics_record.dart';
 import 'package:provider/provider.dart';
-
-import '../common/texts.dart' as custom_text;
+import '../common/texts.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,22 +14,21 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   @override
+  void initState() {
+    var homeBack = context.read<HomeBack>();
+    homeBack.initState();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var firebaseNotifier = context.watch<FirebaseNotifier>();
-    var providerNavigation = context.watch<MainNavigation>();
-    var checkWeight = context.watch<CheckWeight>();
-    var recordS = context.watch<RecordStatistic>();
-
-    if (firebaseNotifier.isLoggingIn) {
-      firebaseNotifier.login();
-    }
-
+    var homeBack = context.watch<HomeBack>();
     //views
     return centerColumn([
       const Spacer(flex: 3),
       const Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.0),
-          child: custom_text.TextQuestion(words: '당신에게 가장 어울리는 포지션은?')),
+          child: TextQuestion(words: '당신에게 가장 어울리는 포지션은?')),
       const SizedBox(height: 20),
       DarkButton(
         text: "시작!",
@@ -42,12 +37,7 @@ class HomeState extends State<Home> {
         fontStyle: const TextStyle(
             color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
         onPressed: () {
-          providerNavigation.changePage(MainPage.question);
-          //성향, 포지션 점수 초기화
-          checkWeight.initWeights();
-
-          //통계 수정
-          recordS.updateRecordS(0);
+          homeBack.goToQuestion();
         },
       ),
       const Spacer(flex: 3),
