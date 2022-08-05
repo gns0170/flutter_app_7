@@ -6,8 +6,10 @@ import 'package:flutter_application_7/back/widgets/mainpage/widgets/achievement/
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/home/index.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/questions/functions/select_question.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/questions/index.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/functions/get_result.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/functions/result_record.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/functions/check_weight.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/index.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/widgets/statistics/functions/statistics_record.dart';
 import 'package:flutter_application_7/front/mainpage/navigation.dart';
 import 'package:flutter_application_7/front/mainpage/common/popup.dart';
@@ -77,6 +79,18 @@ Widget providerApp(Widget mainWidget) {
     ChangeNotifierProvider<QuestionsBack>(
         create: (context) => QuestionsBack(context.read<SelectQuestion>(),
             context.read<MainNavigation>(), context.read<CheckWeight>())),
+
+    //  Result
+    ChangeNotifierProvider<GetResult>(
+        // 결과 구하기
+        create: (context) => GetResult(
+            context.read<CheckWeight>(),
+            context.read<RecordResult>(),
+            context.read<RecordAchievement>(),
+            context.read<ProviderPopup>())),
+    ChangeNotifierProvider<ResultBack>(
+        create: (context) => ResultBack(
+            context.read<DashPurchases>(), context.read<GetResult>())),
   ], child: mainWidget);
 }
 
