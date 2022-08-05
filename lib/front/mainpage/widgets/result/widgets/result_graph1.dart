@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_7/back/widgets/mainpage/functions/in_app_purchase/logic/dash_purchases.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/functions/check_weight.dart';
 import 'package:flutter_application_7/front/mainpage/common/button.dart';
 import 'package:flutter_application_7/front/mainpage/common/layout.dart';
 import 'package:flutter_application_7/front/mainpage/common/texts.dart';
-import 'package:flutter_application_7/front/mainpage/widgets/result/common/button.dart';
-import 'package:flutter_application_7/front/mainpage/widgets/result/index.dart';
+import '../common/button.dart';
+import '../common/spacer.dart';
+import '../index.dart';
 
 import 'package:provider/provider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -32,7 +32,6 @@ class ChartData {
 class _ResultGraph1State extends State<ResultGraph1> {
   @override
   Widget build(BuildContext context) {
-    var purchase = context.read<DashPurchases>();
     var checkWeight = context.watch<CheckWeight>();
 
     //List 데이터
@@ -104,9 +103,7 @@ class _ResultGraph1State extends State<ResultGraph1> {
 
     return Scaffold(
         body: centerColumn([
-      purchase.adUpgrade == false
-          ? const Spacer(flex: 2)
-          : const Spacer(flex: 1),
+      const SpacerResult(number: 0),
       title(),
       Container(
         color: Colors.white,

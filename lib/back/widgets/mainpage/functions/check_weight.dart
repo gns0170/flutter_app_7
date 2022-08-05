@@ -26,7 +26,6 @@ class CheckWeight extends ChangeNotifier {
   void initState() {
     _weightPlayStyle = [0, 0, 0, 0];
     _weightPosition = [0, 0, 0, 0, 0];
-    notifyListeners();
   }
 
   //가중치 덧셈 1
@@ -61,7 +60,7 @@ class CheckWeight extends ChangeNotifier {
 
     result = r[indexComposed];
 
-    checkRecord(indexComposed);
+    checkRecord(indexComposed); // 결과/업적 달성 여부 확인 && local Storage 에 저장.
 
     return result;
   }

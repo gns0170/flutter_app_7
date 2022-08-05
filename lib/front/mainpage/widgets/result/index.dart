@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/index.dart';
 import 'package:flutter_application_7/front/mainpage/widgets/result/widgets/result_context.dart';
 import 'package:flutter_application_7/front/mainpage/widgets/result/widgets/result_graph1.dart';
 import 'package:flutter_application_7/front/mainpage/widgets/result/widgets/result_graph2.dart';
+import 'package:provider/provider.dart';
 
 //List
 class Result extends StatefulWidget {
@@ -15,11 +17,11 @@ dynamic globalTabController;
 
 class _ResultState extends State<Result> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
   @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+  void initState() {
+    var resultBack = context.read<ResultBack>();
+    resultBack.initState();
+    super.initState();
   }
 
 //views
