@@ -6,7 +6,7 @@ import 'package:flutter_application_7/front/mainpage/common/appbar.dart';
 import 'package:flutter_application_7/front/mainpage/common/drawer.dart';
 import 'package:flutter_application_7/front/mainpage/navigation.dart';
 import 'package:flutter_application_7/front/mainpage/widgets/home.dart';
-import 'package:flutter_application_7/front/mainpage/widgets/questions.dart';
+import 'package:flutter_application_7/front/mainpage/widgets/questions/questions.dart';
 import 'package:flutter_application_7/front/mainpage/widgets/result/index.dart';
 
 import 'package:provider/provider.dart';

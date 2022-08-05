@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/widgets/mainpage/functions/in_app_purchase/logic/dash_purchases.dart';
-import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/functions/select_correct_result/check_weight.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/functions/check_weight.dart';
 import 'package:flutter_application_7/front/mainpage/common/button.dart';
 import 'package:flutter_application_7/front/mainpage/common/layout.dart';
 import 'package:flutter_application_7/front/mainpage/common/texts.dart';

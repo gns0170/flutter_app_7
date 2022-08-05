@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/back/connection/firebase/firebase_notifier.dart';
-import 'package:flutter_application_7/back/widgets/mainpage/widgets/result/functions/select_correct_result/check_weight.dart';
+import 'package:flutter_application_7/back/widgets/mainpage/functions/check_weight.dart';
 import 'package:flutter_application_7/front/mainpage/common/button.dart';
 import 'package:flutter_application_7/front/mainpage/common/layout.dart';
 import 'package:flutter_application_7/front/mainpage/navigation.dart';
@@ -15,8 +15,6 @@ class Home extends StatefulWidget {
   @override
   HomeState createState() => HomeState();
 }
-
-List<int> testInt = [1, 2, 3, 4];
 
 class HomeState extends State<Home> {
   @override
@@ -58,7 +56,7 @@ class HomeState extends State<Home> {
           height: 50,
           onPressed: () {
             // setState(() {
-            //   firebaseNotifier.login();asdasd
+            //   firebaseNotifier.login();
             // });
             // //local storage init
             // initLocalRecord();
